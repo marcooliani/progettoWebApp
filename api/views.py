@@ -12,7 +12,7 @@ from .serializers import OrdersSerializer, CustomerSerializer, AgentsSerializer
 
 # Mi importo le classi contententi le definizioni delle permissions 
 # dal file permissions.py
-from .permissions import CanViewOrders, CanInsertModifyDeleteOrders
+from .permissions import CanView, CanInsertModifyDeleteOrders, IsAgent, IsManager
 from rest_framework.permissions import IsAuthenticated
 
 # Per il debugging
@@ -36,7 +36,7 @@ difficoltà anche nella configurazione di api/urls.py
 """
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated, CanViewOrders])
+@permission_classes([IsAuthenticated, CanView])
 def order_list(request):
 
 	if(request.method == 'GET'):
@@ -87,7 +87,7 @@ def order_new(request):
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated, CanViewOrders])
+@permission_classes([IsAuthenticated, CanView])
 def order_detail(request, pk):
 	try:
 		order = Orders.objects
@@ -175,7 +175,7 @@ stessi dati (tranne l'id, mi sa)
 """
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsManager])
 def agent_list(request):
 	if(request.method == 'GET'):
 		agents = Agents.objects.all().order_by('agent_code')
@@ -185,13 +185,13 @@ def agent_list(request):
 
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsManager])
 def agent_new(request):
 	pass
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, CanView])
 def agent_detail(request, pk):
 	try:
 		agent = Agents.objects.get(pk=pk)
@@ -206,13 +206,13 @@ def agent_detail(request, pk):
 
 @api_view(['PUT'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAgent, IsManager])
 def agent_update(request, pk):
 	pass
 
 @api_view(['DELETE'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsManager])
 def agent_delete(request, pk):
   pass
 
@@ -230,7 +230,7 @@ la cancellazione dei customer
 """
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAgent, IsManager])
 def customer_list(request):
 	if(request.method == 'GET'):
 		customers = Customer.objects.all().order_by('cust_code')
@@ -246,7 +246,7 @@ def customer_new(request):
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, CanView])
 def customer_detail(request, pk):
 	try:
 		customer = Customer.objects.get(pk=pk)
@@ -261,13 +261,13 @@ def customer_detail(request, pk):
 
 @api_view(['PUT'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAgent, IsManager])
 def customer_update(request, pk):
 	pass
 
 @api_view(['DELETE'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsManager])
 def customer_delete(request, pk):
   pass
 
