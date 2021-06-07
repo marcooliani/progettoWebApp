@@ -26,4 +26,3 @@ class OrdersSerializer(serializers.ModelSerializer):
 		model = Orders
 		fields = '__all__'
 
-		logger.info("Model usato: " + str(model))

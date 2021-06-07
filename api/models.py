@@ -28,7 +28,7 @@ class Customer(models.Model):
 	cust_city = models.CharField(max_length=35, blank=True, null=True)
 	working_area = models.CharField(max_length=35)
 	cust_country = models.CharField(max_length=20)
-	grade = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+	grade = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
 	opening_amt = models.DecimalField(max_digits=12, decimal_places=2)
 	receive_amt = models.DecimalField(max_digits=12, decimal_places=2)
 	payment_amt = models.DecimalField(max_digits=12, decimal_places=2)
