@@ -1,13 +1,13 @@
 # progettoWebApp
 
-#### Sviluppo RESTful API
+### Sviluppo RESTful API
 Ricordarsi di installare Django Rest Framework, se non lo si ha già installato!
 pip3 install djangorestframework
 
 ### API Test
 Utilizzare Postman: https://www.postman.com/downloads/
 
-###Vademecum al volo sui comandi:
+### Vademecum al volo sui comandi:
 
 - python3 manager.py inspectdb [--database nome_database > myapp/models.py]
 
