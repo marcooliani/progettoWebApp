@@ -1,6 +1,11 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import permissions
 
+"""
+Questa è più una classe di test, che non viene utilizzata nella
+view: verifica se l'utente corrente è in un gruppo (qualsiasi).
+Le permissions vere sono quelle successive
+"""
 class IsInGroup(permissions.BasePermission):
 	message = 'User must be in a group to perfmorm this action.'
 

@@ -34,6 +34,16 @@ class based è una scelta puramente personale: in questo modo ho una
 visione più immediata di quello che la mia view va a fare e ho meno
 difficoltà anche nella configurazione di api/urls.py
 """
+
+"""
+GET order_list()
+
+Visualizza la lista degli ordini. Permissions:
+- clienti: possono vedere i propri ordini, ma non quelli altri
+- agenti: possono visualizzare gli ordini da loro gestiti, ma non
+quelli gestiti da altri agenti
+- manager: possono vedere l'elenco completo degli ordini
+"""
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanView])
@@ -54,13 +64,20 @@ def order_list(request):
 		# .all() non sarebbe nemmeno necessario, in verità
 		orders = orders.all().order_by('ord_num')
 
+		# Serializzo i dati ottenuti con la query e li restituisco sotto
+		# forma di risposta JSON
 		orders_serializer = OrdersSerializer(orders, many=True)
-		logger.info("Serializer GET: " + str(orders_serializer))
 
 		return JsonResponse(orders_serializer.data, safe=False)
-		# safe=False for objects serialization
+		# safe=False serve per la serializzazione
 
 
+"""
+POST order_new()
+Inserisce un nuovo ordine all'interno della tabella ordini. Permissions:
+- clienti: non possono eseguire questa operazione
+- agenti e manager: possono inserire nuovi ordini
+"""
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
@@ -85,10 +102,22 @@ def order_new(request):
 		return JsonResponse(order_serializer.error, status=status.HTTP_400_BAD_REQUEST)
 
 
+"""
+GET order_detail()
+Visualizza il singolo ordine. Permissions:
+- clienti: possono visualizzare il singolo ordine se effettuato da loro.
+NON possono visualizzare gli ordini effettuati da altri clienti!
+- agenti: possono visualizzare il singolo ordine se gestito da loro.
+NON possono visualizzare gli ordini gestiti da altri agenti!
+- manager: possono visualizzare qualsiasi ordine singolo
+"""
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanView])
 def order_detail(request, pk):
+	
+	# Verifico che l'ordine esista. Se esiste, controllo a chi appartiene
+	# ed eseguo la query
 	try:
 		order = Orders.objects
 
@@ -100,19 +129,29 @@ def order_detail(request, pk):
 
 		order = order.get(pk=pk)
 
+	# Se l'ordine non viene trovato, restituisco un errore 404
 	except Orders.DoesNotExist:
 		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
+	# Serializzo i dati e li restituisco in forma di risposta JSON
 	if(request.method == 'GET'):
 		order_serializer = OrdersSerializer(order)
 
 		return JsonResponse(order_serializer.data)
 
-
+"""
+PUT order_update()
+Modifica un ordine esistente. Permissions:
+- clienti: non possono aggiornare i loro ordini
+- agenti: possono modificare solo gli ordini da loro gestiti
+- manager: possono modificare tutti gli ordini
+"""
 @api_view(['PUT'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
 def order_update(request, pk):
+
+	# Come per il metodo precedente 
 	try:
 		order = Orders.objects
 
@@ -127,6 +166,9 @@ def order_update(request, pk):
 	except Orders.DoesNotExist:
 		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
+	# Faccio il parsing dei dati ricevuti, dopo di che serializzo i dati.
+	# se la serializzazione effettuata è valida, scrivo i dati nel 
+	# database e aggiorno l'ordine
 	if(request.method == 'PUT'):
 		order_data = JSONParser().parse(request)
 		logger.info("PUT: Sono dopo il parser")
@@ -137,10 +179,20 @@ def order_update(request, pk):
 			logger.info("PUT: Serializer valido")
 			order_serializer.save()
 
+			# Si poterbbe restituire anche un semplice messaggio
 			return JsonResponse(order_serializer.data)
 
+		# Se la serializzazione non è valida, viene ritornata una bad request
 		return JsonResponse(order_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+"""
+DELETE order_delete()
+Cancella un ordine dal database. Permissions:
+- clienti: non possono cancellare ordini
+- agenti: possono cancellare un ordine, se gestito da loro. NON possono
+cancellare ordini gestiti da altri agenti
+- manager: possono cancellare qualsiasi ordine
+"""
 @api_view(['DELETE'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
@@ -223,10 +275,9 @@ CUSTOMER APIs
 ------------------
 Gestione dei clienti. Regole:
 - un customer può vedere e modificare solo se stesso
-- un agent può visualizzare, modificare o aggiungere 
-un customer
-- un manager può fare tutto ciò che fa l'agent, più
-la cancellazione dei customer
+- un agent può visualizzare, modificare o aggiungere un customer
+- un manager può fare tutto ciò che fa l'agent, più la cancellazione 
+dei customer
 """
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
@@ -240,7 +291,7 @@ def customer_list(request):
 
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAgent, IsManager])
 def customer_new(request):
 	pass
 

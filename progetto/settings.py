@@ -154,12 +154,14 @@ REST_FRAMEWORK = {
 		'PAGE_SIZE': 10
 }
 
+# Direttiva per il routing dei database
 DATABASE_ROUTERS = ['dbRouters.dbRouters']
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
 
+# Permette il logging in console e su file di testo
 LOGGING = {
     'version': 1,
     'formatters': {
