@@ -30,8 +30,6 @@ difficoltà anche nella configurazione di api/urls.py
 def order_list(request):
 
 	if(request.method == 'GET'):
-		# orders = Orders.objects.using('dati').filter(cust_code=str(request.user)).order_by('ord_num')
-		#orders = Orders.objects.using('dati')
 		orders = Orders.objects
 
 		# Controllo in che gruppo è l'utente: in base a quello decido il filtro
@@ -39,9 +37,12 @@ def order_list(request):
 		# se "agents" visualizzo tutti gli ordini dei clienti destiti dall'agente
 		for g in request.user.groups.all():
 			if(g.name == "customers"):
-				orders = orders.filter(cust_code=str(request.user)).order_by('ord_num')
+				orders = orders.filter(cust_code=str(request.user))
 			elif(g.name == "agents"):
-				orders = orders.filter(agent_code=str(request.user)).order_by('ord_num')
+				orders = orders.filter(agent_code=str(request.user))
+
+		# .all() non sarebbe nemmeno necessario, in verità
+		orders = orders.all().order_by('ord_num')
 
 		orders_serializer = OrdersSerializer(orders, many=True)
 		logger.info("Serializer GET: " + str(orders_serializer))
@@ -79,8 +80,15 @@ def order_new(request):
 @permission_classes([IsAuthenticated, CanViewOrders])
 def order_detail(request, pk):
 	try:
-		#order = Orders.objects.using('dati').get(pk=pk)
-		order = Orders.objects.get(pk=pk)
+		order = Orders.objects
+
+		for g in request.user.groups.all():
+			if(g.name == "customers"):
+				order = order.filter(cust_code=str(request.user))
+			elif(g.name == "agents"):
+				order = order.filter(agent_code=str(request.user))
+
+		order = order.get(pk=pk)
 
 	except Orders.DoesNotExist:
 		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
@@ -96,8 +104,14 @@ def order_detail(request, pk):
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
 def order_update(request, pk):
 	try:
-		#order = Orders.objects.using('dati').get(pk=pk)
-		order = Orders.objects.get(pk=pk)
+		order = Orders.objects
+
+		for g in request.user.groups.all():
+			if(g.name == "agents"):
+				order = order.filter(agent_code=str(request.user))
+
+		order = order.get(pk=pk)
+
 		logger.info("Ho trovato l'ordine")
 
 	except Orders.DoesNotExist:
@@ -105,12 +119,12 @@ def order_update(request, pk):
 
 	if(request.method == 'PUT'):
 		order_data = JSONParser().parse(request)
-		logger.info("Sono dopo il parser")
+		logger.info("PUT: Sono dopo il parser")
 		order_serializer = OrdersSerializer(order, data=order_data)
-		logger.info("Sono dopo il serializer")
+		logger.info("PUT: Sono dopo il serializer")
 
 		if(order_serializer.is_valid()):
-			logger.info("HAHAHA")
+			logger.info("PUT: Serializer valido")
 			order_serializer.save()
 
 			return JsonResponse(order_serializer.data)
@@ -122,8 +136,13 @@ def order_update(request, pk):
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
 def order_delete(request, pk):
 	try:
-		#order = Orders.objects.using('dati').get(pk=pk)
-		order = Orders.objects.get(pk=pk)
+		order = Orders.objects
+
+		for g in request.user.groups.all():
+			if(g.name == "agents"):
+				order = order.filter(agent_code=str(request.user))
+
+		order = order.get(pk=pk)
 
 	except Orders.DoesNotExist:
 		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
