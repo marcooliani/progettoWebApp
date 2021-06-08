@@ -61,8 +61,21 @@ def order_list(request):
 			elif(g.name == "agents"):
 				orders = orders.filter(agent_code=str(request.user))
 
-		# .all() non sarebbe nemmeno necessario, in verità
-		orders = orders.all().order_by('ord_num')
+		# La differenza tra all() e values() dovrebbe essere che all() ritorna 
+		# oggetti contenenti i record, values() direttamente i valori.
+		# Nota: avrei voluto aggiungere un .defer() in fondo per escludere
+		# il campo cust_code o agent_code a seconda di chi è loggato, ma
+		# il serializer non accetta che ci sia un campo in meno (giustamente).
+		# Quindi farò il filtro lato client, se mi riesce...
+		orders = orders.all()
+
+		# Leggo il parametro extra per l'ordinamento in base alle colonne.
+		# Hint per la chiamata in JQuery: per l'ordinamento discentente è 
+		# sufficiente mettere un "-" davanti al campo nell'url!
+		# Es: http://127.0.0.1/api/orders/?sort_by=-ord_date
+		sort_by = request.GET.get('sort_by', 'ord_num');
+
+		orders = orders.order_by(sort_by)
 
 		# Serializzo i dati ottenuti con la query e li restituisco sotto
 		# forma di risposta JSON
@@ -104,6 +117,7 @@ def order_new(request):
 
 """
 GET order_detail()
+
 Visualizza il singolo ordine. Permissions:
 - clienti: possono visualizzare il singolo ordine se effettuato da loro.
 NON possono visualizzare gli ordini effettuati da altri clienti!
@@ -141,6 +155,7 @@ def order_detail(request, pk):
 
 """
 PUT order_update()
+
 Modifica un ordine esistente. Permissions:
 - clienti: non possono aggiornare i loro ordini
 - agenti: possono modificare solo gli ordini da loro gestiti
@@ -187,6 +202,7 @@ def order_update(request, pk):
 
 """
 DELETE order_delete()
+
 Cancella un ordine dal database. Permissions:
 - clienti: non possono cancellare ordini
 - agenti: possono cancellare un ordine, se gestito da loro. NON possono
