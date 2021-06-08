@@ -73,7 +73,9 @@ def order_list(request):
 		# Hint per la chiamata in JQuery: per l'ordinamento discentente è 
 		# sufficiente mettere un "-" davanti al campo nell'url!
 		# Es: http://127.0.0.1/api/orders/?sort_by=-ord_date
-		sort_by = request.GET.get('sort_by', 'ord_num');
+		# Per l'ordinamento ascendente, invece, come al solito
+		# ?sort_by=ord_date
+		sort_by = request.GET.get('sort_by', '-ord_date');
 
 		orders = orders.order_by(sort_by)
 
