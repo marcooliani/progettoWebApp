@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@9kho^d$mjxxjr!+!7a4*8y&z$3l-d69gh=ryn8!fj4u(as)gi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.107']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 		'rest_framework',
 		'api.apps.ApiConfig',
+		'ordini.apps.OrdiniConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,7 +138,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Aggiungo la directory static/ alla Document Root
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    BASE_DIR / "static",
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

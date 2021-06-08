@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls), # Admin
     path('api/', include('api.urls')), # API
     path('auth/', include('django.contrib.auth.urls')), # Login
+    path('ordini/', include('ordini.urls')), # Ordini
+		path('', RedirectView.as_view(url='/ordini/')), # Home
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
