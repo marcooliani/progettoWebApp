@@ -8,7 +8,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 from .models import Orders, Customer, Agents
-from .serializers import OrdersSerializer, CustomerSerializer, AgentsSerializer
+from .serializers import OrdersSerializer, CustomerSerializer, AgentsSerializer, OrdersListSerializer
 
 # Mi importo le classi contententi le definizioni delle permissions 
 # dal file permissions.py
@@ -67,7 +67,8 @@ def order_list(request):
 		# il campo cust_code o agent_code a seconda di chi è loggato, ma
 		# il serializer non accetta che ci sia un campo in meno (giustamente).
 		# Quindi farò il filtro lato client, se mi riesce...
-		orders = orders.all()
+		#orders = orders.all()
+		orders = orders.all().select_related('cust_code', 'agent_code')
 
 		# Leggo il parametro extra per l'ordinamento in base alle colonne.
 		# Hint per la chiamata in JQuery: per l'ordinamento discentente è 
@@ -78,10 +79,14 @@ def order_list(request):
 		sort_by = request.GET.get('sort_by', '-ord_date');
 
 		orders = orders.order_by(sort_by)
+		logger.info(str(orders.query))
 
 		# Serializzo i dati ottenuti con la query e li restituisco sotto
 		# forma di risposta JSON
-		orders_serializer = OrdersSerializer(orders, many=True)
+#		orders_serializer = OrdersSerializer(orders, many=True)
+		orders_serializer = OrdersListSerializer(orders, many=True)
+
+		logger.info(str(orders_serializer.data))
 
 		return JsonResponse(orders_serializer.data, safe=False)
 		# safe=False serve per la serializzazione

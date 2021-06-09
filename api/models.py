@@ -20,7 +20,8 @@ class Agents(models.Model):
 		db_table = 'agents'
 
 	def __str__(self):
-		return str(self.agent_code)
+		#return str(self.agent_code)
+		return self.agent_name
 
 class Customer(models.Model):
 	cust_code = models.CharField(primary_key=True, max_length=6)
@@ -41,7 +42,8 @@ class Customer(models.Model):
 		db_table = 'customer'
 
 	def __str__(self):
-		return str(self.cust_code)
+		#return str(self.cust_code)
+		return self.cust_name
 
 class Orders(models.Model):
 	ord_num = models.DecimalField(primary_key=True, max_digits=6, decimal_places=0)
@@ -56,6 +58,8 @@ class Orders(models.Model):
 		managed = False
 		db_table = 'orders'
 
+"""
 	def __str__(self):
 		return str(self.ord_num)
+"""
 

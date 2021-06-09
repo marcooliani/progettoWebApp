@@ -1,5 +1,66 @@
 {% extends "page_skeleton.html" %}
 
 {% block content %}
-	<h3>Ok, ci sono. Gruppo {{ request.session.gruppo }} </h3>
+<h3>Tabella ordini per {{request.session.utente}}</h3>
+
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<caption>Lista ordini per {{request.session.utente}}</caption>
+			<thead class="table-light">
+				<th scope="col">#</th>
+				<th scope="col">Order ID</th>
+				<th scope="col">Date</th>
+				<th scope="col">Amount</th>
+				<th scope="col">Advance amount</th>
+			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+				<th>Customer</th>
+			{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
+				<th>Agent</th>
+			{% endif %}
+				<th>Desc</th>
+				<th>&nbsp;</th>
+			</thead>
+			<tbody id="orderTable">
+			</tbody>
+		</table>
+	</div>
+
+
+	<script type="text/javascript">
+	$.ajax({
+        url: "/api/orders/",
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+					var len = response.length;
+
+					for(var i=0; i<len; i++){
+                var ord_num = response[i].ord_num;
+                var ord_date = response[i].ord_date;
+                var ord_amount = response[i].ord_amount;
+                var advance_amount = response[i].advance_amount;
+                var cust_code = response[i].cust_code;
+                var agent_code = response[i].agent_code;
+                var ord_description = response[i].ord_description;
+
+								var tr_str = "<tr id="+ ord_num +">" +
+                    "<th scope='row'>" + (i+1) + "</th>" +
+                    "<td>" + ord_num + "</td>" +
+                    "<td>" + ord_date + "</td>" +
+                    "<td>" + ord_amount + "</td>" +
+                    "<td>" + advance_amount + "</td>" +
+								{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+                    "<td>" + cust_code + "</td>" +
+								{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
+                    "<td>" + agent_code + "</td>" +
+								{% endif %}
+                    "<td>" + ord_description + "</td>" +
+										"<td><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>" +
+                    "</tr>";
+
+                $("#orderTable").append(tr_str);
+					}
+        }
+    });
+	</script>
 {% endblock %}

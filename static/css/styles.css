@@ -1,0 +1,13 @@
+
+html,body {
+  height: 100vh;
+}
+
+.sidebar{
+		margin-top: 10px;
+		border:solid 1px #ddd;
+		border-radius: 5px;
+    padding-right: 20px;
+    padding-top: 20px;
+    min-height: calc(100vh - 60px);
+}

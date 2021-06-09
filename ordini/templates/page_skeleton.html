@@ -12,38 +12,55 @@
 
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
-  <script src="{% static 'fontawesome/all.min.js' %}"></script>
+  <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
 
 </head>
 
 <body>
 
-  <div class="container-fluid">
-    <div class="row">
-      {% block navbar %}
-				<nav class="navbar navbar-expand-sm py-0 navbar-dark bg-dark">
-					<div class="container-fluid">
-						<a class="navbar-brand" href="#"><i class="fab fa-python"></i> Progetto WebApp</a>
-						<ul class="navbar-nav mr-auto">&nbsp;</ul>
-						<ul class="navbar-nav ml-auto">
-							<li class="nav-item">
-							{% if request.session.gruppo == "agents" %}
-								<a class="nav-link" href="/agente/dettaglio/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user-tie"></i></a>
-							{% elif request.session.gruppo == "customers" %}
-								<a class="nav-link" href="/clienti/dettaglio/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
-							{% endif %}
+  <div class="container-fluid h-100">
 
-							</li>
-							<li class="nav-item" >
-								<a class="nav-link" href="/auth/logout/">Logout <i class="fas fa-power-off"></i></a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			{% endblock %}
-      <div class="col-sm-12 ">{% block content %}{% endblock %}</div>
-    </div>
-  </div>
+		<div class="row">
+				{% block navbar %}
+					<nav class="navbar navbar-expand-sm py-0 navbar-light bg-light">
+						<div class="container-fluid">
+
+							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+											data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+											aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+
+							<a class="navbar-brand" href="#"><i class="fab fa-python"></i> Progetto WebApp</a>
+
+							<div class="collapse navbar-collapse" id="navbarNav">
+								<ul class="navbar-nav me-auto">&nbsp;</ul>
+								<ul class="navbar-nav ms-auto">
+									<li class="nav-item">
+								{% if request.session.gruppo == "agents" %}
+										<a class="nav-link" href="/agente/dettaglio/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user-tie"></i></a>
+								{% elif request.session.gruppo == "customers" %}
+										<a class="nav-link" href="/clienti/dettaglio/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
+								{% endif %}
+
+									</li>
+									<li class="nav-item" >
+										<a class="nav-link" href="/auth/logout/">Logout <i class="fas fa-power-off"></i></a>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</nav>
+				{% endblock %}
+		</div>
+		
+		<div class="row">
+				<div class="col-sm-4 col-md-4 col-lg-2 p-10 bg-light sidebar sticky-top" >&nbsp;</div>
+				<div class="col-sm-8 col-md-8 col-lg-10">{% block content %}{% endblock %}</div>
+		</div>
+
+	</div>
 
 </body>
 </html>

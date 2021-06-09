@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.contrib.auth.decorators import login_required
+from base64 import b64encode
+import requests
 
 """
 Verifico in quale gruppo è l'utente e setto una variabile
@@ -31,6 +33,7 @@ sfruttare l'api in modo che ritorni all'index...
 """
 @login_required(login_url='/auth/login/')
 def index(request):
+
 	return render(request, 'index.html')
 
 @login_required(login_url='/auth/login/')
