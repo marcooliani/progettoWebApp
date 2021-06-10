@@ -67,7 +67,10 @@ def order_list(request):
 		# il campo cust_code o agent_code a seconda di chi è loggato, ma
 		# il serializer non accetta che ci sia un campo in meno (giustamente).
 		# Quindi farò il filtro lato client, se mi riesce...
-		#orders = orders.all()
+		#
+		# Edit: la select(related) permette di fare l'inner join con 
+		# Agents e Customer per recuperare poi, nel serializer, i nomi.
+		# Devo però, appunto, passare i dati al serializer...
 		orders = orders.all().select_related('cust_code', 'agent_code')
 
 		# Leggo il parametro extra per l'ordinamento in base alle colonne.
@@ -83,7 +86,7 @@ def order_list(request):
 
 		# Serializzo i dati ottenuti con la query e li restituisco sotto
 		# forma di risposta JSON
-#		orders_serializer = OrdersSerializer(orders, many=True)
+		#orders_serializer = OrdersSerializer(orders, many=True)
 		orders_serializer = OrdersListSerializer(orders, many=True)
 
 		logger.info(str(orders_serializer.data))
@@ -148,7 +151,8 @@ def order_detail(request, pk):
 			elif(g.name == "agents"):
 				order = order.filter(agent_code=str(request.user))
 
-		order = order.get(pk=pk)
+		#order = order.get(pk=pk)
+		order = orders.get(pk=pk).select_related('cust_code', 'agent_code')
 
 	# Se l'ordine non viene trovato, restituisco un errore 404
 	except Orders.DoesNotExist:
@@ -156,7 +160,8 @@ def order_detail(request, pk):
 
 	# Serializzo i dati e li restituisco in forma di risposta JSON
 	if(request.method == 'GET'):
-		order_serializer = OrdersSerializer(order)
+		#order_serializer = OrdersSerializer(order)
+		order_serializer = OrdersListSerializer(order)
 
 		return JsonResponse(order_serializer.data)
 

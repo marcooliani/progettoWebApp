@@ -1,0 +1,15 @@
+{% extends "page_skeleton.html" %}
+
+{% block content %}
+
+<h3>Nuovo ordine</h3>
+
+<form name="new_order" action = "/api/orders/new/" method = "post">
+    {% csrf_token %} <!-- !!! -->
+
+		
+    
+	<button class="btn btn-primary" type="submit" name="submit_order" id="submit_order">Invia</button>
+</form>
+
+{% endblock %}
