@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import json
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
@@ -106,15 +106,27 @@ Inserisce un nuovo ordine all'interno della tabella ordini. Permissions:
 def order_new(request):
 
 	if(request.method == 'POST'):
-		
-		logger.info("E qui ci sono")
-		logger.info(request.data)
-		order_data = JSONParser().parse(request)
-		logger.info("E qui pure")
-		logger.info(order_data)
-		order_serializer = OrdersSerializer(data=order_data)
 
-		logger.info('Prima di is_valid')
+		"""
+		Ok, il punto è questo: devo bypassare JSONParser() altrimenti
+		la mia request.data proveniente dalla chiama Ajax NON 
+		ne vuole sapere di funzionare, per quanto il contenuto sia
+		esattamente identico a quello inviato tramite Postman
+		(provato con gli stessi dati!). Così al serializzatore do
+		in pasto direttamente i dati "grezzi" della request.data
+		e non i dati "puliti" passati sotto JSONParser().
+		Ritengo tutto ciò letteralmente ASSURDO!
+		C'è da dire che i dati sono comunque già in formato
+		JSON corretto, quindi in questo caso il parser è superfluo
+		nel momento in cui la richiesta arriva da Ajax o da Postman,
+		coi dati preparati ad hoc. E' anche vero che l'API è fatta
+		apposta per accettare i dati solo in JSON e non in 
+		form-encoded o altre codifiche da form...
+		"""
+		#order_data = JSONParser().parse(request)
+		#order_serializer = OrdersSerializer(data=order_data)
+		order_serializer = OrdersSerializer(data=request.data)
+
 		if(order_serializer.is_valid()):
 			order_serializer.save()
 
@@ -194,8 +206,14 @@ def order_update(request, pk):
 	# se la serializzazione effettuata è valida, scrivo i dati nel 
 	# database e aggiorno l'ordine
 	if(request.method == 'PUT'):
-		order_data = JSONParser().parse(request)
-		order_serializer = OrdersSerializer(order, data=order_data)
+		"""
+		Vale lo stesso discorso fatto per il metodo POST: JSONParser() deve
+		essere bypassato anche qui, dato che pure in questo caso i dati
+		provengono da AJAX...
+		"""
+		#order_data = JSONParser().parse(request)
+		#order_serializer = OrdersSerializer(order, data=order_data)
+		order_serializer = OrdersSerializer(order, data=request.data)
 
 		if(order_serializer.is_valid()):
 			order_serializer.save()

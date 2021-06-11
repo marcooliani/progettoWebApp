@@ -6,11 +6,10 @@
 
 <div id="submit_result"></div>
 
-<form name="new_order" id="new_order" action = "" method = "post" >
     {% csrf_token %} <!-- !!! -->
+<form name="new_order" id="new_order" >
 
 	<input type="hidden" name="ord_num" id="ord_num" value="{{ ord_num }}">
-	<input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
 
 	<div class="row">
 		<div class="col-3">
@@ -26,6 +25,7 @@
 		</div>
 	</div>
 
+	<input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
 
 	<div class="row">
 		<div class="col-4">
@@ -78,33 +78,45 @@ dal campo (nascosto) html, che sarebbe poi rappresentato dalla
 istruzione {% csrf_token %} */
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+// Intercetto il click del bottone di invio del form
 $("#submit_order").click(function(e) {
 	e.preventDefault();
 
+	// Prendo i campi del form e li salvo in un array associativo
 	var form_data = $("#new_order").serializeArray();
 	var _data = {};
-    for (var i = 0; i < form_data.length; i++){
-        _data[form_data[i]["name"]] = form_data[i]["value"];
-		}
+  for (var i = 0; i < form_data.length; i++){
+    _data[form_data[i]["name"]] = form_data[i]["value"];
+	}
 
-		data = JSON.stringify(_data);
-		console.log(data);
+	// "Stringhifico" i dati dell'array associativo e 
+	// converto il suddetto array in formato JSON
+	// valido
+	data = JSON.stringify(_data)
 
+	// Richiesta AJAX
 	$.ajax({
           url: '/api/orders/new/',
           type: 'POST',
-					// Passo il tolken csrf attaverso gli
+					// Passo il token csrf attaverso gli
 					// header http, pena il 403 Forbidden
 					headers: {
               'X-CSRFToken': csrftoken
            },
           contentType: 'application/json', 
+					dataType: 'json',
           data: data,
+					processData: false,
           success: function() {
             $("#submit_result").html("Inserimento ok");
           },
-					
+					error: function(message) {
+						$("#submit_result").html("Errore nell'inserimento");
+						//alert(message.responseText);
+						$("#submit_result").html("Inserimento fallito");
+					}
     }); 
+
 });
 
 </script>
