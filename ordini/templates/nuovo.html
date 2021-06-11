@@ -81,10 +81,15 @@ const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 $("#submit_order").click(function(e) {
 	e.preventDefault();
 
-	var form_data = JSON.stringify(("#new_order").formToJson());
+	var form_data = $("#new_order").serializeArray();
+	var _data = {};
+    for (var i = 0; i < form_data.length; i++){
+        _data[form_data[i]["name"]] = form_data[i]["value"];
+		}
 
-	alert(form_data);
-/*
+		data = JSON.stringify(_data);
+		console.log(data);
+
 	$.ajax({
           url: '/api/orders/new/',
           type: 'POST',
@@ -93,13 +98,13 @@ $("#submit_order").click(function(e) {
 					headers: {
               'X-CSRFToken': csrftoken
            },
-          data: form_data,
           contentType: 'application/json', 
+          data: data,
           success: function() {
             $("#submit_result").html("Inserimento ok");
           },
 					
-    }); */
+    }); 
 });
 
 </script>

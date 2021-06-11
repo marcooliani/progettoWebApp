@@ -106,9 +106,11 @@ Inserisce un nuovo ordine all'interno della tabella ordini. Permissions:
 def order_new(request):
 
 	if(request.method == 'POST'):
-
-		logger.info(request)
+		
+		logger.info("E qui ci sono")
+		logger.info(request.data)
 		order_data = JSONParser().parse(request)
+		logger.info("E qui pure")
 		logger.info(order_data)
 		order_serializer = OrdersSerializer(data=order_data)
 
