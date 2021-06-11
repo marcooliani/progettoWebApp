@@ -4,12 +4,104 @@
 
 <h3>Nuovo ordine</h3>
 
-<form name="new_order" action = "/api/orders/new/" method = "post">
+<div id="submit_result"></div>
+
+<form name="new_order" id="new_order" action = "" method = "post" >
     {% csrf_token %} <!-- !!! -->
 
-		
-    
+	<input type="hidden" name="ord_num" id="ord_num" value="{{ ord_num }}">
+	<input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
+
+	<div class="row">
+		<div class="col-3">
+			<div class="mb-3">
+				<label for="cust_code" class="form-label">Customer</label>
+				<select class="form-select" aria-label="Select customer" name="cust_code" id="cust_code">
+					<option value=""> Select Customer </option>
+				{% for i in cust_list %}
+					<option value="{{ i.cust_code }}"> {{ i.cust_name }} </option>
+				{% endfor %}
+				</select>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-4">
+			<div class="mb-3">
+				<label for="ord_amount" class="form-label">Order Amount</label>
+				<div class="input-group">
+					<div class="input-group-text">$</div>
+					<input type="text" class="form-control" id="ord_amount" name="ord_amount" placeholder="4000.11" aria-label="Order amount">
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-4">
+			<div class="mb-3">
+				<label for="advance_amount" class="form-label">Advance Amount</label>
+				<div class="input-group">
+          <div class="input-group-text">$</div>
+					<input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" aria-label="Advance amount">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-4">
+			<div class="mb-3">
+				<label for="ord_date" class="form-label">Order Date</label>
+				<div class="input-group">
+					<div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+					<input type="text" class="form-control" id="ord_date" name="ord_date" placeholder="10/06/2021" aria-label="Order date">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4">
+      <div class="mb-3">
+				<label for="ord_description" class="form-label">Order Description</label>
+				<input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Vertical piano" aria-label="Order description">
+			</div>
+		</div>
+	</div>
+
 	<button class="btn btn-primary" type="submit" name="submit_order" id="submit_order">Invia</button>
 </form>
+
+<script type="text/javascript">
+/* Avendo messo nei settings di Django CSRF_USE_SESSIONS = True
+e CSRF_COOKIE_HTTPONLY = True, richiamo il token csrf semplicemente
+dal campo (nascosto) html, che sarebbe poi rappresentato dalla 
+istruzione {% csrf_token %} */
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+$("#submit_order").click(function(e) {
+	e.preventDefault();
+
+	var form_data = JSON.stringify(("#new_order").formToJson());
+
+	alert(form_data);
+/*
+	$.ajax({
+          url: '/api/orders/new/',
+          type: 'POST',
+					// Passo il tolken csrf attaverso gli
+					// header http, pena il 403 Forbidden
+					headers: {
+              'X-CSRFToken': csrftoken
+           },
+          data: form_data,
+          contentType: 'application/json', 
+          success: function() {
+            $("#submit_result").html("Inserimento ok");
+          },
+					
+    }); */
+});
+
+</script>
 
 {% endblock %}

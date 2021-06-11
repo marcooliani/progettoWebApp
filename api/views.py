@@ -10,6 +10,8 @@ from rest_framework import status
 from .models import Orders, Customer, Agents
 from .serializers import OrdersSerializer, CustomerSerializer, AgentsSerializer, OrdersListSerializer
 
+from django.views.decorators.csrf import csrf_protect
+
 # Mi importo le classi contententi le definizioni delle permissions 
 # dal file permissions.py
 from .permissions import CanView, CanInsertModifyDeleteOrders, IsAgent, IsManager
@@ -82,14 +84,11 @@ def order_list(request):
 		sort_by = request.GET.get('sort_by', '-ord_date');
 
 		orders = orders.order_by(sort_by)
-		logger.info(str(orders.query))
 
 		# Serializzo i dati ottenuti con la query e li restituisco sotto
 		# forma di risposta JSON
 		#orders_serializer = OrdersSerializer(orders, many=True)
 		orders_serializer = OrdersListSerializer(orders, many=True)
-
-		logger.info(str(orders_serializer.data))
 
 		return JsonResponse(orders_serializer.data, safe=False)
 		# safe=False serve per la serializzazione
@@ -108,15 +107,13 @@ def order_new(request):
 
 	if(request.method == 'POST'):
 
+		logger.info(request)
 		order_data = JSONParser().parse(request)
-		logger.info('order_data POST: ' + str(order_data))
+		logger.info(order_data)
 		order_serializer = OrdersSerializer(data=order_data)
-		logger.info('order_serializer POST: ' + str(order_serializer))
 
 		logger.info('Prima di is_valid')
 		if(order_serializer.is_valid()):
-			logger.info(order_serializer.is_valid())
-			logger.info('Valida!')
 			order_serializer.save()
 
 			return JsonResponse(order_serializer.data, status=status.HTTP_201_CREATED)
@@ -188,8 +185,6 @@ def order_update(request, pk):
 
 		order = order.get(pk=pk)
 
-		logger.info("Ho trovato l'ordine")
-
 	except Orders.DoesNotExist:
 		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -198,12 +193,9 @@ def order_update(request, pk):
 	# database e aggiorno l'ordine
 	if(request.method == 'PUT'):
 		order_data = JSONParser().parse(request)
-		logger.info("PUT: Sono dopo il parser")
 		order_serializer = OrdersSerializer(order, data=order_data)
-		logger.info("PUT: Sono dopo il serializer")
 
 		if(order_serializer.is_valid()):
-			logger.info("PUT: Serializer valido")
 			order_serializer.save()
 
 			# Si poterbbe restituire anche un semplice messaggio

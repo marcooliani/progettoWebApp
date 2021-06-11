@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from base64 import b64encode
+from api.models import Orders, Agents, Customer
 import requests
 
 """
@@ -46,13 +47,27 @@ def dettaglio(request, ordine):
 
 @login_required(login_url='/auth/login/')
 def nuovo(request):
-	# Avrei potuto creare i campi del form direttamente in Python e poi esportarli
-	# al template, ma avrei avuto forse problemi nella resa grafica visto che non
-	# credo si possano specificare le varie classi. Quindi opto per la soluzione
-	# "tradizionale": form costruito a mano sul template e invio dei dati alla 
-	# API per l'inserimento. Come per gli altri metodi, nulla viene fatto a 
-	# livello server in questo metodo, se non ritornare il template
-	return render(request, 'nuovo.html')
+
+	# Genero il nuovo ID per l'ordine. Farlo direttamente sul 
+	# serializer delle API avrebbe comportato parecchie
+	# complicazioni inutili, a mio avviso...
+	last_ord_num = Orders.objects.values_list('ord_num', flat=True).order_by('ord_num').last()
+	next_ord_num = last_ord_num + 1
+
+	# Recupero l'elenco dei customer gestiti dall'agent per passarli 
+	# al template.
+	# In realtà potevo fare la stessa cosa anche sfruttando la API
+	# con una chiamata AJAX da JQuery, ma non cambia nulla (anzi,
+	# visto che qui non è necessario AJAX è l'opzione più comoda).
+	# Dipende da come si vuole fare la cosa, insomma...
+	customer_list = Customer.objects.filter(agent_code=request.user.username).values('cust_code', 'cust_name').order_by('cust_name')
+
+	context = {
+    'ord_num' : next_ord_num,
+		'cust_list': customer_list,
+  }
+
+	return render(request, 'nuovo.html', context=context)
 
 @login_required(login_url='/auth/login/')
 def modifica(request, ordine):

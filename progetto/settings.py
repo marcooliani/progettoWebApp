@@ -151,7 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+#        'rest_framework.authentication.BasicAuthentication',
     ],
 		'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
@@ -167,6 +167,12 @@ DATABASE_ROUTERS = ['dbRouters.dbRouters']
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
+
+# Abilito l'uso del token csrf in sessione. In questo modo evito di 
+# specificarlo "a mano" negli header della richiesta in AJAX...
+CSRF_USE_SESSIONS = True
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SECURE = True
 
 # Permette il logging in console e su file di testo
 LOGGING = {
