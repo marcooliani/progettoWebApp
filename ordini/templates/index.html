@@ -29,9 +29,9 @@
           <td>{{ i.ord_amount }}</td>
           <td>{{ i.advance_amount }}</td>
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-          <td id="{{ i.cust_code }}"> {{ i.cust_name }}</td>
+          <td id="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</td>
       {% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-          <td id="{{ i.agent_code }}"> {{ i.agent_name }}</td>
+          <td id="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</td>
       {% endif %}
 					<td>{{ i.ord_description }}</td>
           <td><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>
