@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.contrib.auth.decorators import login_required
-from base64 import b64encode
 from api.models import Orders, Agents, Customer
-import requests
+
+# Per il debugging
+import logging
+logger = logging.getLogger('ordini_logger')
 
 """
 Verifico in quale gruppo è l'utente e setto una variabile
@@ -38,8 +40,20 @@ sfruttare l'api in modo che ritorni all'index...
 """
 @login_required(login_url='/auth/login/')
 def index(request):
+	order_list = Orders.objects
 
-	return render(request, 'index.html')
+	if(request.user.groups.all()[0].name == "customers"):
+		order_list = order_list.filter(cust_code=request.user.username)
+	elif(request.user.groups.all()[0].name == "agents"):
+		order_list = order_list.filter(agent_code=request.user.username)
+
+	order_list = order_list.all().order_by('-ord_date')
+
+	context = {
+		'order_list': order_list,
+	}
+
+	return render(request, 'index.html', context=context)
 
 @login_required(login_url='/auth/login/')
 def dettaglio(request, ordine):
@@ -48,9 +62,14 @@ def dettaglio(request, ordine):
 @login_required(login_url='/auth/login/')
 def nuovo(request):
 
-	# Genero il nuovo ID per l'ordine. Farlo direttamente sul 
-	# serializer delle API avrebbe comportato parecchie
-	# complicazioni inutili, a mio avviso...
+	# Genero il nuovo ID per l'ordine. In realtà questo modo di 
+	# fare, in un caso reale, non sarebbe corretto, perchè porterebbe
+	# a problemi di concorrenza (duplicate key). A livello si API la
+	# cosa si potrebbe risolvere a livello di serializers, creandone
+	# uno ex novo che gestisca le richieste POST o modificando quello
+	# esistente in base alla richiesta ricevuta e sovrascrivendo il
+	# campo ord_num. Ma dato che si tratta un mero progettino universitario
+	# va bene anche così, credo..
 	last_ord_num = Orders.objects.values_list('ord_num', flat=True).order_by('ord_num').last()
 	next_ord_num = last_ord_num + 1
 
@@ -70,8 +89,25 @@ def nuovo(request):
 	return render(request, 'nuovo.html', context=context)
 
 @login_required(login_url='/auth/login/')
-def modifica(request, ordine):
-	return render(request, 'modifica.html')
+def modifica(request, pk):
+	# Recupero il singolo ordine, più o meno come nel codice delle API
+	order = Orders.objects
+
+	if(request.user.groups.all()[0].name == "customers"):
+		order = order.filter(cust_code=request.user.username)
+	elif(request.user.groups.all()[0].name == "agents"):
+		order = order.filter(agent_code=request.user.username)
+
+	order = order.get(pk=pk)
+
+	customer_list = Customer.objects.filter(agent_code=request.user.username).values('cust_code', 'cust_name').order_by('cust_name')
+
+	context = {
+		'ordine' : order,
+		'cust_list': customer_list,
+	}
+	
+	return render(request, 'modifica.html', context = context)
 
 @login_required(login_url='/auth/login/')
 def elimina(request, ordine):

@@ -125,6 +125,7 @@ def order_new(request):
 		"""
 		#order_data = JSONParser().parse(request)
 		#order_serializer = OrdersSerializer(data=order_data)
+
 		order_serializer = OrdersSerializer(data=request.data)
 
 		if(order_serializer.is_valid()):
@@ -134,7 +135,6 @@ def order_new(request):
 
 		logger.info('Serializzazione non valida e non so perchè!')
 		return JsonResponse(order_serializer.error, status=status.HTTP_400_BAD_REQUEST)
-
 
 """
 GET order_detail()
@@ -163,7 +163,7 @@ def order_detail(request, pk):
 				order = order.filter(agent_code=str(request.user))
 
 		#order = order.get(pk=pk)
-		order = orders.get(pk=pk).select_related('cust_code', 'agent_code')
+		order = order.select_related('cust_code', 'agent_code').get(pk=pk)
 
 	# Se l'ordine non viene trovato, restituisco un errore 404
 	except Orders.DoesNotExist:

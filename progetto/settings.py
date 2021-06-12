@@ -98,7 +98,6 @@ DATABASES = {
   },
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -222,6 +221,10 @@ LOGGING = {
             'level': 'INFO',
         },
         'serializer_logger': {
+            'handlers': ['console', 'logfile'],
+            'level': 'INFO',
+        },
+        'ordini_logger': {
             'handlers': ['console', 'logfile'],
             'level': 'INFO',
         },

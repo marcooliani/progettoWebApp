@@ -7,7 +7,7 @@
 		<table class="table table-hover">
 			<caption>Lista ordini per {{request.session.utente}}</caption>
 			<thead class="table-light">
-				<th scope="col">#</th>
+			<!--	<th scope="col">#</th> -->
 				<th scope="col">Order ID</th>
 				<th scope="col">Date</th>
 				<th scope="col">Amount</th>
@@ -21,13 +21,31 @@
 				<th>&nbsp;</th>
 			</thead>
 			<tbody id="orderTable">
+		{% for i in order_list %} 
+				<tr id="{{ i.ord_num }}">
+			<!--		<th scope='row'>{{ j }}</th> -->
+					<td>{{ i.ord_num }}</td>
+          <td>{{ i.ord_date }}</td>
+          <td>{{ i.ord_amount }}</td>
+          <td>{{ i.advance_amount }}</td>
+			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+          <td id="{{ i.cust_code }}"> {{ i.cust_name }}</td>
+      {% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
+          <td id="{{ i.agent_code }}"> {{ i.agent_name }}</td>
+      {% endif %}
+					<td>{{ i.ord_description }}</td>
+          <td><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>
+        </tr>
+					
+		{% endfor %}
+
 			</tbody>
 		</table>
 	</div>
 
 
 	<script type="text/javascript">
-	$.ajax({
+/*	$.ajax({
         url: "/api/orders/",
         type: 'GET',
         dataType: 'json',
@@ -63,6 +81,7 @@
                 $("#orderTable").append(tr_str);
 					}
         }
-    });
+    }); */
 	</script>
+
 {% endblock %}

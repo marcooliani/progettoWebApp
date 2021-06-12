@@ -1,0 +1,88 @@
+{% extends "page_skeleton.html" %}
+
+{% block content %}
+
+<h3>Modifica ordine {{ ordine.ord_num }}</h3>
+
+<div id="submit_result">
+{% if request.GET.p == "success" %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong><i class="fas fa-check-circle"></i> Successo!</strong> Ordine inserito correttamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi alert"></button>
+  </div>
+{% endif %}
+</div>
+
+<form name="new_order" id="new_order" class="needs-validation">
+
+  {% csrf_token %} <!-- !!! -->
+
+  <!-- Vedi commenti nella view al riguardo-->
+  <input type="hidden" name="ord_num" id="ord_num" value="{{ ordine.ord_num }}" >
+
+  <div class="row">
+    <div class="col-3">
+      <div class="mb-3">
+        <label for="cust_code" class="form-label">Customer</label>
+        <select class="form-select" aria-label="Select customer" name="cust_code" id="cust_code" required>
+          <option value=""> Select Customer </option>
+        {% for i in cust_list %}
+          <option value="{{ i.cust_code }}" {% if i.cust_code|slugify == ordine.cust_code|slugify %}selected{% endif %}> {{ i.cust_name }} </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
+
+	  <div class="row">
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="ord_amount" class="form-label">Order Amount</label>
+        <div class="input-group">
+          <div class="input-group-text">$</div>
+          <input type="text" class="form-control" id="ord_amount" name="ord_amount" 
+						placeholder="4000.11" aria-label="Order amount" value="{{ ordine.ord_amount }}"  required>
+        </div>
+        <div id="ord_amount_help" class="form-text">Use "." for decimals separator</div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="advance_amount" class="form-label">Advance Amount</label>
+        <div class="input-group">
+          <div class="input-group-text">$</div>
+          <input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" aria-label="Advance amount" required>
+        </div>
+        <div id="advance_amount_help" class="form-text">Use "." for decimals separator</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="ord_date" class="form-label">Order Date</label>
+        <div class="input-group">
+          <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+          <input type="text" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" aria-label="Order date" required>
+        </div>
+        <div id="ord_date_help" class="form-text">Date format: YYYY-MM-DD</div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="mb-3">
+        <label for="ord_description" class="form-label">Order Description</label>
+        <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Insert order description" aria-label="Order description">
+        <div id="ord_desc_help" class="form-text">Max 60 chars</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit" name="submit_order" id="submit_order">Invia</button>
+</form>
+
+{% endblock %}

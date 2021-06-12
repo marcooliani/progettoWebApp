@@ -20,8 +20,8 @@ class Agents(models.Model):
 		db_table = 'agents'
 
 	def __str__(self):
-		#return str(self.agent_code)
-		return self.agent_name
+		return self.agent_code
+		#return self.agent_name
 
 class Customer(models.Model):
 	cust_code = models.CharField(primary_key=True, max_length=6)
@@ -41,9 +41,28 @@ class Customer(models.Model):
 		managed = False
 		db_table = 'customer'
 
+	"""
+	La funzione __str__ è alquanto infima: se una foreign key di un
+	model fa riferimento alla pk di questo model, facendo una
+	select al model di partenza il valore definito nel metodo
+	__str___ di questo model andrà a "sovrascriversi" al valore
+	della foreign key. Ad esempio, con __str__ settato per ritornare
+	cust_name:
+
+	order = Orders.objects.get(pk=pk)
+
+	il campo order.cust_code non sarà uguale al codice, come ci si
+	potebbe aspettare, ma viene sostituito dal valore del campo
+	cust_name del model Customer!
+	Indicando a __str__ di ritornare invece il campo cust_code
+	(o forse anche omettendo del tutto il metodo!), la cosa
+	torna a funzionare correttamente. Nota: ci ho perso su tutta
+	una giornata perchè ho dato la colpa alla cache...
+	"""
+	
 	def __str__(self):
-		#return str(self.cust_code)
-		return self.cust_name
+		return self.cust_code
+		#return self.cust_name
 
 class Orders(models.Model):
 	ord_num = models.DecimalField(primary_key=True, max_digits=6, decimal_places=0)
