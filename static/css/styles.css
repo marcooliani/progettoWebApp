@@ -1,9 +1,9 @@
 
+/*
 html,body {
   height: 100vh;
 }
 
-/*
 .sidebar{
 		margin-top: 10px;
 		border:solid 1px #ddd;
@@ -23,3 +23,4 @@ th,
 .nowrap {
 	white-space: nowrap;
 }
+
