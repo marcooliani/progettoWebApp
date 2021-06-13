@@ -49,7 +49,7 @@ def index(request):
 
 	order_list = order_list.all().select_related('cust_code', 'agent_code').order_by('-ord_date')
 
-	logger.info(str(order_list.query))
+	#logger.info(str(order_list.query))
 
 	context = {
 		'order_list': order_list,

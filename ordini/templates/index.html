@@ -4,7 +4,7 @@
 <h3>Tabella ordini per {{request.session.utente}}</h3>
 
 	<div class="table-responsive">
-		<table class="table table-hover">
+		<table class="table table-hover" id="order_list_table" name="order_list_table">
 			<caption>Lista ordini per {{request.session.utente}}</caption>
 			<thead class="table-light">
 				<th scope="col">Order ID</th>
@@ -21,7 +21,7 @@
 			</thead>
 			<tbody id="orderTable">
 		{% for i in order_list %} 
-				<tr id="{{ i.ord_num }}">
+				<tr id="row_{{ i.ord_num }}">
 					<td>{{ i.ord_num }}</td>
           <td>{{ i.ord_date|date:'d/m/Y' }}</td>
           <td>{{ i.ord_amount }}</td>
@@ -35,7 +35,7 @@
           <td>
 						<a href="/ordini/modifica/{{ i.ord_num  }}/"><i class='fas fa-edit'></i></a>
 							&nbsp;&nbsp;&nbsp;
-						<i class='fas fa-trash-alt'></i>
+						<a class="delete_order" id="{{ i.ord_num }}"><i class='fas fa-trash-alt'></i></a>
 					</td>
         </tr>
 					
@@ -45,8 +45,48 @@
 		</table>
 	</div>
 
+	<form>
+		{% csrf_token  %}
+	</form>
 
 	<script type="text/javascript">
+	/* Avendo messo nei settings di Django CSRF_USE_SESSIONS = True
+   * e CSRF_COOKIE_HTTPONLY = True, richiamo il token csrf semplicemente
+   * dal campo (nascosto) html, che sarebbe poi rappresentato dalla
+   * istruzione {% csrf_token %} */
+	 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	
+	$(".delete_order").click(function(e) {
+		e.preventDefault();
+
+		// recupero l'id dell'ordine da cancellare
+		ord = $(this).attr('id');
+
+		// Richiesta AJAX DELETE. Non servono dati JSON o altro,
+		// ma il token csrf va passato anche in questo caso...
+		$.ajax({
+			url: "/api/orders/delete/" + ord + "/",
+			type: 'DELETE',
+			headers: {
+        'X-CSRFToken': csrftoken
+      }, 
+			success: function(message) {
+				$('#row_' + ord).fadeOut(300, function(){
+					$(this).remove();
+				})
+				
+				//$('#row_' + ord).remove();
+			},
+			error: function(message) {
+				//alert(message.responseText)
+			}
+
+		}) 
+
+	});
+
+
+
 /*	$.ajax({
         url: "/api/orders/",
         type: 'GET',
