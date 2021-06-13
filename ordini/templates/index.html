@@ -7,7 +7,6 @@
 		<table class="table table-hover">
 			<caption>Lista ordini per {{request.session.utente}}</caption>
 			<thead class="table-light">
-			<!--	<th scope="col">#</th> -->
 				<th scope="col">Order ID</th>
 				<th scope="col">Date</th>
 				<th scope="col">Amount</th>
@@ -23,9 +22,8 @@
 			<tbody id="orderTable">
 		{% for i in order_list %} 
 				<tr id="{{ i.ord_num }}">
-			<!--		<th scope='row'>{{ j }}</th> -->
 					<td>{{ i.ord_num }}</td>
-          <td>{{ i.ord_date }}</td>
+          <td>{{ i.ord_date|date:'d/m/Y' }}</td>
           <td>{{ i.ord_amount }}</td>
           <td>{{ i.advance_amount }}</td>
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
@@ -34,7 +32,11 @@
           <td id="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</td>
       {% endif %}
 					<td>{{ i.ord_description }}</td>
-          <td><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>
+          <td>
+						<a href="/ordini/modifica/{{ i.ord_num  }}/"><i class='fas fa-edit'></i></a>
+							&nbsp;&nbsp;&nbsp;
+						<i class='fas fa-trash-alt'></i>
+					</td>
         </tr>
 					
 		{% endfor %}
@@ -64,7 +66,6 @@
                 var ord_description = response[i].ord_description;
 
 								var tr_str = "<tr id="+ ord_num +">" +
-                    "<th scope='row'>" + (i+1) + "</th>" +
                     "<td>" + ord_num + "</td>" +
                     "<td>" + ord_date + "</td>" +
                     "<td>" + ord_amount + "</td>" +

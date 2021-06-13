@@ -66,9 +66,9 @@
 				<label for="ord_date" class="form-label">Order Date</label>
 				<div class="input-group">
 					<div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-					<input type="text" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" aria-label="Order date" required>
+					<input type="date" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" aria-label="Order date" required>
 				</div>
-				<div id="ord_date_help" class="form-text">Date format: YYYY-MM-DD</div>
+				<div id="ord_date_help" class="form-text">Date format depends on your browser locales!</div>
 			</div>
 		</div>
 
@@ -81,7 +81,8 @@
 		</div>
 	</div>
 
-	<button class="btn btn-primary" type="submit" name="submit_order" id="submit_order">Invia</button>
+	<button class="btn btn-primary" type="submit" name="submit_order" id="submit_order">Insert</button>
+	<button class="btn btn-light" type="reset" name="reset_order" id="reset_order">Reset</button>
 </form>
 
 <script type="text/javascript">
