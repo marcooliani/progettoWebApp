@@ -7,17 +7,17 @@
 		<table class="table table-hover" id="order_list_table" name="order_list_table">
 			<caption>Lista ordini per {{request.session.utente}}</caption>
 			<thead class="table-light">
-				<th scope="col">Order ID</th>
-				<th scope="col">Date</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Advance amount</th>
+				<th scope="col"><span class="ordina" sort="ord_num"><i class="fas fa-sort"></i> Order ID</span></th>
+				<th scope="col"><span class="ordina" sort="ord_date"><i class="fas fa-sort"></i> Date</span></th>
+				<th scope="col"><span class="ordina" sort="ord_amount"><i class="fas fa-sort"></i> Amount</span></th>
+				<th scope="col"><span class="ordina" sort="advance_amount"><i class="fas fa-sort"></i> Advance amount</span></th>
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-				<th>Customer</th>
+				<th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> Customer</span></th>
 			{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-				<th>Agent</th>
+				<th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> Agent</span></th>
 			{% endif %}
-				<th>Description</th>
-				<th>&nbsp;</th>
+				<th scope="col">Description</th>
+				<th scope="col">&nbsp;</th>
 			</thead>
 			<tbody id="orderTable">
 		{% for i in order_list %} 
@@ -32,11 +32,15 @@
           <td id="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</td>
       {% endif %}
 					<td>{{ i.ord_description }}</td>
-          <td>
+			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+          <td class="nowrap">
 						<a href="/ordini/modifica/{{ i.ord_num  }}/"><i class='fas fa-edit'></i></a>
 							&nbsp;&nbsp;&nbsp;
 						<a class="delete_order" id="{{ i.ord_num }}"><i class='fas fa-trash-alt'></i></a>
 					</td>
+      {% elif request.session.gruppo == "customers" %}
+					<td>&nbsp;</td>
+      {% endif %}
         </tr>
 					
 		{% endfor %}
@@ -55,7 +59,10 @@
    * dal campo (nascosto) html, che sarebbe poi rappresentato dalla
    * istruzione {% csrf_token %} */
 	 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-	
+
+	/*
+	 * Cancellazione ordine
+	 */
 	$(".delete_order").click(function(e) {
 		e.preventDefault();
 
@@ -85,14 +92,26 @@
 
 	});
 
+	/*
+	 * Ordinamento colonne
+	 */
+	$(".ordina").click(function(e) {
+		e.preventDefault();
+		sort = $(this).attr('sort');
 
-
-/*	$.ajax({
-        url: "/api/orders/",
+		$.ajax({
+        url: '/api/orders/?sort_by=' + sort,
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-					var len = response.length;
+					// Svuoto il il tbody prima di fare l'append
+					// delle righe ordinate!
+					$('#orderTable').empty();
+
+					// Recupero i dati dall'oggetto response 
+					// restituito dalla chiamata all'API
+					// e appendo le righe ordinate
+          var len = response.length;
 
 					for(var i=0; i<len; i++){
                 var ord_num = response[i].ord_num;
@@ -105,24 +124,32 @@
                 var agent_name = response[i].agent_name;
                 var ord_description = response[i].ord_description;
 
-								var tr_str = "<tr id="+ ord_num +">" +
-                    "<td>" + ord_num + "</td>" +
-                    "<td>" + ord_date + "</td>" +
-                    "<td>" + ord_amount + "</td>" +
-                    "<td>" + advance_amount + "</td>" +
+                var tr_str = '<tr id="row_'+ ord_num + '">' +
+                    '<td>' + ord_num + '</td>' +
+                    '<td>' + ord_date + '</td>' +
+                    '<td>' + ord_amount + '</td>' +
+                    '<td>' + advance_amount + '</td>' +
+                {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+                    '<td id="' + cust_code + '">' + cust_name + '</td>' +
+                {% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
+                    '<td id="' + agent_code + '">' + agent_name + '</td>' +
+                {% endif %}
+                    '<td>' + ord_description + '</td>' +
 								{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-                    "<td id=" + cust_code + ">" + cust_name + "</td>" +
-								{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-                    "<td id=" + agent_code + ">" + agent_name + "</td>" +
+                    '<td class="nowrap"><a href="/ordini/modifica/' + ord_num + '"><i class="fas fa-edit"></i></a>' +
+										'&nbsp;&nbsp;&nbsp;' + 
+										'<a class="delete_order" id="' + ord_num + '"><i class="fas fa-trash-alt"></i></a></td>' +
+                    '</tr>';
+								{% elif request.session.gruppo == "customers" %}
+										'<td>&nbsp;</td>';
 								{% endif %}
-                    "<td>" + ord_description + "</td>" +
-										"<td><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>" +
-                    "</tr>";
 
                 $("#orderTable").append(tr_str);
-					}
-        }
-    }); */
+          }
+				}
+			});
+	});
+
 	</script>
 
 {% endblock %}
