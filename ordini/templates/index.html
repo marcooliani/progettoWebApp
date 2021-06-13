@@ -14,7 +14,7 @@
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
 				<th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> Customer</span></th>
 			{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-				<th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> Agent</span></th>
+				<th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
 			{% endif %}
 				<th scope="col">Description</th>
 				<th scope="col">&nbsp;</th>
@@ -128,8 +128,36 @@
 	 */
 	$(".ordina").click(function(e) {
 		e.preventDefault();
+
+		/*
+		 * Setto il tipo di ordinamento per la colonna
+		 * selezionata. A differenza delle normali query
+		 * SQL, Django non usa ASC o DESC per gli ordinamenti
+		 * crescenti/decrescenti, ma una semplicemente 
+		 * nomecampo per l'ordinamento crescente e
+		 * -nomecampo per quelli decrescenti. L'unico modo
+		 * per tenere traccia di quale ordinamento si sta
+		 * visualizzando ora per una data colonna è sostituire
+		 * il campo "sort" appositamente messo nel tag <span>
+		 * di ogni colonna
+		 */
 		sort = $(this).attr('sort');
 
+		// Controllo se il primo carattere della stringa è "-":
+		// se non lo è, aggiungo il "-" alla stringa, per
+		// poter poi eventualmente fare l'ordinamento 
+		// decrescente per la colonna considerata,
+		// altrimento lo tolgo per fare poi l'ordinamento
+		// crescente
+		if(sort.charAt(0) != "-") {
+			$(this).attr('sort', '-' + sort);
+		}
+		else {
+			$(this).attr('sort', sort.substring(1));
+		}
+
+		// Richiesta AJAX GET per recuperare i dati
+		// di tutti gli ordini
 		$.ajax({
         url: '/api/orders/?sort_by=' + sort,
         type: 'GET',

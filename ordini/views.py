@@ -35,8 +35,13 @@ degli ordini)
 - nuovo: inserisci un nuovo ordine
 - modifica: modifica un ordine esistente
 
-Manca il metodo "elimina": devo capire meglio come
-sfruttare l'api in modo che ritorni all'index...
+Manca il metodo "elimina": per quello sfrutto 
+direttamente una chiamata all'API da AJAX nella
+pagina degli ordini
+"""
+
+"""
+Lista ordini
 """
 @login_required(login_url='/auth/login/')
 def index(request):
@@ -57,10 +62,18 @@ def index(request):
 
 	return render(request, 'index.html', context=context)
 
+"""
+Dettaglio ordine
+ATTENZIONE: alla fine non l'ho implementata perchè pare
+non servire a nulla!
+"""
 @login_required(login_url='/auth/login/')
 def dettaglio(request, ordine):
 	return render(request, 'dettaglio.html')
 
+"""
+Nuovo ordine
+"""
 @login_required(login_url='/auth/login/')
 def nuovo(request):
 
@@ -90,9 +103,13 @@ def nuovo(request):
 
 	return render(request, 'nuovo.html', context=context)
 
+"""
+Modifica ordine
+"""
 @login_required(login_url='/auth/login/')
 def modifica(request, pk):
-	# Recupero il singolo ordine, più o meno come nel codice delle API
+	# Recupero il singolo ordine, più o meno come nel codice delle API,
+	# e passo i dati al template
 	order = Orders.objects
 
 	if(request.user.groups.all()[0].name == "customers"):
@@ -111,6 +128,11 @@ def modifica(request, pk):
 	
 	return render(request, 'modifica.html', context = context)
 
+"""
+Come detto sopra, la funzione è definita, ma non implementata
+visto che l'eliminazione dell'ordine viene fatta tramite
+chiamata diretta all'API
+"""
 @login_required(login_url='/auth/login/')
 def elimina(request, ordine):
 	pass
