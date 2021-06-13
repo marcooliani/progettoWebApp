@@ -18,7 +18,7 @@
 
 <body>
 
-  <div class="container-fluid h-100">
+  <div class="container-fluid">
 
 		<div class="row">
 				{% block navbar %}
@@ -31,14 +31,14 @@
 								<span class="navbar-toggler-icon"></span>
 							</button>
 
-							<a class="navbar-brand" href="#"><i class="fab fa-python"></i> Progetto WebApp</a>
+							<a class="navbar-brand" href="#"><i class="fab fa-rebel"></i> Progetto WebApp</a>
 
 							<div class="collapse navbar-collapse" id="navbarNav">
 								<ul class="navbar-nav me-auto">&nbsp;</ul>
 								<ul class="navbar-nav ms-auto">
 									<li class="nav-item">
 								{% if request.session.gruppo == "agents" %}
-										<a class="nav-link" href="/agente/dettaglio/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user-tie"></i></a>
+										<a class="nav-link" href="/agente/dettaglio/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
 								{% elif request.session.gruppo == "customers" %}
 										<a class="nav-link" href="/clienti/dettaglio/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
 								{% endif %}
@@ -56,7 +56,7 @@
 		</div>
 		
 		<div class="row">
-				<div class="col-sm-3 col-md-4 col-lg-2 p-10 bg-light sidebar sticky-bottom" >&nbsp;</div>
+				<div class="col-sm-3 col-md-4 col-lg-2 p-10 bg-light sidebar sticky-bottom" >{% block sidebar %}{% endblock %}</div>
 				<div class="col-sm-9 col-md-8 col-lg-10">{% block content %}{% endblock %}</div>
 		</div>
 

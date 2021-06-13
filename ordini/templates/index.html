@@ -1,11 +1,11 @@
 {% extends "page_skeleton.html" %}
 
 {% block content %}
-<h3>Tabella ordini per {{request.session.utente}}</h3>
+<h3>Tabella ordini per {{request.session.nome}}</h3>
 
 	<div class="table-responsive">
 		<table class="table table-hover" id="order_list_table" name="order_list_table">
-			<caption>Lista ordini per {{request.session.utente}}</caption>
+			<caption>Lista ordini per {{request.session.nome}}</caption>
 			<thead class="table-light">
 				<th scope="col"><span class="ordina" sort="ord_num"><i class="fas fa-sort"></i> Order ID</span></th>
 				<th scope="col"><span class="ordina" sort="ord_date"><i class="fas fa-sort"></i> Date</span></th>
@@ -49,8 +49,9 @@
 		</table>
 	</div>
 
+	<!-- questo giusto per tenere il DOM pulito... -->
 	<form>
-		{% csrf_token  %}
+		{% csrf_token %}
 	</form>
 
 	<script type="text/javascript">

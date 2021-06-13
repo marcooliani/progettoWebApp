@@ -24,6 +24,23 @@ def check_grp(request):
 	request.session['gruppo'] = request.user.groups.all()[0].name
 	request.session['utente'] = request.user.username
 
+	# Recupero il nome vero dell'utente
+	if(request.user.groups.all()[0].name == "customers"):
+		nome = Customer.objects.filter(cust_code=request.user.username).values_list('cust_name', flat=True)
+
+	elif(request.user.groups.all()[0].name == "agents"):
+		nome = Agents.objects.filter(agent_code=request.user.username).values_list('agent_name', flat=True)
+
+	elif(request.user.groups.all()[0].name == "managers"):
+		nome = request.user.username
+
+	# Non capisco perchè nella query per l'ultimo ordine nel
+	# db il valore mi venga ritornato direttamente, mentre qui
+	# devo accedere con l'indice dell'array. Probabilmente la
+	# differenza la fa .last() nell'altra query ( .count() 
+	# infatti funziona in maniera simile, dà un valore 
+	# diretto
+	request.session['nome'] = nome[0]
 	return redirect(index)
 
 """
