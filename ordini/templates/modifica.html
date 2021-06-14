@@ -32,9 +32,27 @@
         </select>
       </div>
     </div>
+
+		<div class="col-1"></div>
+
+	{% if request.session.gruppo == "managers" %}
+		<div class="col-3">
+			<div class="mb-3">
+				<label for="agent_code" class="form-label">Agent</label>
+				<select class="form-select" aria-label="Select agent" name="agent_code" id="agent_code" required>
+					<option value=""> Select Agent </option>
+				{% for j in agent_list %}
+					<option value="{{ j.agent_code }}" {% if j.agent_code|slugify == ordine.agent_code|slugify %}selected{% endif %}> {{ j.agent_name }} </option>
+				{% endfor %}
+				</select>
+			</div>
+		</div>
+	{% endif %}
   </div>
 
-  <input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
+	{% if request.session.gruppo == "agents" %}
+		<input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
+	{% endif %}
 
 	  <div class="row">
     <div class="col-4">

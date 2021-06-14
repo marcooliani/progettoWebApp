@@ -28,19 +28,19 @@
           <td>{{ i.ord_amount }}</td>
           <td>{{ i.advance_amount }}</td>
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-          <td id="{{ i.cust_code }}"><a href="javascript:return false;" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
+          <td><a href="javascript:return false;" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
 					</td>
       {% endif %}
       {% if request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-          <td id="{{ i.agent_code }}"><a href="javascript:return false;" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
+          <td><a href="javascript:return false;" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
 					</td>
       {% endif %}
 					<td>{{ i.ord_description }}</td>
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
           <td class="nowrap">
-						<a href="/ordini/modifica/{{ i.ord_num  }}/"><i class='fas fa-edit'></i></a>
+						<a href="/ordini/modifica/{{ i.ord_num  }}/" title="Modifica ordine"><i class='fas fa-edit'></i></a>
 							&nbsp;&nbsp;&nbsp;
-						<a class="delete_order" id="{{ i.ord_num }}"><i class='fas fa-trash-alt'></i></a>
+						<a class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine"><i class='fas fa-trash-alt'></i></a>
 					</td>
       {% elif request.session.gruppo == "customers" %}
 					<td>&nbsp;</td>
@@ -363,9 +363,9 @@ $(document).ready(function() {
                 {% endif %}
                     '<td>' + ord_description + '</td>' +
 								{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-                    '<td class="nowrap"><a href="/ordini/modifica/' + ord_num + '"><i class="fas fa-edit"></i></a>' +
+                    '<td class="nowrap"><a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine"><i class="fas fa-edit"></i></a>' +
 										'&nbsp;&nbsp;&nbsp;' + 
-										'<a class="delete_order" id="' + ord_num + '"><i class="fas fa-trash-alt"></i></a></td>' +
+										'<a class="delete_order" id="' + ord_num + '" title="Elimina ordine"><i class="fas fa-trash-alt"></i></a></td>' +
                     '</tr>';
 								{% elif request.session.gruppo == "customers" %}
 										'<td>&nbsp;</td>';

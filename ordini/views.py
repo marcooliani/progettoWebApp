@@ -136,11 +136,20 @@ def modifica(request, pk):
 
 	order = order.get(pk=pk)
 
-	customer_list = Customer.objects.filter(agent_code=request.user.username).values('cust_code', 'cust_name').order_by('cust_name')
+	if(request.user.groups.all()[0].name == "agents"):
+		customer_list = Customer.objects.filter(agent_code=request.user.username).values('cust_code', 'cust_name').order_by('cust_name')
+	elif(request.user.groups.all()[0].name == "managers"):
+		customer_list = Customer.objects.values('cust_code', 'cust_name').order_by('cust_name')
+
+	if(request.user.groups.all()[0].name == "managers"):
+		agent_list = Agents.objects.values('agent_code', 'agent_name').order_by('agent_name')
+	else:
+		agent_list = ""
 
 	context = {
 		'ordine' : order,
 		'cust_list': customer_list,
+		'agent_list': agent_list,
 	}
 	
 	return render(request, 'modifica.html', context = context)
