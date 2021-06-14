@@ -106,16 +106,32 @@ def nuovo(request):
 	next_ord_num = last_ord_num + 1
 
 	# Recupero l'elenco dei customer gestiti dall'agent per passarli 
-	# al template.
+	# al template (o tutti, se è loggato un manager).
 	# In realtà potevo fare la stessa cosa anche sfruttando la API
 	# con una chiamata AJAX da JQuery, ma non cambia nulla (anzi,
 	# visto che qui non è necessario AJAX è l'opzione più comoda).
 	# Dipende da come si vuole fare la cosa, insomma...
-	customer_list = Customer.objects.filter(agent_code=request.user.username).values('cust_code', 'cust_name').order_by('cust_name')
+	if(request.user.groups.all()[0].name == "agents"):
+		customer_list = Customer.objects.filter(agent_code=request.user.username).values('cust_code', 'cust_name').order_by('cust_name')
+	elif(request.user.groups.all()[0].name == "managers"):
+		customer_list = Customer.objects.values('cust_code', 'cust_name').order_by('cust_name')
+
+	# In realtà non servirebbe nemmeno, anzi, non si dovrebbe per nulla 
+	# fare così: la cosa più sensata sarebbe fare una onchange() sulla
+	# select del customer lato template e da lì mandare una richiesta
+	# AJAX (la GET sul singolo agent su cust_code) per ricavare codice e nome
+	# agente, e popolare poi la select di conseguenza. Così invece
+	# rischio l'errore se mi va bene, se non l'inconsistenza nel 
+	# caso peggiore... 
+	if(request.user.groups.all()[0].name == "managers"):
+		agent_list = Agents.objects.values('agent_code', 'agent_name').order_by('agent_name')
+	else:
+		agent_list = ''
 
 	context = {
     'ord_num' : next_ord_num,
 		'cust_list': customer_list,
+		'agent_list': agent_list,
   }
 
 	return render(request, 'nuovo.html', context=context)
@@ -141,6 +157,10 @@ def modifica(request, pk):
 	elif(request.user.groups.all()[0].name == "managers"):
 		customer_list = Customer.objects.values('cust_code', 'cust_name').order_by('cust_name')
 
+	# Stesso discorso fatto per l'insert: servirebbe, meglio,
+	# una onchange() lato template sulla select del customer
+	# facendo una richiesta AJAX e popolando la select dell'agent
+	# coi dati corretti...
 	if(request.user.groups.all()[0].name == "managers"):
 		agent_list = Agents.objects.values('agent_code', 'agent_name').order_by('agent_name')
 	else:
