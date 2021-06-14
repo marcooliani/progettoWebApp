@@ -24,3 +24,12 @@ th,
 	white-space: nowrap;
 }
 
+a,
+a:visited {
+	color:#333333;
+}
+
+a:hover {
+	color:#999999;
+}
+

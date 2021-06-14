@@ -27,9 +27,11 @@
           <td>{{ i.ord_amount }}</td>
           <td>{{ i.advance_amount }}</td>
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-          <td id="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</td>
+          <td id="{{ i.cust_code }}"><a href="#" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
+					</td>
       {% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-          <td id="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</td>
+          <td id="{{ i.agent_code }}"><a href="#" class="popover_cli" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
+					</td>
       {% endif %}
 					<td>{{ i.ord_description }}</td>
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
@@ -49,12 +51,90 @@
 		</table>
 	</div>
 
-	<!-- questo giusto per tenere il DOM pulito... -->
+	<!-- Questo giusto per tenere il DOM pulito... -->
 	<form>
 		{% csrf_token %}
 	</form>
 
+	<div id="popover_customer" style="display:none;">
+		<strong>Name:</strong> p_name<br>
+		<strong>Code:</strong> p_code<br>
+		<strong>City:</strong> p_city<br>
+		<strong>Country:</strong> p_country<br>
+		<strong>Grade:</strong> p_grade
+	</div>
+
+	<div id="popover_agent" style="display:none;">
+		<strong>Name:</strong> p_name<br>
+		<strong>Code:</strong> p_code<br>
+		<strong>Working area:</strong> p_warea<br>
+		<strong>Commission:</strong> p_commission<br>
+		<strong>Phone:</strong> p_phone
+	</div>
+
 	<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		function popoverContent() {
+			var content = '';
+			var element = $(this);
+			var id = element.attr("code");
+
+			// Fantastico, se faccio la chiamata senza l'opzione
+			// async mi ritorna la variabile content vuota appena
+			// fuori dalla success!
+			// Però l'opzione è deprecated, stando ai messaggi
+			// della console: siamo a posto... -__-
+			$.ajax({  
+			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+				url: '/api/customers/' + id +'/',
+			{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers" %}
+				url: '/api/agents/' + id +'/',
+			{% endif %}
+				method: 'GET',
+				async: false,
+				success:function(response) {
+				{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+					content = $("#popover_customer").html();
+
+					content = content.replace(/p_code/g, response.cust_code);
+					content = content.replace(/p_name/g, response.cust_name);
+					content = content.replace(/p_city/g, response.cust_city);
+					content = content.replace(/p_country/g, response.cust_country);
+					content = content.replace(/p_grade/g, response.grade);
+
+				{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers" %}
+					content = $("#popover_agent").html();
+
+					content = content.replace(/p_code/g, response.agent_code);
+					content = content.replace(/p_name/g, response.agent_name);
+					content = content.replace(/p_warea/g, response.working_area);
+					content = content.replace(/p_commission/g, response.commission);
+					content = content.replace(/p_phone/g, response.phone_no);
+				{% endif %}
+				},
+				error: function(response) {	
+				}
+			});
+
+			return content;
+		}
+
+		$('.popover_cli').popover({  
+				title: '<i class="fas fa-info-circle"></i> About',  
+				html: true,  
+				placement: 'right',
+				animation: true,
+				trigger: 'click, focus',
+				sanitize: true,
+				content: popoverContent
+			}); 
+
+//	});
+
+
+//$(document).ready(function() {
 	/* Avendo messo nei settings di Django CSRF_USE_SESSIONS = True
    * e CSRF_COOKIE_HTTPONLY = True, richiamo il token csrf semplicemente
    * dal campo (nascosto) html, che sarebbe poi rappresentato dalla
@@ -64,7 +144,8 @@
 	/*
 	 * Cancellazione ordine
 	 */
-	$(".delete_order").click(function(e) {
+	//$(".delete_order").click(function(e) {
+	$('body').on('click', '.delete_order', function(e) {
 		e.preventDefault();
 
 		// recupero l'id dell'ordine da cancellare
@@ -190,9 +271,9 @@
                     '<td>' + ord_amount + '</td>' +
                     '<td>' + advance_amount + '</td>' +
                 {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-                    '<td id="' + cust_code + '">' + cust_name + '</td>' +
+                    '<td id="' + cust_code + '"><a href="#" class="popover_cli" code="' + cust_code + '">' + cust_name + '</td>' +
                 {% elif request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-                    '<td id="' + agent_code + '">' + agent_name + '</td>' +
+                    '<td id="' + agent_code + '"><a href="#" class="popover_cli" code="' + agent_code  + '">' + agent_name + '</td>' +
                 {% endif %}
                     '<td>' + ord_description + '</td>' +
 								{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
@@ -209,6 +290,8 @@
 				}
 			});
 	});
+});
+
 
 	</script>
 

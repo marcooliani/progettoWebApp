@@ -10,8 +10,11 @@
   <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'  %}">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+<!--
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+-->
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
 
 </head>
@@ -31,16 +34,16 @@
 								<span class="navbar-toggler-icon"></span>
 							</button>
 
-							<a class="navbar-brand" href="#"><i class="fab fa-rebel"></i> Progetto WebApp</a>
+							<a class="navbar-brand" href="/"><i class="fab fa-rebel"></i> Progetto WebApp</a>
 
 							<div class="collapse navbar-collapse" id="navbarNav">
 								<ul class="navbar-nav me-auto">&nbsp;</ul>
 								<ul class="navbar-nav ms-auto">
 									<li class="nav-item">
 								{% if request.session.gruppo == "agents" %}
-										<a class="nav-link" href="/agente/dettaglio/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
+										<a class="nav-link" href="/agente/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
 								{% elif request.session.gruppo == "customers" %}
-										<a class="nav-link" href="/clienti/dettaglio/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
+										<a class="nav-link" href="/clienti/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
 								{% endif %}
 
 									</li>
