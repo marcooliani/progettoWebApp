@@ -270,7 +270,11 @@ stessi dati (tranne l'id, mi sa)
 @permission_classes([IsAuthenticated, IsManager])
 def agent_list(request):
 	if(request.method == 'GET'):
-		agents = Agents.objects.all().order_by('agent_code')
+		agents = Agents.objects.all()
+
+		sort_by = request.GET.get('sort_by', 'cust_name')
+		agents = agents.order_by(sort_by)
+
 		agents_serializer = AgentsSerializer(agents, many=True)
 
 		return JsonResponse(agents_serializer.data, safe=False)
@@ -331,7 +335,8 @@ def customer_list(request):
 				customers = customers.filter(agent_code=str(request.user))
 
 		customers = customers.all().select_related('agent_code')
-		sort_by = request.GET.get('sort_by', 'cust_name');
+
+		sort_by = request.GET.get('sort_by', 'cust_name')
 		customers = customers.order_by(sort_by)
 
 		customers_serializer = CustomerSerializer(customers, many=True)

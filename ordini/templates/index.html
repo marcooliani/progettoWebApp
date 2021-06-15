@@ -58,6 +58,7 @@
 		{% csrf_token %}
 	</form>
 
+<!-- Popovers -->
 	<div id="popover_customer" style="display:none;">
 		<strong>Name:</strong> p_name<br>
 		<strong>Code:</strong> p_code<br>
@@ -73,6 +74,25 @@
 		<strong>Commission:</strong> p_commission<br>
 		<strong>Phone:</strong> p_phone
 	</div>
+
+<!-- Modal -->
+<div class="modal fade" name="modal_confirm" id="modal_confirm" aria-labelledby="modalTitle" aria-describedby="modalDialog" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Eliminazione ordine</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalDialog">
+        <p>Cancellare l'ordine selezionato?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="delete_confirm" name="delete_confirm" ordine="">Elimina</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
 
@@ -219,6 +239,9 @@ $(document).ready(function() {
    * istruzione {% csrf_token %} */
 	 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+	// Creo l'oggetto modal e lo lancio
+	const myModal = new bootstrap.Modal(document.getElementById('modal_confirm'));
+
 	/*
 	 * Cancellazione ordine. I casi sono due:
 	 * - se lascio $('.delete_order).click(), il metodo funziona
@@ -231,11 +254,24 @@ $(document).ready(function() {
 	 */
 	//$(".delete_order").click(function(e) {
 	$('body').on('click', '.delete_order', function(e) {
+    e.preventDefault();
+
+    // recupero l'id dell'ordine da cancellare e
+		// lo passo al modal
+    ord = $(this).attr('id');
+		$('#delete_confirm').attr('ordine', ord);
+
+		myModal.show();
+
+	});
+
+	$('#delete_confirm').click(function(e) {
 		e.preventDefault();
 
-		// recupero l'id dell'ordine da cancellare
-		ord = $(this).attr('id');
+		ord = $(this).attr('ordine');
 
+		myModal.hide();
+		
 		// Richiesta AJAX DELETE. Non servono dati JSON o altro,
 		// ma il token csrf va passato anche in questo caso...
 		$.ajax({
@@ -255,7 +291,7 @@ $(document).ready(function() {
 				//alert(message.responseText)
 			}
 
-		}) 
+		})
 
 	});
 

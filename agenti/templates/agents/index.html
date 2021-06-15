@@ -1,0 +1,48 @@
+{% extends "page_skeleton.html"%}
+
+{% block content %}
+<div class="heading bg-secondary text-white"><i class="fas fa-users"></i> Agenti </div>
+
+	<div class="table-responsive">
+		<table class="table table-hover" id="agents_list_table" name="agents_list_table">
+			<caption>Lista agenti</caption>
+			<thead class="table-light">
+				<th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> ID</span></th>
+				<th scope="col"><span class="ordina" sort="agent_name"><i class="fas fa-sort"></i> Name</span></th>
+				<th scope="col"><span class="ordina" sort="working_area"><i class="fas fa-sort"></i> Working Area</span></th>
+				<th scope="col"><span class="ordina" sort="country"><i class="fas fa-sort"></i> Country</span></th>
+				<th scope="col"><span class="ordina" sort="commission"><i class="fas fa-sort"></i> Commission</span></th>
+				<th scope="col"> Phone</th>
+				<th scope="col">&nbsp;</th>
+			</thead>
+			<tbody id="agentsTable">
+
+		{% for i in agent_list %} 
+				<tr id="row_{{ i.agent_code }}">
+					<td>{{ i.agent_code }}</td>
+					<td>{{ i.agent_name }}</td>
+          <td>{{ i.working_area }}</td>
+          <td>{{ i.country }}</td>
+          <td>{{ i.commission }}</td>
+          <td>{{ i.phone_no }}</td>
+          <td class="nowrap">
+						<a href="#" title="Modifica agente"><i class='fas fa-edit'></i></a>
+							&nbsp;&nbsp;&nbsp;
+						<a class="delete_agent" id="{{ i.agent_code }}" title="Elimina agente"><i class='fas fa-trash-alt'></i></a>
+					</td>
+        </tr>
+		{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+
+  <!-- Questo giusto per tenere il DOM pulito... -->
+  <form>
+    {% csrf_token %}
+  </form>
+
+{% load static %}
+<script src="{% static 'js/agents_sort.js' %}"></script>
+
+{% endblock %}

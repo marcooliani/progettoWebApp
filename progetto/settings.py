@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 		'api.apps.ApiConfig',
 		'ordini.apps.OrdiniConfig',
 		'clienti.apps.ClientiConfig',
+		'agenti.apps.AgentiConfig',
 ]
 
 MIDDLEWARE = [

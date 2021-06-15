@@ -29,8 +29,16 @@
 }
 
 .delete_order,
+.delete_customer,
+.delete_agent,
 .ordina {
 	cursor: pointer;
+}
+
+a.delete_order:hover,
+a.delete_customer:hover,
+a.delete_agent:hover {
+	color: #ff0000;
 }
 
 th,
