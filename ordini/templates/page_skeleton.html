@@ -23,7 +23,8 @@
 
   <div class="container-fluid">
 
-		<div class="row">
+		<header class="row">
+		<!-- <div class="row"> -->
 				{% block navbar %}
 					<nav class="navbar navbar-expand-sm py-0 navbar-dark bg-dark">
 						<div class="container-fluid">
@@ -56,17 +57,19 @@
 						</div>
 					</nav>
 				{% endblock %}
-		</div>
+		<!-- </div> -->
+		</header>
 		
-		<div class="row vh-100">
-				<div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
+		<!-- <div class="row vh-100"> -->
+		<main class="row vh-100">
+				<div class="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
 					<div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
 						<ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto 
 							mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
 
 							<li class="nav-item">
 								<a href="/ordini/index/" class="nav-link px-sm-0 px-2" title="Lista ordini">
-									<i class="fas fa-th-list"></i><span class="ms-1 d-none d-sm-inline">Ordini</span>
+									<i class="fas fa-list"></i><span class="ms-1 d-none d-sm-inline">Ordini</span>
 								</a>
 							</li>
 						
@@ -95,10 +98,11 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-sm-9 col-md-8 col-lg-10"><main>{% block content %}{% endblock %}</main></div>
+				<div class="col-sm-9 col-md-8 col-lg-10 content">{% block content %}{% endblock %}</div>
 		</div>
 
-	</div>
+	<!-- </div> -->
+	</main>
 
 </body>
 </html>

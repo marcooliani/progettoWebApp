@@ -1,7 +1,7 @@
 {% extends "page_skeleton.html" %}
 
 {% block content %}
-<h3>Tabella ordini per {{request.session.nome}}</h3>
+<div class="heading bg-secondary text-white"><i class="fas fa-list"></i> Tabella ordini per {{request.session.nome}}</div>
 
 	<div class="table-responsive">
 		<table class="table table-hover" id="order_list_table" name="order_list_table">
@@ -91,9 +91,9 @@ $(document).ajaxComplete(function() {
 			// della console: siamo a posto... -__-
 			$.ajax({  
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-				url: '/api/customers/' + id +'/',
+				url: '/api/customers/' + id.trim() +'/',
 			{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers" %}
-				url: '/api/agents/' + id +'/',
+				url: '/api/agents/' + id.trim() +'/',
 			{% endif %}
 				method: 'GET',
 				async: false,
@@ -160,9 +160,9 @@ $(document).ready(function() {
 			// della console: siamo a posto... -__-
 			$.ajax({  
 			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-				url: '/api/customers/' + id +'/',
+				url: '/api/customers/' + id.trim() +'/',
 			{% elif request.session.gruppo == "customers" or request.session.gruppo == "managers" %}
-				url: '/api/agents/' + id +'/',
+				url: '/api/agents/' + id.trim() +'/',
 			{% endif %}
 				method: 'GET',
 				async: false,

@@ -1,8 +1,30 @@
-
+/* Sidebar */
 @media (min-width: 576px) {
-    .h-sm-100 {
-        height: 100%;
-    }
+  .h-sm-100 {
+    height: 100%;
+  }
+}
+
+/* Ridefinisco la classe Bootstrap vh-100
+ * visto che altrimenti ho problema con lo 
+ * scrolling dovuto alla navbar. In pratica
+ * la grandezza è ora 100vh meno le dimensioni
+ * della navbar (1.25 rem il font + 1rem di 
+ * padding, e il resto mancia)
+ */
+.vh-100 {
+	height: calc(100vh - 2.5rem) !important; 
+}
+
+.content {
+	padding-top: 1rem;
+}
+
+.heading {
+	font-size: 1.2rem;
+	display: block;
+	margin-bottom: 0.7rem;
+	padding: 0.3rem 0.3rem 0.3rem 0.6rem;
 }
 
 .delete_order,
@@ -15,11 +37,19 @@ th,
 	white-space: nowrap;
 }
 
+/*
+ * Ridefinisco, assieme alle proprietà di <a>,
+ * anche parte della classe Bootstrap nav-link,
+ * così da uniformare il tutto
+ */
+.nav-link,
+.nav-link:visited,
 a,
 a:visited {
 	color:#333333;
 }
 
+.nav-link:hover,
 a:hover {
 	color:#999999;
 }

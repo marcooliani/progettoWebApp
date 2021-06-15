@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h3>Modifica ordine {{ ordine.ord_num }}</h3>
+<div class="heading bg-secondary text-white"><i class="fas fa-edit"></i> Modifica ordine {{ ordine.ord_num }}</div>
 
 <div id="submit_result">
 {% if request.GET.p == "success" %}
@@ -21,7 +21,7 @@
   <input type="hidden" name="ord_num" id="ord_num" value="{{ ordine.ord_num }}" >
 
   <div class="row">
-    <div class="col-3">
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
         <label for="cust_code" class="form-label">Customer</label>
         <select class="form-select" aria-label="Select customer" name="cust_code" id="cust_code" required>
@@ -36,7 +36,7 @@
 		<div class="col-1"></div>
 
 	{% if request.session.gruppo == "managers" %}
-		<div class="col-3">
+		<div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
 			<div class="mb-3">
 				<label for="agent_code" class="form-label">Agent</label>
 				<select class="form-select" aria-label="Select agent" name="agent_code" id="agent_code" required>
@@ -55,7 +55,7 @@
 	{% endif %}
 
 	  <div class="row">
-    <div class="col-4">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
         <label for="ord_amount" class="form-label">Order Amount</label>
         <div class="input-group">
@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
         <label for="advance_amount" class="form-label">Advance Amount</label>
         <div class="input-group">
@@ -81,7 +81,7 @@
   </div>
 
   <div class="row">
-    <div class="col-4">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
         <label for="ord_date" class="form-label">Order Date</label>
         <div class="input-group">
@@ -93,7 +93,7 @@
       </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
         <label for="ord_description" class="form-label">Order Description</label>
         <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" 
@@ -103,7 +103,7 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" type="submit" name="submit_order" id="submit_order">Update</button>
+  <button class="btn btn-secondary" type="submit" name="submit_order" id="submit_order">Update</button>
   <button class="btn btn-light" type="reset" name="reset_order" id="reset_order">Reset</button>
 </form>
 
