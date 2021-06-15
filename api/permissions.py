@@ -49,13 +49,13 @@ class CanInsertModifyDeleteOrders(permissions.BasePermission):
 """
 IsAgent: verifica se un utente è un agente
 """
-class IsAgent(permissions.BasePermission):
+class IsAgentOrManager(permissions.BasePermission):
 	message = "Devi essere agente per eseguire questa operazione"
 
 	def has_permission(self, request, view):
 		
 		for g in request.user.groups.all():
-			if(g.name == "agents"):
+			if(g.name == "agents" or g.name == "managers"):
 				return True
 
 """

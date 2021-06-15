@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_protect
 
 # Mi importo le classi contententi le definizioni delle permissions 
 # dal file permissions.py
-from .permissions import CanView, CanInsertModifyDeleteOrders, IsAgent, IsManager
+from .permissions import CanView, CanInsertModifyDeleteOrders, IsAgentOrManager, IsManager
 from rest_framework.permissions import IsAuthenticated
 
 # Per il debugging
@@ -298,7 +298,7 @@ def agent_detail(request, pk):
 
 @api_view(['PUT'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated, IsAgent, IsManager])
+@permission_classes([IsAuthenticated, IsAgentOrManager])
 def agent_update(request, pk):
 	pass
 
@@ -321,26 +321,35 @@ dei customer
 """
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated, IsAgent, IsManager])
+@permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_list(request):
 	if(request.method == 'GET'):
-		customers = Customer.objects.all().order_by('cust_code')
+		customers = Customer.objects
+
+		for g in request.user.groups.all():
+			if(g.name == "agents"):
+				customers = customers.filter(agent_code=str(request.user))
+
+		customers = customers.all().select_related('agent_code')
+		sort_by = request.GET.get('sort_by', 'cust_name');
+		customers = customers.order_by(sort_by)
+
 		customers_serializer = CustomerSerializer(customers, many=True)
 
 		return JsonResponse(customers_serializer.data, safe=False)
 
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated, IsAgent, IsManager])
+@permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_new(request):
 	pass
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated, CanView])
+@permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_detail(request, pk):
 	try:
-		customer = Customer.objects.get(pk=pk)
+		customer = Customer.objects.select_related('agent_code').get(pk=pk)
 
 	except Customer.DoesNotExists:
 		return JsonResponse({'message': 'Customer does not exist'}, status=status.HTTP_404_NOT_FOUND)
@@ -352,7 +361,7 @@ def customer_detail(request, pk):
 
 @api_view(['PUT'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated, IsAgent, IsManager])
+@permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_update(request, pk):
 	pass
 
