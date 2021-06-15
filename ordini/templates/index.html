@@ -79,12 +79,12 @@
 <div class="modal fade" name="modal_confirm" id="modal_confirm" aria-labelledby="modalTitle" aria-describedby="modalDialog" tabindex="-1">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-light">
         <h5 class="modal-title" id="modalTitle">Eliminazione ordine</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalDialog">
-        <p>Cancellare l'ordine selezionato?</p>
+        <p>Eliminare l'ordine <span id="ordnum_modal">1234</span>?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -260,6 +260,7 @@ $(document).ready(function() {
 		// lo passo al modal
     ord = $(this).attr('id');
 		$('#delete_confirm').attr('ordine', ord);
+		$('#ordnum_modal').html(ord);
 
 		myModal.show();
 
