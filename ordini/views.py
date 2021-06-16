@@ -43,7 +43,7 @@ def index(request):
 		'gruppo': request.user.groups.all()[0].name,
 	}
 
-	return render(request, 'index.html', context=context)
+	return render(request, 'orders/index.html', context=context)
 
 """
 Dettaglio ordine
@@ -65,7 +65,7 @@ def dettaglio(request, pk):
 		'ordine': order,
 	}
 
-	return render(request, 'ordine_singolo.html', context=context)
+	return render(request, 'orders/ordine_singolo.html', context=context)
 
 """
 Nuovo ordine
@@ -113,7 +113,7 @@ def nuovo(request):
 		'agent_list': agent_list,
   }
 
-	return render(request, 'nuovo.html', context=context)
+	return render(request, 'orders/nuovo.html', context=context)
 
 """
 Modifica ordine
@@ -151,7 +151,7 @@ def modifica(request, pk):
 		'agent_list': agent_list,
 	}
 	
-	return render(request, 'modifica.html', context = context)
+	return render(request, 'orders/modifica.html', context = context)
 
 """
 Come detto sopra, la funzione è definita, ma non implementata
