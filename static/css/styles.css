@@ -28,6 +28,10 @@
 	padding: 0.3rem 0.3rem 0.3rem 0.6rem;
 }
 
+.dettaglio {
+	font-weight: bold;
+}
+
 .delete_order,
 .delete_customer,
 .delete_agent,

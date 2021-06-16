@@ -45,6 +45,8 @@
 										<a class="nav-link" href="/agente/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
 								{% elif request.session.gruppo == "customers" %}
 										<a class="nav-link" href="/clienti/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
+								{% elif request.session.gruppo == "managers" %}
+										<a class="nav-link" href="#">{{ request.session.utente }} <i class="fas fa-user-graduate"></i></a>
 								{% endif %}
 
 									</li>
@@ -68,7 +70,7 @@
 							mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
 
 							<li class="nav-item">
-								<a href="/ordini/index/" class="nav-link px-sm-0 px-2" title="Lista ordini">
+								<a href="/ordini/" class="nav-link px-sm-0 px-2" title="Lista ordini">
 									<i class="fas fa-list"></i><span class="ms-1 d-none d-sm-inline">Ordini</span>
 								</a>
 							</li>

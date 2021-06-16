@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="heading bg-secondary text-white"><i class="fas fa-list"></i> Tabella ordini per {{request.session.nome}}</div>
+<input type="hidden" name="gruppo" value="{{ gruppo }}" />
 
 	<div class="table-responsive">
 		<table class="table table-hover" id="order_list_table" name="order_list_table">
@@ -36,14 +37,14 @@
 					</td>
       {% endif %}
 					<td>{{ i.ord_description }}</td>
-			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
           <td class="nowrap">
+						<a href="/ordini/{{ i.ord_num  }}/" title="Dettaglio ordine"><i class='fas fa-search'></i></a>
+							&nbsp;&nbsp;&nbsp;
+			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
 						<a href="/ordini/modifica/{{ i.ord_num  }}/" title="Modifica ordine"><i class='fas fa-edit'></i></a>
 							&nbsp;&nbsp;&nbsp;
 						<a class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine"><i class='fas fa-trash-alt'></i></a>
 					</td>
-      {% elif request.session.gruppo == "customers" %}
-					<td>&nbsp;</td>
       {% endif %}
         </tr>
 					
@@ -93,6 +94,10 @@
     </div>
   </div>
 </div>
+
+{% load static %}
+<script src="{% static 'js/formatDate.js' %}"></script>
+<script src="{% static 'js/sortOrders.js' %}"></script>
 
 <script type="text/javascript">
 
@@ -297,40 +302,9 @@ $(document).ready(function() {
 	});
 
 	/*
-	 * Formatta la data da YYYY-mm-dd
-	 * a dd/mm/YYYY
-	 */
-	function formatta_data(data) {
-		// Scompongo la data in input
-		var formattedDate = new Date(data);
-		var d = formattedDate.getDate();
-
-		// Aggiungo uno 0 davanti se il giorno è < 10
-		if(d < 10) {
-			d = '0' + d;
-		}
-
-		var m =  formattedDate.getMonth();
-		var Y = formattedDate.getFullYear();
-
-		m = m+1; // Per qualche motivo conta un mese in meno...
-
-		// Stesso discorso del giorno, aggiungo uno zero
-		// davanti al mese se questo è < 10
-		if(m < 10) {
-			m = '0' + m;
-		}
-
-		// Riformatto la data nel formato dd/mm/YYYY 
-		data = d + '/' + m + '/' + Y;
-
-		return data;
-	}
-
-	/*
 	 * Ordinamento colonne
 	 */
-	$(".ordina").click(function(e) {
+/*	$(".ordina").click(function(e) {
 		e.preventDefault();
 
 		/*
@@ -399,20 +373,22 @@ $(document).ready(function() {
                     '<td id="' + agent_code + '"><a href="javascript:return false;" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>' +
                 {% endif %}
                     '<td>' + ord_description + '</td>' +
+                    '<td class="nowrap">'+
+										'<a href="/ordini/'+ ord_num + '" title="Dettaglio ordine"><i class="fas fa-search"></i></a>' +
+										'&nbsp;&nbsp;&nbsp;' +
 								{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-                    '<td class="nowrap"><a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine"><i class="fas fa-edit"></i></a>' +
+										'<a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine"><i class="fas fa-edit"></i></a>' +
 										'&nbsp;&nbsp;&nbsp;' + 
-										'<a class="delete_order" id="' + ord_num + '" title="Elimina ordine"><i class="fas fa-trash-alt"></i></a></td>' +
-                    '</tr>';
-								{% elif request.session.gruppo == "customers" %}
-										'<td>&nbsp;</td>';
+										'<a class="delete_order" id="' + ord_num + '" title="Elimina ordine"><i class="fas fa-trash-alt"></i></a>' +
 								{% endif %}
+										'</td>' +
+                    '</tr> ';
 
                 $("#orderTable").append(tr_str);
           }
 				}
 			});
-	});
+	}); */
 });
 
 

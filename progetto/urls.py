@@ -26,5 +26,6 @@ urlpatterns = [
     path('ordini/', include('ordini.urls')), # Ordini
     path('clienti/', include('clienti.urls')), # Clienti
     path('agenti/', include('agenti.urls')), # Clienti
-		path('', RedirectView.as_view(url='/ordini/')), # Home
+    path('checklogin/', include('checklogin.urls')), # Clienti
+		path('', RedirectView.as_view(url='/checklogin/')), # Home
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

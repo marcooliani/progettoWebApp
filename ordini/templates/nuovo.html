@@ -24,7 +24,7 @@
 		<div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
 			<div class="mb-3">
 				<label for="cust_code" class="form-label">Customer</label>
-				<select class="form-select" aria-label="Select customer" name="cust_code" id="cust_code" required>
+				<select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
 					<option value=""> Select Customer </option>
 				{% for i in cust_list %}
 					<option value="{{ i.cust_code }}"> {{ i.cust_name }} </option>
@@ -39,7 +39,7 @@
 		<div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
 			<div class="mb-3">
 				<label for="cust_code" class="form-label">Agent</label>
-				<select class="form-select" aria-label="Select agent" name="agent_code" id="agent_code" required>
+				<select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
 					<option value=""> Select Agent </option>
 				{% for j in agent_list %}
 					<option value="{{ j.agent_code }}"> {{ j.agent_name }} </option>
@@ -100,7 +100,7 @@
 		</div>
 	</div>
 
-	<button class="btn btn-secondary" type="submit" name="submit_order" id="submit_order">Insert</button>
+	<button class="btn btn-secondary" type="submit" name="submit_order" id="submit_order">Inserisci</button>
 	<button class="btn btn-light" type="reset" name="reset_order" id="reset_order">Reset</button>
 </form>
 

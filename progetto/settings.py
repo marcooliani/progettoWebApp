@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 		'ordini.apps.OrdiniConfig',
 		'clienti.apps.ClientiConfig',
 		'agenti.apps.AgentiConfig',
+		'checklogin.apps.CheckloginConfig',
 ]
 
 MIDDLEWARE = [
