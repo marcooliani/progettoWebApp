@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.contrib.auth.decorators import login_required
@@ -14,6 +14,12 @@ Lista agents
 """
 @login_required(login_url='/auth/login/')
 def index(request):
+  # Qui è meglio che nemmeno gli agenti possano 
+  # vedere la lista di loro stessi... 
+  if(request.user.groups.all()[0].name == "customers" or request.user.groups.all()[0].name == "agents"):
+    return render(request, '404.html')
+    #return redirect('/error/')
+
   agent_list = Agents.objects.all().order_by('agent_name')
 
   context = {
@@ -41,6 +47,10 @@ Agent singolo
 """
 @login_required(login_url='/auth/login/')
 def dettaglio(request, pk):
+  if(request.user.groups.all()[0].name == "customers"):
+    return render(request, '404.html')
+    #return redirect('/error/')
+
   agent = Agents.objects.get(pk=pk)
 
   context = {

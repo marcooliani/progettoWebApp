@@ -12,8 +12,8 @@
   {% endif %}
 
   <div class="card">
-    <div class="card-header">
-      Progetto WebApp
+    <div class="card-header bg-light">
+      <i class="fab fa-rebel"></i> Progetto WebApp - Login
     </div>
     <div class="card-body">
       <form method="post" action="{% url 'login' %}" autocomplete="off">
@@ -24,7 +24,8 @@
           e {{ form.password }} -->
         <div class="form-group">
           <label for="id_username">Username</label>
-          <input type="text" class="form-control" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+          <!-- <input type="text" class="form-control" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username"> -->
+          <input type="text" class="form-control" name="username" autofocus autocapitalize="none" maxlength="150" required id="id_username">
         </div>
 
         <div class="form-group">

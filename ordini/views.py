@@ -72,6 +72,9 @@ Nuovo ordine
 """
 @login_required(login_url='/auth/login/')
 def nuovo(request):
+  if(request.user.groups.all()[0].name == "customers"):
+    return render(request, '404.html')
+    #return redirect('/error/')
 
   # Genero il nuovo ID per l'ordine. In realtà questo modo di 
   # fare, in un caso reale, non sarebbe corretto, perchè porterebbe
@@ -124,7 +127,8 @@ def modifica(request, pk):
   # che se anche lo facesse poi sarebbe bloccato dall'API,
   # però meglio evitare del tutto che ci arrivi...
   if(request.user.groups.all()[0].name == "customers"):
-    return render(request, 'error.html')
+    return render(request, '404.html')
+    #return redirect('/error/')
 
   # Recupero il singolo ordine, più o meno come nel codice delle API,
   # e passo i dati al template
@@ -166,5 +170,9 @@ chiamata diretta all'API
 """
 @login_required(login_url='/auth/login/')
 def elimina(request, ordine):
+  if(request.user.groups.all()[0].name == "customers"):
+    return render(request, '404.html')
+    #return redirect('/error/')
+
   pass
 

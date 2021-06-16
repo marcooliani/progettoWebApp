@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Progetto WebApp</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'  %}">
+  <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'  %}">
+
+  <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'jqueryValidate/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'jqueryValidate/additional-methods.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
+</head>
+
+<body>
+
+<div class="d-flex justify-content-center align-items-center" id="main" style="height: 100vh">
+    <h1 class="mr-3 pr-3 align-top border-right inline-block align-content-center">500</h1>
+    <div class="inline-block align-middle">
+      <h2 class="font-weight-normal lead" id="desc">Uhm... Unfortunately, the server crashed. Apologies.</h2>
+    </div>
+</div>
+
+</body>
+</html>

@@ -27,9 +27,11 @@ def check_grp(request):
   # Recupero il nome vero dell'utente
   if(request.user.groups.all()[0].name == "customers"):
     nome = Customer.objects.filter(cust_code=request.user.username).values_list('cust_name', flat=True)
+    nome = nome[0]
 
   elif(request.user.groups.all()[0].name == "agents"):
     nome = Agents.objects.filter(agent_code=request.user.username).values_list('agent_name', flat=True)
+    nome = nome[0]
 
   elif(request.user.groups.all()[0].name == "managers"):
     nome = request.user.username
@@ -40,5 +42,5 @@ def check_grp(request):
   # differenza la fa .last() nell'altra query ( .count()
   # infatti funziona in maniera simile, dà un valore
   # diretto
-  request.session['nome'] = nome[0]
+  request.session['nome'] = nome
   return redirect('/ordini/')

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.contrib.auth.decorators import login_required
@@ -14,6 +14,10 @@ Lista customers
 """
 @login_required(login_url='/auth/login/')
 def index(request):
+  if(request.user.groups.all()[0].name == "customers"):
+    return render(request, '404.html')
+    #return redirect('/error/')
+
   customer_list = Customer.objects
 
   if(request.user.groups.all()[0].name == "agents"):
