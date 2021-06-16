@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	/*
+  /*
    * Formatta la data da YYYY-mm-dd
    * a dd/mm/YYYY
    */
@@ -63,7 +63,7 @@ $(document).ready(function() {
       $(this).attr('sort', sort.substring(1));
     }
 
-		// Richiesta AJAX GET per recuperare i dati
+    // Richiesta AJAX GET per recuperare i dati
     // di tutti gli ordini
     $.ajax({
         url: '/api/orders/?sort_by=' + sort,
@@ -74,10 +74,10 @@ $(document).ready(function() {
           // delle righe ordinate!
           $('#orderTable').empty();
 
-					// Recupero il gruppo dell'utente, visto che le 
-					// istruzioni di Django all'interno di un JS
-					// esterno NON vengono richiamate...
-					var gruppo = $("[name='gruppo']").val()
+          // Recupero il gruppo dell'utente, visto che le 
+          // istruzioni di Django all'interno di un JS
+          // esterno NON vengono richiamate...
+          var gruppo = $("[name='gruppo']").val()
 
           // Recupero i dati dall'oggetto response
           // restituito dalla chiamata all'API
@@ -111,7 +111,7 @@ $(document).ready(function() {
                     '<a href="/ordini/'+ ord_num + '" title="Dettaglio ordine"><i class="fas fa-search"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;';
 
-								if(gruppo == "agents" || gruppo == "managers") {
+                if(gruppo == "agents" || gruppo == "managers") {
                     tr_str = tr_str + '<a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine"><i class="fas fa-edit"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;' +
                     '<a class="delete_order" id="' + ord_num + '" title="Elimina ordine"><i class="fas fa-trash-alt"></i></a>';
@@ -122,8 +122,8 @@ $(document).ready(function() {
 
                 $("#orderTable").append(tr_str);
 
-					  }
+            }
         }
       });
-	});
+  });
 })

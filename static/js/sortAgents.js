@@ -1,11 +1,11 @@
 $(document).ready(function() {
-	/*
+  /*
    * Ordinamento colonne
    */
   $(".ordina").click(function(e) {
     e.preventDefault();
 
-		/*
+    /*
      * Setto il tipo di ordinamento per la colonna
      * selezionata. A differenza delle normali query
      * SQL, Django non usa ASC o DESC per gli ordinamenti
@@ -32,7 +32,7 @@ $(document).ready(function() {
       $(this).attr('sort', sort.substring(1));
     }
 
-		// Richiesta AJAX GET per recuperare i dati
+    // Richiesta AJAX GET per recuperare i dati
     // di tutti gli ordini
     $.ajax({
         url: '/api/agents/?sort_by=' + sort,

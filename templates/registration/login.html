@@ -11,37 +11,37 @@
     {% endif %}
   {% endif %}
 
-	<div class="card">
-		<div class="card-header">
-			Progetto WebApp
-		</div>
-		<div class="card-body">
-			<form method="post" action="{% url 'login' %}" autocomplete="off">
-			{% csrf_token %}
+  <div class="card">
+    <div class="card-header">
+      Progetto WebApp
+    </div>
+    <div class="card-body">
+      <form method="post" action="{% url 'login' %}" autocomplete="off">
+      {% csrf_token %}
 
-				<!-- I valori e gli attributi dei campi username e password sono 
-					gli stessi delle due variabili di Django {{ form.username }}
-					e {{ form.password }} -->
-				<div class="form-group">
-					<label for="id_username">Username</label>
-					<input type="text" class="form-control" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
-				</div>
+        <!-- I valori e gli attributi dei campi username e password sono 
+          gli stessi delle due variabili di Django {{ form.username }}
+          e {{ form.password }} -->
+        <div class="form-group">
+          <label for="id_username">Username</label>
+          <input type="text" class="form-control" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+        </div>
 
-				<div class="form-group">
-					<label for="id_password">Password</label>
-					<input type="password" class="form-control" name="password" autocomplete="current-password" required id="id_password">
-				</div>
+        <div class="form-group">
+          <label for="id_password">Password</label>
+          <input type="password" class="form-control" name="password" autocomplete="current-password" required id="id_password">
+        </div>
 
-				<div class="">&nbsp;</div>
-				{% if form.errors %}
-					<p style="color: #f00">Username o password non validi!</p>
-				{% endif %}
+        <div class="">&nbsp;</div>
+        {% if form.errors %}
+          <p style="color: #f00">Username o password non validi!</p>
+        {% endif %}
 
-				<button type="submit" id="sendlogin" class="btn btn-primary">Login</button>
-				<input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit" id="sendlogin" class="btn btn-primary">Login</button>
+        <input type="hidden" name="next" value="{{ next }}" />
 
-			</form>
-		</div>
-	</div>
+      </form>
+    </div>
+  </div>
 
 {% endblock %}

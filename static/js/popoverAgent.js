@@ -16,22 +16,22 @@ $(document).ready(function() {
         method: 'GET',
         async: false,
         success:function(response) {
-					content = $("#popover_agent").html();
+          content = $("#popover_agent").html();
 
           content = content.replace(/p_code/g, response.agent_code);
           content = content.replace(/p_name/g, response.agent_name);
           content = content.replace(/p_warea/g, response.working_area);
           content = content.replace(/p_commission/g, response.commission);
           content = content.replace(/p_phone/g, response.phone_no);
-				},
-				error: function(response) {
+        },
+        error: function(response) {
         }
     });
 
     return content;
   }
 
-	$('.popover_age').popover({
+  $('.popover_age').popover({
       title: '<i class="fas fa-user-tie"></i> About',
       html: true,
       placement: 'right',

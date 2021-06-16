@@ -33,35 +33,35 @@
       </div>
     </div>
 
-		<div class="col-1"></div>
+    <div class="col-1"></div>
 
-	{% if request.session.gruppo == "managers" %}
-		<div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
-			<div class="mb-3">
-				<label for="agent_code" class="form-label">Agent</label>
-				<select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
-					<option value=""> Select Agent </option>
-				{% for j in agent_list %}
-					<option value="{{ j.agent_code }}" {% if j.agent_code|slugify == ordine.agent_code|slugify %}selected{% endif %}> {{ j.agent_name }} </option>
-				{% endfor %}
-				</select>
-			</div>
-		</div>
-	{% endif %}
+  {% if request.session.gruppo == "managers" %}
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      <div class="mb-3">
+        <label for="agent_code" class="form-label">Agent</label>
+        <select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
+          <option value=""> Select Agent </option>
+        {% for j in agent_list %}
+          <option value="{{ j.agent_code }}" {% if j.agent_code|slugify == ordine.agent_code|slugify %}selected{% endif %}> {{ j.agent_name }} </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
   </div>
 
-	{% if request.session.gruppo == "agents" %}
-		<input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
-	{% endif %}
+  {% if request.session.gruppo == "agents" %}
+    <input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
+  {% endif %}
 
-	  <div class="row">
+    <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
         <label for="ord_amount" class="form-label">Order Amount</label>
         <div class="input-group">
           <div class="input-group-text">$</div>
           <input type="text" class="form-control" id="ord_amount" name="ord_amount" 
-						placeholder="4000.11" aria-label="Order amount" value="{{ ordine.ord_amount }}"  required>
+            placeholder="4000.11" aria-label="Order amount" value="{{ ordine.ord_amount }}"  required>
         </div>
         <div id="ord_amount_help" class="form-text">Use "." for decimals separator</div>
       </div>
@@ -73,7 +73,7 @@
         <div class="input-group">
           <div class="input-group-text">$</div>
           <input type="text" class="form-control" id="advance_amount" name="advance_amount" 
-						placeholder="1000.23" aria-label="Advance amount" value="{{ ordine.advance_amount }}" required>
+            placeholder="1000.23" aria-label="Advance amount" value="{{ ordine.advance_amount }}" required>
         </div>
         <div id="advance_amount_help" class="form-text">Use "." for decimals separator</div>
       </div>
@@ -87,7 +87,7 @@
         <div class="input-group">
           <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
           <input type="date" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" 
-						aria-label="Order date" value="{{ ordine.ord_date|date:'Y-m-d' }}" required>
+            aria-label="Order date" value="{{ ordine.ord_date|date:'Y-m-d' }}" required>
         </div>
         <div id="ord_date_help" class="form-text">Date format depends on your browser locales!</div>
       </div>
@@ -97,7 +97,7 @@
       <div class="mb-3">
         <label for="ord_description" class="form-label">Order Description</label>
         <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" 
-					placeholder="Insert short description" aria-label="Breve descrizione dell'ordine" value="{{ ordine.ord_description }}">
+          placeholder="Insert short description" aria-label="Breve descrizione dell'ordine" value="{{ ordine.ord_description }}">
         <div id="ord_desc_help" class="form-text">Max 60 chars</div>
       </div>
     </div>
@@ -130,7 +130,7 @@ $("#submit_order").click(function(e) {
   // valido
   data = JSON.stringify(_data)
 
-	// Richiesta AJAX
+  // Richiesta AJAX
   $.ajax({
           url: '/api/orders/update/{{ ordine.ord_num }}/',
           type: 'PUT',

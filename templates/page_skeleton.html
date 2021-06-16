@@ -5,12 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	{% load static %}
+  {% load static %}
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'  %}">
   <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'  %}">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
   <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'jqueryValidate/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'jqueryValidate/additional-methods.min.js' %}"></script>
 <!--
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 -->
@@ -23,88 +25,83 @@
 
   <div class="container-fluid">
 
-		<header class="row">
-		<!-- <div class="row"> -->
-				{% block navbar %}
-					<nav class="navbar navbar-expand-sm py-0 navbar-dark bg-dark">
-						<div class="container-fluid">
+    <header class="row">
+    {% block navbar %}
+      <nav class="navbar navbar-expand-sm py-0 navbar-dark bg-dark">
+        <div class="container-fluid">
 
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-											data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
-											aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                  data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-							<a class="navbar-brand" href="/"><i class="fab fa-rebel"></i> Progetto WebApp</a>
+          <a class="navbar-brand" href="/"><i class="fab fa-rebel"></i> Progetto WebApp</a>
 
-							<div class="collapse navbar-collapse" id="navbarNav">
-								<ul class="navbar-nav me-auto">&nbsp;</ul>
-								<ul class="navbar-nav ms-auto">
-									<li class="nav-item">
-								{% if request.session.gruppo == "agents" %}
-										<a class="nav-link" href="/agente/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
-								{% elif request.session.gruppo == "customers" %}
-										<a class="nav-link" href="/clienti/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
-								{% elif request.session.gruppo == "managers" %}
-										<a class="nav-link" href="#">{{ request.session.utente }} <i class="fas fa-user-graduate"></i></a>
-								{% endif %}
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">&nbsp;</ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+            {% if request.session.gruppo == "agents" %}
+                <a class="nav-link" href="/agente/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
+            {% elif request.session.gruppo == "customers" %}
+                <a class="nav-link" href="/clienti/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
+            {% elif request.session.gruppo == "managers" %}
+                <a class="nav-link" href="#">{{ request.session.utente }} <i class="fas fa-user-graduate"></i></a>
+            {% endif %}
 
-									</li>
-									<li class="nav-item" >
-										<a class="nav-link" href="/auth/logout/">Logout <i class="fas fa-power-off"></i></a>
-									</li>
-								</ul>
-							</div>
+              </li>
+              <li class="nav-item" >
+                <a class="nav-link" href="/auth/logout/">Logout <i class="fas fa-power-off"></i></a>
+              </li>
+            </ul>
+          </div>
 
-						</div>
-					</nav>
-				{% endblock %}
-		<!-- </div> -->
-		</header>
-		
-		<!-- <div class="row vh-100"> -->
-		<main class="row vh-100">
-				<div class="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
-					<div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
-						<ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto 
-							mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
+        </div>
+      </nav>
+    {% endblock %}
+    </header>
+    
+    <main class="row vh-100">
+      <div class="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
+        <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
+          <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto 
+              mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
 
-							<li class="nav-item">
-								<a href="/ordini/" class="nav-link px-sm-0 px-2" title="Lista ordini">
-									<i class="fas fa-list"></i><span class="ms-1 d-none d-sm-inline">Ordini</span>
-								</a>
-							</li>
-						
-						{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-							<li class="nav-item">
-								<a href="/ordini/nuovo/" class="nav-link px-sm-0 px-2" title="Inserisci nuovo ordini">
-									<i class="fas fa-plus"></i><span class="ms-1 d-none d-sm-inline">Nuovo Ordine</span>
-								</a>
-							</li>
+            <li class="nav-item">
+              <a href="/ordini/" class="nav-link px-sm-0 px-2" title="Lista ordini">
+                <i class="fas fa-list"></i><span class="ms-1 d-none d-sm-inline">Ordini</span>
+              </a>
+            </li>
+            
+          {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+            <li class="nav-item">
+              <a href="/ordini/nuovo/" class="nav-link px-sm-0 px-2" title="Inserisci nuovo ordini">
+                <i class="fas fa-plus"></i><span class="ms-1 d-none d-sm-inline">Nuovo Ordine</span>
+              </a>
+            </li>
 
-							<li class="nav-item">
-								<a href="/clienti/" class="nav-link px-sm-0 px-2" title="Elenco clienti">
-									<i class="fas fa-users"></i><span class="ms-1 d-none d-sm-inline">Clienti</span>
-								</a>
-							</li>
-						{% endif %}
+            <li class="nav-item">
+              <a href="/clienti/" class="nav-link px-sm-0 px-2" title="Elenco clienti">
+                <i class="fas fa-users"></i><span class="ms-1 d-none d-sm-inline">Clienti</span>
+              </a>
+            </li>
+          {% endif %}
 
-						{% if request.session.gruppo == "managers" %}
-							<li class="nav-item">
-								<a href="/agenti/" class="nav-link px-sm-0 px-2" title="Elenco agenti">
-									<i class="fas fa-user-tie"></i><span class="ms-1 d-none d-sm-inline">Agenti</span>
-								</a>
-							</li>
-						{% endif %}
+          {% if request.session.gruppo == "managers" %}
+            <li class="nav-item">
+              <a href="/agenti/" class="nav-link px-sm-0 px-2" title="Elenco agenti">
+                <i class="fas fa-user-tie"></i><span class="ms-1 d-none d-sm-inline">Agenti</span>
+              </a>
+            </li>
+          {% endif %}
 
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-9 col-md-8 col-lg-10 content">{% block content %}{% endblock %}</div>
-		</div>
-
-	<!-- </div> -->
-	</main>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-9 col-md-8 col-lg-10 content">{% block content %}{% endblock %}</div>
+    </main>
+  </div>
 
 </body>
 </html>

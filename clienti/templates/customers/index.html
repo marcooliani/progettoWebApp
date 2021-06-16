@@ -4,63 +4,63 @@
 <div class="heading bg-secondary text-white"><i class="fas fa-users"></i> Clienti gestiti da {{request.session.nome}}</div>
 <input type="hidden" name="gruppo" value="{{ gruppo }}" />
 
-	<div class="table-responsive">
-		<table class="table table-hover" id="customer_list_table" name="customer_list_table">
-			<caption>Clienti di {{request.session.nome}}</caption>
-			<thead class="table-light">
-				<th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> ID</span></th>
-				<th scope="col"><span class="ordina" sort="-cust_name"><i class="fas fa-sort"></i> Name</span></th>
-				<th scope="col"><span class="ordina" sort="cust_city"><i class="fas fa-sort"></i> City</span></th>
-				<th scope="col"><span class="ordina" sort="cust_country"><i class="fas fa-sort"></i> Country</span></th>
-				<th scope="col"><span class="ordina" sort="grade"><i class="fas fa-sort"></i> Grade</span></th>
-			{% if request.session.gruppo == "managers"  %}
-				<th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
-			{% endif %}
-				<th scope="col">&nbsp;</th>
-			</thead>
-			<tbody id="customerTable">
-		{% for i in customer_list %} 
-				<tr id="row_{{ i.cust_code }}">
-					<td>{{ i.cust_code }}</td>
-					<td>{{ i.cust_name }}</td>
+  <div class="table-responsive">
+    <table class="table table-hover" id="customer_list_table" name="customer_list_table">
+      <caption>Clienti di {{request.session.nome}}</caption>
+      <thead class="table-light">
+        <th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> ID</span></th>
+        <th scope="col"><span class="ordina" sort="-cust_name"><i class="fas fa-sort"></i> Name</span></th>
+        <th scope="col"><span class="ordina" sort="cust_city"><i class="fas fa-sort"></i> City</span></th>
+        <th scope="col"><span class="ordina" sort="cust_country"><i class="fas fa-sort"></i> Country</span></th>
+        <th scope="col"><span class="ordina" sort="grade"><i class="fas fa-sort"></i> Grade</span></th>
+      {% if request.session.gruppo == "managers"  %}
+        <th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
+      {% endif %}
+        <th scope="col">&nbsp;</th>
+      </thead>
+      <tbody id="customerTable">
+    {% for i in customer_list %} 
+        <tr id="row_{{ i.cust_code }}">
+          <td>{{ i.cust_code }}</td>
+          <td>{{ i.cust_name }}</td>
           <td>{{ i.cust_city }}</td>
           <td>{{ i.cust_country }}</td>
           <td>{{ i.grade }}</td>
       {% if request.session.gruppo == "managers"  %}
           <td><a href="javascript:return false;" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
-					</td>
+          </td>
       {% endif %}
           <td class="nowrap">
-						<a href="#" title="Modifica cliente"><i class='fas fa-edit'></i></a>
-							&nbsp;&nbsp;&nbsp;
+            <a href="#" title="Modifica cliente"><i class='fas fa-edit'></i></a>
+              &nbsp;&nbsp;&nbsp;
       {% if request.session.gruppo == "managers"  %}
-						<a class="delete_customer" id="{{ i.cust_code }}" title="Elimina cliente"><i class='fas fa-trash-alt'></i></a>
+            <a class="delete_customer" id="{{ i.cust_code }}" title="Elimina cliente"><i class='fas fa-trash-alt'></i></a>
       {% endif %}
-					</td>
+          </td>
         </tr>
-					
-		{% endfor %}
+          
+    {% endfor %}
 
-			</tbody>
-		</table>
-	</div>
+      </tbody>
+    </table>
+  </div>
 
-	<!-- Nel caso implementassi la delete... -->
+  <!-- Nel caso implementassi la delete... -->
   <form>
     {% csrf_token %}
   </form>
 
-	<div id="popover_agent" style="display:none;">
-		<strong>Name:</strong> p_name<br>
-		<strong>Code:</strong> p_code<br>
-		<strong>Working area:</strong> p_warea<br>
-		<strong>Commission:</strong> p_commission<br>
-		<strong>Phone:</strong> p_phone
-	</div>
+  <div id="popover_agent" style="display:none;">
+    <strong>Name:</strong> p_name<br>
+    <strong>Code:</strong> p_code<br>
+    <strong>Working area:</strong> p_warea<br>
+    <strong>Commission:</strong> p_commission<br>
+    <strong>Phone:</strong> p_phone
+  </div>
 
-	{% load static %}
-	<script src="{% static 'js/popoverAgent.js' %}"></script>
-	<script src="{% static 'js/ajax_popoverAgent.js' %}"></script>
-	<script src="{% static 'js/sortCustomers.js' %}"></script>
+  {% load static %}
+  <script src="{% static 'js/popoverAgent.js' %}"></script>
+  <script src="{% static 'js/ajax_popoverAgent.js' %}"></script>
+  <script src="{% static 'js/sortCustomers.js' %}"></script>
 
 {% endblock %}

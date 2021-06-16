@@ -6,10 +6,10 @@
 
 <div id="submit_result">
 {% if request.GET.p == "success" %}
-	<div class="alert alert-success alert-dismissible fade show" role="alert">
-		<strong><i class="fas fa-check-circle"></i> Successo!</strong> Ordine inserito correttamente
-		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi alert"></button>
-	</div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong><i class="fas fa-check-circle"></i> Successo!</strong> Ordine inserito correttamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi alert"></button>
+  </div>
 {% endif %}
 </div>
 
@@ -17,155 +17,94 @@
 
   {% csrf_token %} <!-- !!! -->
 
-	<!-- Vedi commenti nella view al riguardo-->
-	<input type="hidden" name="ord_num" id="ord_num" value="{{ ord_num }}">
+  <!-- Vedi commenti nella view al riguardo-->
+  <input type="hidden" name="ord_num" id="ord_num" value="{{ ord_num }}">
 
-	<div class="row">
-		<div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
-			<div class="mb-3">
-				<label for="cust_code" class="form-label">Customer</label>
-				<select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
-					<option value=""> Select Customer </option>
-				{% for i in cust_list %}
-					<option value="{{ i.cust_code }}"> {{ i.cust_name }} </option>
-				{% endfor %}
-				</select>
-			</div>
-		</div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      <div class="mb-3">
+        <label for="cust_code" class="form-label">Customer</label>
+        <select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
+          <option value=""> Select Customer </option>
+        {% for i in cust_list %}
+          <option value="{{ i.cust_code }}"> {{ i.cust_name }} </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
 
-		<div class="col-1"></div>
+    <div class="col-1"></div>
 
-	{% if request.session.gruppo == "managers" %}
-		<div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
-			<div class="mb-3">
-				<label for="cust_code" class="form-label">Agent</label>
-				<select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
-					<option value=""> Select Agent </option>
-				{% for j in agent_list %}
-					<option value="{{ j.agent_code }}"> {{ j.agent_name }} </option>
-				{% endfor %}
-				</select>
-			</div>
-		</div>
-	{% endif %}
+  {% if request.session.gruppo == "managers" %}
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      <div class="mb-3">
+        <label for="cust_code" class="form-label">Agent</label>
+        <select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
+          <option value=""> Select Agent </option>
+        {% for j in agent_list %}
+          <option value="{{ j.agent_code }}"> {{ j.agent_name }} </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
 
-	</div>
+  </div>
 
 {% if request.session.gruppo == "agents" %}
-	<input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
+  <input type="hidden" name="agent_code" id="agent_code" value="{{ request.user.username }}">
 {% endif %}
 
-	<div class="row">
-		<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-			<div class="mb-3">
-				<label for="ord_amount" class="form-label">Order Amount</label>
-				<div class="input-group">
-					<div class="input-group-text">$</div>
-					<input type="text" class="form-control" id="ord_amount" name="ord_amount" placeholder="4000.11" aria-label="Order amount" required>
-				</div>
-				<div id="ord_amount_help" class="form-text">Use "." for decimals separator</div>
-			</div>
-		</div>
-	
-		<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-			<div class="mb-3">
-				<label for="advance_amount" class="form-label">Advance Amount</label>
-				<div class="input-group">
-          <div class="input-group-text">$</div>
-					<input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" aria-label="Advance amount" required>
-				</div>
-				<div id="advance_amount_help" class="form-text">Use "." for decimals separator</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-			<div class="mb-3">
-				<label for="ord_date" class="form-label">Order Date</label>
-				<div class="input-group">
-					<div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-					<input type="date" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" aria-label="Order date" required>
-				</div>
-				<div id="ord_date_help" class="form-text">Date format depends on your browser locales!</div>
-			</div>
-		</div>
-
-		<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-				<label for="ord_description" class="form-label">Order Description</label>
-				<input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Insert order description" aria-label="Order description">
-				<div id="ord_desc_help" class="form-text">Max 60 chars</div>
-			</div>
-		</div>
-	</div>
+        <label for="ord_amount" class="form-label">Order Amount</label>
+        <div class="input-group">
+          <div class="input-group-text">$</div>
+          <input type="text" class="form-control" id="ord_amount" name="ord_amount" placeholder="4000.11" aria-label="Order amount" required>
+        </div>
+        <div id="ord_amount_help" class="form-text">Use "." for decimals separator</div>
+      </div>
+    </div>
+  
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="advance_amount" class="form-label">Advance Amount</label>
+        <div class="input-group">
+          <div class="input-group-text">$</div>
+          <input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" aria-label="Advance amount" required>
+        </div>
+        <div id="advance_amount_help" class="form-text">Use "." for decimals separator</div>
+      </div>
+    </div>
+  </div>
 
-	<button class="btn btn-secondary" type="submit" name="submit_order" id="submit_order">Inserisci</button>
-	<button class="btn btn-light" type="reset" name="reset_order" id="reset_order">Reset</button>
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="ord_date" class="form-label">Order Date</label>
+        <div class="input-group">
+          <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+          <input type="date" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" aria-label="Order date" required>
+        </div>
+        <div id="ord_date_help" class="form-text">Date format depends on your browser locales!</div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="ord_description" class="form-label">Order Description</label>
+        <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Insert order description" aria-label="Order description">
+        <div id="ord_desc_help" class="form-text">Max 60 chars</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-secondary" type="submit" name="submit_order" id="submit_order">Inserisci</button>
+  <button class="btn btn-light" type="reset" name="reset_order" id="reset_order">Reset</button>
 </form>
 
-<script type="text/javascript">
-/* Avendo messo nei settings di Django CSRF_USE_SESSIONS = True
- * e CSRF_COOKIE_HTTPONLY = True, richiamo il token csrf semplicemente
- * dal campo (nascosto) html, che sarebbe poi rappresentato dalla 
- * istruzione {% csrf_token %} */
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-// Intercetto il click del bottone di invio del form
-$("#submit_order").click(function(e) {
-	e.preventDefault();
-
-	// Prendo i campi del form e li salvo in un array associativo
-	var form_data = $("#new_order").serializeArray();
-	var _data = {};
-  for (var i = 0; i < form_data.length; i++){
-    _data[form_data[i]["name"]] = form_data[i]["value"];
-	}
-
-	// "Stringhifico" i dati dell'array associativo e 
-	// converto il suddetto array in formato JSON
-	// valido
-	data = JSON.stringify(_data)
-
-	// Richiesta AJAX
-	$.ajax({
-          url: '/api/orders/new/',
-          type: 'POST',
-					/* Passo il token csrf attaverso gli
-					 * header http, pena il 403 Forbidden */
-					headers: {
-              'X-CSRFToken': csrftoken
-           },
-          contentType: 'application/json', 
-					dataType: 'json',
-          data: data,
-					//processData: false,
-          success: function() {
-            //$("#submit_result").html("Inserimento ok");
-						window.location = '/ordini/nuovo/?p=success';
-          },
-					error: function(message) {
-						/* Potevo fare allo stesso modo del success, ma faccio
-						 * così per non dover ripassare i campi alla pagina
-						 * un'altra volta (in PHP l'avrei fatto, però!). Lo
-						 * tengo così, per l'uso che ne devo fare va bene lo stesso.
-						 * NOTA: message è uno degli oggetti ritornati dalla chiamata
-						 * e contiene vari campi tra cui responseText e responseJson
-						 */
-						$("#submit_result").html(
-								'<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-									'<strong><i class="fas fa-times-circle"></i> Errore!</strong> Ordine non inserito ' + 
-									'<button type="button" class="btn-close" data-bs-dismiss="alert" ' +
-												'aria-label="Chiudi alert">' +
-									'</button>' +
-								'</div>');
-						// $("#submit_result").html("message.responseText");
-						// window.location = '/ordini/nuovo/?p=error';
-					}
-    }); 
-
-});
-
-</script>
+{% load static %}
+<script src="{% static 'js/newOrder.js' %}"></script>
 
 {% endblock %}

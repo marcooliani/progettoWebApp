@@ -4,77 +4,77 @@
 <div class="heading bg-secondary text-white"><i class="fas fa-list"></i> Tabella ordini per {{request.session.nome}}</div>
 <input type="hidden" name="gruppo" value="{{ gruppo }}" />
 
-	<div class="table-responsive">
-		<table class="table table-hover" id="order_list_table" name="order_list_table">
-			<caption>Lista ordini per {{request.session.nome}}</caption>
-			<thead class="table-light">
-				<th scope="col"><span class="ordina" sort="ord_num"><i class="fas fa-sort"></i> Order ID</span></th>
-				<th scope="col"><span class="ordina" sort="ord_date"><i class="fas fa-sort"></i> Date</span></th>
-				<th scope="col"><span class="ordina" sort="ord_amount"><i class="fas fa-sort"></i> Amount</span></th>
-				<th scope="col"><span class="ordina" sort="advance_amount"><i class="fas fa-sort"></i> Advance amount</span></th>
-			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-				<th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> Customer</span></th>
-			{% endif %}
-			{% if request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-				<th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
-			{% endif %}
-				<th scope="col">Description</th>
-				<th scope="col">&nbsp;</th>
-			</thead>
-			<tbody id="orderTable">
-		{% for i in order_list %} 
-				<tr id="row_{{ i.ord_num }}">
-					<td>{{ i.ord_num }}</td>
+  <div class="table-responsive">
+    <table class="table table-hover" id="order_list_table" name="order_list_table">
+      <caption>Lista ordini per {{request.session.nome}}</caption>
+      <thead class="table-light">
+        <th scope="col"><span class="ordina" sort="ord_num"><i class="fas fa-sort"></i> Order ID</span></th>
+        <th scope="col"><span class="ordina" sort="ord_date"><i class="fas fa-sort"></i> Date</span></th>
+        <th scope="col"><span class="ordina" sort="ord_amount"><i class="fas fa-sort"></i> Amount</span></th>
+        <th scope="col"><span class="ordina" sort="advance_amount"><i class="fas fa-sort"></i> Advance amount</span></th>
+      {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+        <th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> Customer</span></th>
+      {% endif %}
+      {% if request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
+        <th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
+      {% endif %}
+        <th scope="col">Description</th>
+        <th scope="col">&nbsp;</th>
+      </thead>
+      <tbody id="orderTable">
+    {% for i in order_list %} 
+        <tr id="row_{{ i.ord_num }}">
+          <td>{{ i.ord_num }}</td>
           <td>{{ i.ord_date|date:'d/m/Y' }}</td>
           <td>{{ i.ord_amount }}</td>
           <td>{{ i.advance_amount }}</td>
-			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+      {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
           <td><a href="javascript:return false;" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
-					</td>
+          </td>
       {% endif %}
       {% if request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
           <td><a href="javascript:return false;" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
-					</td>
+          </td>
       {% endif %}
-					<td>{{ i.ord_description }}</td>
+          <td>{{ i.ord_description }}</td>
           <td class="nowrap">
-						<a href="/ordini/{{ i.ord_num  }}/" title="Dettaglio ordine"><i class='fas fa-search'></i></a>
-							&nbsp;&nbsp;&nbsp;
-			{% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-						<a href="/ordini/modifica/{{ i.ord_num  }}/" title="Modifica ordine"><i class='fas fa-edit'></i></a>
-							&nbsp;&nbsp;&nbsp;
-						<a class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine"><i class='fas fa-trash-alt'></i></a>
-					</td>
+            <a href="/ordini/{{ i.ord_num  }}/" title="Dettaglio ordine"><i class='fas fa-search'></i></a>
+              &nbsp;&nbsp;&nbsp;
+      {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
+            <a href="/ordini/modifica/{{ i.ord_num  }}/" title="Modifica ordine"><i class='fas fa-edit'></i></a>
+              &nbsp;&nbsp;&nbsp;
+            <a class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine"><i class='fas fa-trash-alt'></i></a>
+          </td>
       {% endif %}
         </tr>
-					
-		{% endfor %}
+          
+    {% endfor %}
 
-			</tbody>
-		</table>
-	</div>
+      </tbody>
+    </table>
+  </div>
 
-	<!-- Questo giusto per tenere il DOM pulito... -->
-	<form>
-		{% csrf_token %}
-	</form>
+  <!-- Questo giusto per tenere il DOM pulito... -->
+  <form>
+    {% csrf_token %}
+  </form>
 
 <!-- Popovers -->
-	<div id="popover_customer" style="display:none;">
-		<strong>Name:</strong> p_name<br>
-		<strong>Code:</strong> p_code<br>
-		<strong>City:</strong> p_city<br>
-		<strong>Country:</strong> p_country<br>
-		<strong>Grade:</strong> p_grade
-	</div>
+  <div id="popover_customer" style="display:none;">
+    <strong>Name:</strong> p_name<br>
+    <strong>Code:</strong> p_code<br>
+    <strong>City:</strong> p_city<br>
+    <strong>Country:</strong> p_country<br>
+    <strong>Grade:</strong> p_grade
+  </div>
 
-	<div id="popover_agent" style="display:none;">
-		<strong>Name:</strong> p_name<br>
-		<strong>Code:</strong> p_code<br>
-		<strong>Working area:</strong> p_warea<br>
-		<strong>Commission:</strong> p_commission<br>
-		<strong>Phone:</strong> p_phone
-	</div>
+  <div id="popover_agent" style="display:none;">
+    <strong>Name:</strong> p_name<br>
+    <strong>Code:</strong> p_code<br>
+    <strong>Working area:</strong> p_warea<br>
+    <strong>Commission:</strong> p_commission<br>
+    <strong>Phone:</strong> p_phone
+  </div>
 
 <!-- Modal -->
 <div class="modal fade" name="modal_confirm" id="modal_confirm" aria-labelledby="modalTitle" aria-describedby="modalDialog" tabindex="-1">

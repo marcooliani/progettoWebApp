@@ -1,14 +1,14 @@
 $(document).ready(function() {
-	/* Avendo messo nei settings di Django CSRF_USE_SESSIONS = True
+  /* Avendo messo nei settings di Django CSRF_USE_SESSIONS = True
    * e CSRF_COOKIE_HTTPONLY = True, richiamo il token csrf semplicemente
    * dal campo (nascosto) html, che sarebbe poi rappresentato dalla
    * istruzione {% csrf_token %} */
-	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-	// Creo l'oggetto modal e lo lancio
-	const myModal = new bootstrap.Modal(document.getElementById('modal_confirm'));
+  // Creo l'oggetto modal e lo lancio
+  const myModal = new bootstrap.Modal(document.getElementById('modal_confirm'));
 
-	/*
+  /*
    * Cancellazione ordine. I casi sono due:
    * - se lascio $('.delete_order).click(), il metodo funziona
    * quando la pagina è caricata, ma smette di funzionare se
@@ -32,7 +32,7 @@ $(document).ready(function() {
 
   });
 
-	$('#delete_confirm').click(function(e) {
+  $('#delete_confirm').click(function(e) {
     e.preventDefault();
 
     ord = $(this).attr('ordine');

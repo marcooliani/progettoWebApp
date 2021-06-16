@@ -1,10 +1,10 @@
 $(document).ajaxComplete(function() {
-	function popoverContentCustomer() {
-		var content = '';
+  function popoverContentCustomer() {
+    var content = '';
     var element = $(this);
     var id = element.attr("code");
 
-		var gruppo = $("[name='gruppo']").val()
+    var gruppo = $("[name='gruppo']").val()
 
     // Fantastico, se faccio la chiamata senza l'opzione
     // async mi ritorna la variabile content vuota appena
@@ -31,7 +31,7 @@ $(document).ajaxComplete(function() {
     return content;
   }
 
-	$('.popover_cli').popover({
+  $('.popover_cli').popover({
       title: '<i class="fas fa-user"></i> About',
       html: true,
       placement: 'right',

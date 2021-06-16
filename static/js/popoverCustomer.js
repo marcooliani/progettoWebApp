@@ -1,15 +1,15 @@
 $(document).ready(function() {
-	function popoverContentCustomer() {
-		// Non posso mettere il preventDefault,
-		// altrimenti non si apre il popover.
-		// Tocca tenere il "javascript:return false"
-		// nell'html...
+  function popoverContentCustomer() {
+    // Non posso mettere il preventDefault,
+    // altrimenti non si apre il popover.
+    // Tocca tenere il "javascript:return false"
+    // nell'html...
 
-		var content = '';
+    var content = '';
     var element = $(this);
     var id = element.attr("code");
 
-		var gruppo = $("[name='gruppo']").val()
+    var gruppo = $("[name='gruppo']").val()
 
     // Fantastico, se faccio la chiamata senza l'opzione
     // async mi ritorna la variabile content vuota appena
@@ -36,7 +36,7 @@ $(document).ready(function() {
     return content;
   }
 
-	$('.popover_cli').popover({
+  $('.popover_cli').popover({
       title: '<i class="fas fa-user"></i> About',
       html: true,
       placement: 'right',

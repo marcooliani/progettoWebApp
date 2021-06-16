@@ -22,7 +22,7 @@ $(document).ready(function() {
           // Svuoto il il tbody prima di fare l'append
           // delle righe ordinate!
           $('#customerTable').empty();
-					var gruppo = $("[name='gruppo']").val()
+          var gruppo = $("[name='gruppo']").val()
 
           // Recupero i dati dall'oggetto response
           // restituito dalla chiamata all'API
@@ -63,5 +63,5 @@ $(document).ready(function() {
         }
       });
 
-	});
+  });
 })
