@@ -4,6 +4,11 @@
 
 <div class="heading bg-secondary text-white"><i class="fas fa-table"></i> Cliente {{ cliente.cust_code }}</div>
 
+<div class="card">
+  <div class="card-header">
+    <i class="fas fa-user"></i> Registry
+  </div>
+  <div class="card-body">
 
   <div class="row">
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
@@ -19,7 +24,7 @@
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
         <label for="agent_code" class="form-label dettaglio">Agent</label>
-        <div id="agent_code" name="agent_code">{{ ordine.agent_code.agent_name }} ({{ ordine.agent_code }})</div>
+        <div id="agent_code" name="agent_code">{{ cliente.agent_code.agent_name }} ({{ cliente.agent_code }})</div>
       </div>
     </div>
   {% endif %}
@@ -29,15 +34,15 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="ord_amount" class="form-label dettaglio">Order Amount</label>
-        <div id="ord_amount" name="ord_amount">{{ ordine.ord_amount }}</div>
+        <label for="cust_city" class="form-label dettaglio">City</label>
+        <div id="cust_city" name="cust_city">{{ cliente.cust_city }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="advance_amount" class="form-label dettaglio">Advance Amount</label>
-        <div id="advance_amount" name="advance_amount">{{ ordine.advance_amount }}</div>
+        <label for="cust_country" class="form-label dettaglio">Country</label>
+        <div id="cust_country" name="cust_country">{{ cliente.cust_country }}</div>
       </div>
     </div>
   </div>
@@ -45,17 +50,62 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="ord_date" class="form-label dettaglio">Order Date</label>
-        <div id="ord_date" name="ord_date">{{ ordine.ord_date|date:'d/m/Y' }}</div>
+        <label for="working_area" class="form-label dettaglio">Working Area</label>
+        <div id="working_area" name="working_area">{{ cliente.working_area }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="ord_description" class="form-label dettaglio">Order Description</label>
-        <div id="ord_description" name="ord_description">{{ ordine.ord_description }}</div>
+        <label for="grade" class="form-label dettaglio">Grade</label>
+        <div id="grade" name="grade">{{ cliente.grade }}</div>
       </div>
     </div>
   </div>
 
+  </div>
+</div>
+
+<div class="row">&nbsp;</div>
+
+<div class="card">
+  <div class="card-header">
+    <i class="fas fa-dollar-sign"></i> Amounts
+  </div>
+  <div class="card-body">
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="opening_amt" class="form-label dettaglio">Opening Amount</label>
+        <div id="opening_amt" name="working_area">{{ cliente.opening_amt }}</div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="receive_amt" class="form-label dettaglio">Receive Amount</label>
+        <div id="receive_amt" name="grade">{{ cliente.receive_amt }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="payment_amt" class="form-label dettaglio">Payment Amount</label>
+        <div id="payment_amt" name="working_area">{{ cliente.payment_amt }}</div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="outstanding_amt" class="form-label dettaglio">Outstanding Amount</label>
+        <div id="outstanding_amt" name="outstanding_amt">{{ cliente.outstanding_amt }}</div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
 {% endblock %}

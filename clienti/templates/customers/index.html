@@ -31,6 +31,8 @@
           </td>
       {% endif %}
           <td class="nowrap">
+            <a href="/clienti/{{ i.cust_code }}/" title="Dettaglio cliente"><i class='fas fa-search'></i></a>
+              &nbsp;&nbsp;&nbsp;
             <a href="#" title="Modifica cliente"><i class='fas fa-edit'></i></a>
               &nbsp;&nbsp;&nbsp;
       {% if request.session.gruppo == "managers"  %}
