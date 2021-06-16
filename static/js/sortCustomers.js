@@ -49,13 +49,13 @@ $(document).ready(function() {
 
           tr_str = tr_str + '<td class="nowrap"><a href="/clienti/' + cust_code + '/" title="Dettaglio cliente"><i class="fas fa-search"></i></a>' +
               '&nbsp;&nbsp;&nbsp;';
-          tr_str = tr_str + '<td class="nowrap"><a href="#" title="Modifica cliente"><i class="fas fa-edit"></i></a>' +
+          tr_str = tr_str + '<a href="#" title="Modifica cliente"><i class="fas fa-edit"></i></a>' +
               '&nbsp;&nbsp;&nbsp;';
 
           if(gruppo == "managers")
-            tr_str = tr_str + '<a class="delete_order" id="' + cust_code + '" title="Elimina cliente"><i class="fas fa-trash-alt"></i></a></td>';
+            tr_str = tr_str + '<a class="delete_order" id="' + cust_code + '" title="Elimina cliente"><i class="fas fa-trash-alt"></i></a>';
                 
-          tr_str = tr_str + '</tr>';
+          tr_str = tr_str + '</td></tr>';
 
           $("#customerTable").append(tr_str);
         }

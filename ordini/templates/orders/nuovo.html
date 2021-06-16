@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="heading bg-secondary text-white"><i class="fas fa-plus"></i> Nuovo ordine</div>
+<input type="hidden" name="gruppo" value="{{ request.session.gruppo }}" />
 
 <div id="submit_result">
 {% if request.GET.p == "success" %}
@@ -21,34 +22,39 @@
   <input type="hidden" name="ord_num" id="ord_num" value="{{ ord_num }}">
 
   <div class="row">
-    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
-      <div class="mb-3">
-        <label for="cust_code" class="form-label">Customer</label>
-        <select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
-          <option value=""> Select Customer </option>
-        {% for i in cust_list %}
-          <option value="{{ i.cust_code }}"> {{ i.cust_name }} </option>
-        {% endfor %}
-        </select>
-      </div>
-    </div>
-
-    <div class="col-1"></div>
-
   {% if request.session.gruppo == "managers" %}
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
         <label for="cust_code" class="form-label">Agent</label>
         <select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
           <option value=""> Select Agent </option>
+          <option value="" disabled> --- </option>
         {% for j in agent_list %}
           <option value="{{ j.agent_code }}"> {{ j.agent_name }} </option>
         {% endfor %}
         </select>
       </div>
     </div>
+
+    <div class="col-1"></div>
   {% endif %}
 
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      <div class="mb-3">
+        <label for="cust_code" class="form-label">Customer</label>
+        <select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
+      {% if request.session.gruppo == "managers" %}
+          <option value=""> --- </option>
+      {% else %}
+          <option value=""> Select Customer </option>
+          <option value="" disabled> --- </option>
+        {% for i in cust_list %}
+          <option value="{{ i.cust_code }}"> {{ i.cust_name }} </option>
+        {% endfor %}
+      {% endif %}
+        </select>
+      </div>
+    </div>
   </div>
 
 {% if request.session.gruppo == "agents" %}
@@ -106,5 +112,6 @@
 
 {% load static %}
 <script src="{% static 'js/newOrder.js' %}"></script>
+<script src="{% static 'js/populateCustomerSelect.js' %}"></script>
 
 {% endblock %}

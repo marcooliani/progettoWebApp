@@ -10,7 +10,6 @@ $(document).ready(function() {
    * istruzione {% csrf_token %} */
   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-
   // Intercetto il click del bottone di invio del form
   $("#submit_order").click(function(e) {
     e.preventDefault();

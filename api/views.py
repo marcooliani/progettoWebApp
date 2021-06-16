@@ -51,47 +51,47 @@ quelli gestiti da altri agenti
 @permission_classes([IsAuthenticated, CanView])
 def order_list(request):
 
-	if(request.method == 'GET'):
-		orders = Orders.objects
+  if(request.method == 'GET'):
+    orders = Orders.objects
 
-		# Controllo in che gruppo è l'utente: in base a quello decido il filtro
-		# sulla query (se è "customers" visualizzo tutti gli ordini del cliente,
-		# se "agents" visualizzo tutti gli ordini dei clienti destiti dall'agente
-		for g in request.user.groups.all():
-			if(g.name == "customers"):
-				orders = orders.filter(cust_code=str(request.user))
-			elif(g.name == "agents"):
-				orders = orders.filter(agent_code=str(request.user))
+    # Controllo in che gruppo è l'utente: in base a quello decido il filtro
+    # sulla query (se è "customers" visualizzo tutti gli ordini del cliente,
+    # se "agents" visualizzo tutti gli ordini dei clienti destiti dall'agente
+    for g in request.user.groups.all():
+      if(g.name == "customers"):
+        orders = orders.filter(cust_code=str(request.user))
+      elif(g.name == "agents"):
+        orders = orders.filter(agent_code=str(request.user))
 
-		# La differenza tra all() e values() dovrebbe essere che all() ritorna 
-		# oggetti contenenti i record, values() direttamente i valori.
-		# Nota: avrei voluto aggiungere un .defer() in fondo per escludere
-		# il campo cust_code o agent_code a seconda di chi è loggato, ma
-		# il serializer non accetta che ci sia un campo in meno (giustamente).
-		# Quindi farò il filtro lato client, se mi riesce...
-		#
-		# Edit: la select(related) permette di fare l'inner join con 
-		# Agents e Customer per recuperare poi, nel serializer, i nomi.
-		# Devo però, appunto, passare i dati al serializer...
-		orders = orders.all().select_related('cust_code', 'agent_code')
+    # La differenza tra all() e values() dovrebbe essere che all() ritorna 
+    # oggetti contenenti i record, values() direttamente i valori.
+    # Nota: avrei voluto aggiungere un .defer() in fondo per escludere
+    # il campo cust_code o agent_code a seconda di chi è loggato, ma
+    # il serializer non accetta che ci sia un campo in meno (giustamente).
+    # Quindi farò il filtro lato client, se mi riesce...
+    #
+    # Edit: la select(related) permette di fare l'inner join con 
+    # Agents e Customer per recuperare poi, nel serializer, i nomi.
+    # Devo però, appunto, passare i dati al serializer...
+    orders = orders.all().select_related('cust_code', 'agent_code')
 
-		# Leggo il parametro extra per l'ordinamento in base alle colonne.
-		# Hint per la chiamata in JQuery: per l'ordinamento discentente è 
-		# sufficiente mettere un "-" davanti al campo nell'url!
-		# Es: http://127.0.0.1/api/orders/?sort_by=-ord_date
-		# Per l'ordinamento ascendente, invece, come al solito
-		# ?sort_by=ord_date
-		sort_by = request.GET.get('sort_by', '-ord_date');
+    # Leggo il parametro extra per l'ordinamento in base alle colonne.
+    # Hint per la chiamata in JQuery: per l'ordinamento discentente è 
+    # sufficiente mettere un "-" davanti al campo nell'url!
+    # Es: http://127.0.0.1/api/orders/?sort_by=-ord_date
+    # Per l'ordinamento ascendente, invece, come al solito
+    # ?sort_by=ord_date
+    sort_by = request.GET.get('sort_by', '-ord_date');
 
-		orders = orders.order_by(sort_by)
+    orders = orders.order_by(sort_by)
 
-		# Serializzo i dati ottenuti con la query e li restituisco sotto
-		# forma di risposta JSON
-		#orders_serializer = OrdersSerializer(orders, many=True)
-		orders_serializer = OrdersListSerializer(orders, many=True)
+    # Serializzo i dati ottenuti con la query e li restituisco sotto
+    # forma di risposta JSON
+    #orders_serializer = OrdersSerializer(orders, many=True)
+    orders_serializer = OrdersListSerializer(orders, many=True)
 
-		return JsonResponse(orders_serializer.data, safe=False)
-		# safe=False serve per la serializzazione
+    return JsonResponse(orders_serializer.data, safe=False)
+    # safe=False serve per la serializzazione
 
 
 """
@@ -105,36 +105,36 @@ Inserisce un nuovo ordine all'interno della tabella ordini. Permissions:
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
 def order_new(request):
 
-	if(request.method == 'POST'):
+  if(request.method == 'POST'):
 
-		"""
-		Ok, il punto è questo: devo bypassare JSONParser() altrimenti
-		la mia request.data proveniente dalla chiama Ajax NON 
-		ne vuole sapere di funzionare, per quanto il contenuto sia
-		esattamente identico a quello inviato tramite Postman
-		(provato con gli stessi dati!). Così al serializzatore do
-		in pasto direttamente i dati "grezzi" della request.data
-		e non i dati "puliti" passati sotto JSONParser().
-		Ritengo tutto ciò letteralmente ASSURDO!
-		C'è da dire che i dati sono comunque già in formato
-		JSON corretto, quindi in questo caso il parser è superfluo
-		nel momento in cui la richiesta arriva da Ajax o da Postman,
-		coi dati preparati ad hoc. E' anche vero che l'API è fatta
-		apposta per accettare i dati solo in JSON e non in 
-		form-encoded o altre codifiche da form...
-		"""
-		#order_data = JSONParser().parse(request)
-		#order_serializer = OrdersSerializer(data=order_data)
+    """
+    Ok, il punto è questo: devo bypassare JSONParser() altrimenti
+    la mia request.data proveniente dalla chiama Ajax NON 
+    ne vuole sapere di funzionare, per quanto il contenuto sia
+    esattamente identico a quello inviato tramite Postman
+    (provato con gli stessi dati!). Così al serializzatore do
+    in pasto direttamente i dati "grezzi" della request.data
+    e non i dati "puliti" passati sotto JSONParser().
+    Ritengo tutto ciò letteralmente ASSURDO!
+    C'è da dire che i dati sono comunque già in formato
+    JSON corretto, quindi in questo caso il parser è superfluo
+    nel momento in cui la richiesta arriva da Ajax o da Postman,
+    coi dati preparati ad hoc. E' anche vero che l'API è fatta
+    apposta per accettare i dati solo in JSON e non in 
+    form-encoded o altre codifiche da form...
+    """
+    #order_data = JSONParser().parse(request)
+    #order_serializer = OrdersSerializer(data=order_data)
 
-		order_serializer = OrdersSerializer(data=request.data)
+    order_serializer = OrdersSerializer(data=request.data)
 
-		if(order_serializer.is_valid()):
-			order_serializer.save()
+    if(order_serializer.is_valid()):
+      order_serializer.save()
 
-			return JsonResponse(order_serializer.data, status=status.HTTP_201_CREATED)
+      return JsonResponse(order_serializer.data, status=status.HTTP_201_CREATED)
 
-		logger.info('Serializzazione non valida e non so perchè!')
-		return JsonResponse(order_serializer.error, status=status.HTTP_400_BAD_REQUEST)
+    logger.info('Serializzazione non valida e non so perchè!')
+    return JsonResponse(order_serializer.error, status=status.HTTP_400_BAD_REQUEST)
 
 """
 GET order_detail()
@@ -150,31 +150,31 @@ NON possono visualizzare gli ordini gestiti da altri agenti!
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanView])
 def order_detail(request, pk):
-	
-	# Verifico che l'ordine esista. Se esiste, controllo a chi appartiene
-	# ed eseguo la query
-	try:
-		order = Orders.objects
+  
+  # Verifico che l'ordine esista. Se esiste, controllo a chi appartiene
+  # ed eseguo la query
+  try:
+    order = Orders.objects
 
-		for g in request.user.groups.all():
-			if(g.name == "customers"):
-				order = order.filter(cust_code=str(request.user))
-			elif(g.name == "agents"):
-				order = order.filter(agent_code=str(request.user))
+    for g in request.user.groups.all():
+      if(g.name == "customers"):
+        order = order.filter(cust_code=str(request.user))
+      elif(g.name == "agents"):
+        order = order.filter(agent_code=str(request.user))
 
-		#order = order.get(pk=pk)
-		order = order.select_related('cust_code', 'agent_code').get(pk=pk)
+    #order = order.get(pk=pk)
+    order = order.select_related('cust_code', 'agent_code').get(pk=pk)
 
-	# Se l'ordine non viene trovato, restituisco un errore 404
-	except Orders.DoesNotExist:
-		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
+  # Se l'ordine non viene trovato, restituisco un errore 404
+  except Orders.DoesNotExist:
+    return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-	# Serializzo i dati e li restituisco in forma di risposta JSON
-	if(request.method == 'GET'):
-		#order_serializer = OrdersSerializer(order)
-		order_serializer = OrdersListSerializer(order)
+  # Serializzo i dati e li restituisco in forma di risposta JSON
+  if(request.method == 'GET'):
+    #order_serializer = OrdersSerializer(order)
+    order_serializer = OrdersListSerializer(order)
 
-		return JsonResponse(order_serializer.data)
+    return JsonResponse(order_serializer.data)
 
 """
 PUT order_update()
@@ -189,40 +189,40 @@ Modifica un ordine esistente. Permissions:
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
 def order_update(request, pk):
 
-	# Come per il metodo precedente 
-	try:
-		order = Orders.objects
+  # Come per il metodo precedente 
+  try:
+    order = Orders.objects
 
-		for g in request.user.groups.all():
-			if(g.name == "agents"):
-				order = order.filter(agent_code=str(request.user))
+    for g in request.user.groups.all():
+      if(g.name == "agents"):
+        order = order.filter(agent_code=str(request.user))
 
-		order = order.get(pk=pk)
+    order = order.get(pk=pk)
 
-	except Orders.DoesNotExist:
-		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
+  except Orders.DoesNotExist:
+    return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-	# Faccio il parsing dei dati ricevuti, dopo di che serializzo i dati.
-	# se la serializzazione effettuata è valida, scrivo i dati nel 
-	# database e aggiorno l'ordine
-	if(request.method == 'PUT'):
-		"""
-		Vale lo stesso discorso fatto per il metodo POST: JSONParser() deve
-		essere bypassato anche qui, dato che pure in questo caso i dati
-		provengono da AJAX...
-		"""
-		#order_data = JSONParser().parse(request)
-		#order_serializer = OrdersSerializer(order, data=order_data)
-		order_serializer = OrdersSerializer(order, data=request.data)
+  # Faccio il parsing dei dati ricevuti, dopo di che serializzo i dati.
+  # se la serializzazione effettuata è valida, scrivo i dati nel 
+  # database e aggiorno l'ordine
+  if(request.method == 'PUT'):
+    """
+    Vale lo stesso discorso fatto per il metodo POST: JSONParser() deve
+    essere bypassato anche qui, dato che pure in questo caso i dati
+    provengono da AJAX...
+    """
+    #order_data = JSONParser().parse(request)
+    #order_serializer = OrdersSerializer(order, data=order_data)
+    order_serializer = OrdersSerializer(order, data=request.data)
 
-		if(order_serializer.is_valid()):
-			order_serializer.save()
+    if(order_serializer.is_valid()):
+      order_serializer.save()
 
-			# Si poterbbe restituire anche un semplice messaggio
-			return JsonResponse(order_serializer.data)
+      # Si poterbbe restituire anche un semplice messaggio
+      return JsonResponse(order_serializer.data)
 
-		# Se la serializzazione non è valida, viene ritornata una bad request
-		return JsonResponse(order_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # Se la serializzazione non è valida, viene ritornata una bad request
+    return JsonResponse(order_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 """
 DELETE order_delete()
@@ -237,22 +237,22 @@ cancellare ordini gestiti da altri agenti
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanInsertModifyDeleteOrders])
 def order_delete(request, pk):
-	try:
-		order = Orders.objects
+  try:
+    order = Orders.objects
 
-		for g in request.user.groups.all():
-			if(g.name == "agents"):
-				order = order.filter(agent_code=str(request.user))
+    for g in request.user.groups.all():
+      if(g.name == "agents"):
+        order = order.filter(agent_code=str(request.user))
 
-		order = order.get(pk=pk)
+    order = order.get(pk=pk)
 
-	except Orders.DoesNotExist:
-		return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
+  except Orders.DoesNotExist:
+    return JsonResponse({'message': 'Order does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-	if(request.method == 'DELETE'):
-		order.delete()
+  if(request.method == 'DELETE'):
+    order.delete()
 
-		return JsonResponse({'message': 'Order successfully deleted'}, status=status.HTTP_204_NO_CONTENT)
+    return JsonResponse({'message': 'Order successfully deleted'}, status=status.HTTP_204_NO_CONTENT)
 
 
 """
@@ -269,42 +269,42 @@ stessi dati (tranne l'id, mi sa)
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, IsManager])
 def agent_list(request):
-	if(request.method == 'GET'):
-		agents = Agents.objects.all()
+  if(request.method == 'GET'):
+    agents = Agents.objects.all()
 
-		sort_by = request.GET.get('sort_by', 'cust_name')
-		agents = agents.order_by(sort_by)
+    sort_by = request.GET.get('sort_by', 'cust_name')
+    agents = agents.order_by(sort_by)
 
-		agents_serializer = AgentsSerializer(agents, many=True)
+    agents_serializer = AgentsSerializer(agents, many=True)
 
-		return JsonResponse(agents_serializer.data, safe=False)
+    return JsonResponse(agents_serializer.data, safe=False)
 
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, IsManager])
 def agent_new(request):
-	pass
+  pass
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, CanView])
 def agent_detail(request, pk):
-	try:
-		agent = Agents.objects.get(pk=pk)
+  try:
+    agent = Agents.objects.get(pk=pk)
 
-	except Agents.DoesNotExists:
-		return JsonResponse({'message': 'Agent does not exist'}, status=status.HTTP_404_NOT_FOUND)
+  except Agents.DoesNotExists:
+    return JsonResponse({'message': 'Agent does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-	if(request.method == 'GET'):
-		agent_serializer = AgentsSerializer(agent)
+  if(request.method == 'GET'):
+    agent_serializer = AgentsSerializer(agent)
 
-		return JsonResponse(agent_serializer.data)	
+    return JsonResponse(agent_serializer.data)  
 
 @api_view(['PUT'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, IsAgentOrManager])
 def agent_update(request, pk):
-	pass
+  pass
 
 @api_view(['DELETE'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
@@ -327,48 +327,52 @@ dei customer
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_list(request):
-	if(request.method == 'GET'):
-		customers = Customer.objects
+  if(request.method == 'GET'):
+    agente = request.GET.get('agent', '')
+    customers = Customer.objects
 
-		for g in request.user.groups.all():
-			if(g.name == "agents"):
-				customers = customers.filter(agent_code=str(request.user))
+    for g in request.user.groups.all():
+      if(g.name == "agents"):
+        customers = customers.filter(agent_code=str(request.user))
 
-		customers = customers.all().select_related('agent_code')
+      elif(g.name == "managers" and agente != ''):
+        customers = customers.filter(agent_code=agente)
 
-		sort_by = request.GET.get('sort_by', 'cust_name')
-		customers = customers.order_by(sort_by)
+    customers = customers.all().select_related('agent_code')
 
-		customers_serializer = CustomerSerializer(customers, many=True)
+    sort_by = request.GET.get('sort_by', 'cust_name')
+    customers = customers.order_by(sort_by)
 
-		return JsonResponse(customers_serializer.data, safe=False)
+    customers_serializer = CustomerSerializer(customers, many=True)
+
+    return JsonResponse(customers_serializer.data, safe=False)
 
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_new(request):
-	pass
+  pass
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_detail(request, pk):
-	try:
-		customer = Customer.objects.select_related('agent_code').get(pk=pk)
+  try:
+    customer = Customer.objects.select_related('agent_code').get(pk=pk)
 
-	except Customer.DoesNotExists:
-		return JsonResponse({'message': 'Customer does not exist'}, status=status.HTTP_404_NOT_FOUND)
+  except Customer.DoesNotExists:
+    return JsonResponse({'message': 'Customer does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-	if(request.method == 'GET'):
-		customer_serializer = CustomerSerializer(customer)
+  if(request.method == 'GET'):
+    customer_serializer = CustomerSerializer(customer)
 
-		return JsonResponse(customer_serializer.data)	
+    return JsonResponse(customer_serializer.data) 
 
 @api_view(['PUT'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated, IsAgentOrManager])
 def customer_update(request, pk):
-	pass
+  pass
 
 @api_view(['DELETE'])
 @authentication_classes([SessionAuthentication, BasicAuthentication])

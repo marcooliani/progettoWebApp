@@ -21,33 +21,33 @@
   <input type="hidden" name="ord_num" id="ord_num" value="{{ ordine.ord_num }}" >
 
   <div class="row">
-    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
-      <div class="mb-3">
-        <label for="cust_code" class="form-label">Customer</label>
-        <select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
-          <option value=""> Select Customer </option>
-        {% for i in cust_list %}
-          <option value="{{ i.cust_code }}" {% if i.cust_code|slugify == ordine.cust_code|slugify %}selected{% endif %}> {{ i.cust_name }} </option>
-        {% endfor %}
-        </select>
-      </div>
-    </div>
-
-    <div class="col-1"></div>
-
   {% if request.session.gruppo == "managers" %}
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
         <label for="agent_code" class="form-label">Agent</label>
         <select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
           <option value=""> Select Agent </option>
+          <option value="" disabled> --- </option>
         {% for j in agent_list %}
           <option value="{{ j.agent_code }}" {% if j.agent_code|slugify == ordine.agent_code|slugify %}selected{% endif %}> {{ j.agent_name }} </option>
         {% endfor %}
         </select>
       </div>
     </div>
+
+    <div class="col-1"></div>
   {% endif %}
+
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      <div class="mb-3">
+        <label for="cust_code" class="form-label">Customer</label>
+        <select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
+        {% for i in cust_list %}
+          <option value="{{ i.cust_code }}" {% if i.cust_code|slugify == ordine.cust_code|slugify %}selected{% endif %}> {{ i.cust_name }} </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
   </div>
 
   {% if request.session.gruppo == "agents" %}
@@ -109,8 +109,6 @@
 
 {% load static %}
 <script src="{% static 'js/updateOrder.js' %}"></script>
-<script type="text/javascript">
-
-</script>
+<script src="{% static 'js/populateCustomerSelect.js' %}"></script>
 
 {% endblock %}
