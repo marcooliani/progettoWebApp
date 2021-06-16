@@ -23,6 +23,7 @@ def index(request):
 
 	context = {
 		'customer_list': customer_list,
+		'gruppo': request.user.groups.all()[0].name,
 	}
 
 	"""

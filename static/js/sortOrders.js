@@ -1,4 +1,35 @@
 $(document).ready(function() {
+	/*
+   * Formatta la data da YYYY-mm-dd
+   * a dd/mm/YYYY
+   */
+  function formatta_data(data) {
+    // Scompongo la data in input
+    var formattedDate = new Date(data);
+    var d = formattedDate.getDate();
+
+    // Aggiungo uno 0 davanti se il giorno è < 10
+    if(d < 10) {
+      d = '0' + d;
+    }
+
+    var m =  formattedDate.getMonth();
+    var Y = formattedDate.getFullYear();
+
+    m = m+1; // Per qualche motivo conta un mese in meno...
+
+    // Stesso discorso del giorno, aggiungo uno zero
+    // davanti al mese se questo è < 10
+    if(m < 10) {
+      m = '0' + m;
+    }
+
+    // Riformatto la data nel formato dd/mm/YYYY
+    data = d + '/' + m + '/' + Y;
+
+    return data;
+  }
+
   /*
    * Ordinamento colonne
    */
@@ -68,23 +99,25 @@ $(document).ready(function() {
                     '<td>' + ord_num + '</td>' +
                     '<td>' + formatta_data(ord_date) + '</td>' +
                     '<td>' + ord_amount + '</td>' +
-                    '<td>' + advance_amount + '</td>' +
-                 if(gruppo == "agents" || gruppo == "managers")
-                    '<td id="' + cust_code + '"><a href="javascript:return false;" class="popover_cli" code="' + cust_code + '">' + cust_name + '</td>' +
+                    '<td>' + advance_amount + '</td>';
+                if(gruppo == "agents" || gruppo == "managers")
+                    tr_str = tr_str + '<td id="' + cust_code + '"><a href="javascript:return false;" class="popover_cli" code="' + cust_code + '">' + cust_name + '</td>';
                 
-                 if(gruppo == "customers" || gruppo == "managers")
-                    '<td id="' + agent_code + '"><a href="javascript:return false;" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>' +
+                if(gruppo == "customers" || gruppo == "managers")
+                    tr_str = tr_str + '<td id="' + agent_code + '"><a href="javascript:return false;" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
               
-                    '<td>' + ord_description + '</td>' +
+                tr_str = tr_str + '<td>' + ord_description + '</td>' +
                     '<td class="nowrap">'+
                     '<a href="/ordini/'+ ord_num + '" title="Dettaglio ordine"><i class="fas fa-search"></i></a>' +
+                    '&nbsp;&nbsp;&nbsp;';
+
+								if(gruppo == "agents" || gruppo == "managers") {
+                    tr_str = tr_str + '<a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine"><i class="fas fa-edit"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;' +
-                if(gruppo == "agents" || gruppo == "managers") {
-                    '<a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine"><i class="fas fa-edit"></i></a>' +
-                    '&nbsp;&nbsp;&nbsp;' +
-                    '<a class="delete_order" id="' + ord_num + '" title="Elimina ordine"><i class="fas fa-trash-alt"></i></a>' +
+                    '<a class="delete_order" id="' + ord_num + '" title="Elimina ordine"><i class="fas fa-trash-alt"></i></a>';
                 }
-                    '</td>' +
+
+                tr_str = tr_str + '</td>' +
                     '</tr> ';
 
                 $("#orderTable").append(tr_str);

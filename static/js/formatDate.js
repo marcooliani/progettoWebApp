@@ -1,4 +1,3 @@
-$(document).ready(function() {
 	/*
    * Formatta la data da YYYY-mm-dd
    * a dd/mm/YYYY
@@ -29,5 +28,4 @@ $(document).ready(function() {
 
     return data;
   }
-})
 

@@ -232,5 +232,9 @@ LOGGING = {
             'handlers': ['console', 'logfile'],
             'level': 'INFO',
         },
+        'customer_logger': {
+            'handlers': ['console', 'logfile'],
+            'level': 'INFO',
+        },
     }
 }

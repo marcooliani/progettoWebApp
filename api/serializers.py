@@ -15,12 +15,42 @@ class AgentsSerializer(serializers.ModelSerializer):
 
 """
 Serializer per i customer
+
+OCCHIO: se implemento i metodi POST, PUT e DELETE nelle
+API, questo serializer va bene solo per la GET, dato che
+c'è un campo extra (quello del nome dell'agente).
+A futura memoria, farlo esattamente come AgentsSerializer o
+OrdersSerializers
 """
 class CustomerSerializer(serializers.ModelSerializer):
+	agent_name = serializers.SerializerMethodField('get_agent_name')
 
 	class Meta:
 		model = Customer
-		fields = '__all__'
+		#fields = '__all__'
+		fields = [
+			'cust_code',
+			'cust_name',
+			'cust_city',
+			'working_area',
+			'cust_country',
+			'grade',
+			'opening_amt',
+			'receive_amt',
+			'payment_amt',
+			'outstanding_amt',
+			'phone_no',
+			'agent_code',
+			'agent_name',
+		]
+
+	def get_agent_name(self, obj):
+		aname = Agents.objects.filter(agent_code=obj.agent_code_id).values_list('agent_name', flat=True)[0]
+
+		# strip() fa il trim della stringa. Sono stato costretto a metterla perchè i dati originali
+		# sono proprio scritti male di loro, con una marea di spazi bianchi alla fine del nome
+		# (verificare con una query diretta dal prompt di Postgres, se non ci si crede!)
+		return aname.strip()
 
 """
 OrdersSerializer()

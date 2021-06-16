@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="heading bg-secondary text-white"><i class="fas fa-users"></i> Clienti gestiti da {{request.session.nome}}</div>
+<input type="hidden" name="gruppo" value="{{ gruppo }}" />
 
 	<div class="table-responsive">
 		<table class="table table-hover" id="customer_list_table" name="customer_list_table">
@@ -44,6 +45,11 @@
 		</table>
 	</div>
 
+	<!-- Nel caso implementassi la delete... -->
+  <form>
+    {% csrf_token %}
+  </form>
+
 	<div id="popover_agent" style="display:none;">
 		<strong>Name:</strong> p_name<br>
 		<strong>Code:</strong> p_code<br>
@@ -52,137 +58,9 @@
 		<strong>Phone:</strong> p_phone
 	</div>
 
-<script type="text/javascript">
-
-$(document).ready(function() {
-		function popoverContent() {
-			var content = '';
-			var element = $(this);
-			var id = element.attr("code");
-
-			// Fantastico, se faccio la chiamata senza l'opzione
-			// async mi ritorna la variabile content vuota appena
-			// fuori dalla success!
-			// Però l'opzione è deprecated, stando ai messaggi
-			// della console: siamo a posto... -__-
-			$.ajax({  
-				url: '/api/agents/' + id.trim() +'/',
-				method: 'GET',
-				async: false,
-				success:function(response) {
-
-				{% if request.session.gruppo == "managers" %}
-					content = $("#popover_agent").html();
-
-					content = content.replace(/p_code/g, response.agent_code);
-					content = content.replace(/p_name/g, response.agent_name);
-					content = content.replace(/p_warea/g, response.working_area);
-					content = content.replace(/p_commission/g, response.commission);
-					content = content.replace(/p_phone/g, response.phone_no);
-				{% endif %}
-				},
-				error: function(response) {	
-				}
-			});
-
-			return content;
-		}
-
-		$('.popover_age').popover({  
-				title: '<i class="fas fa-user-tie"></i> About',  
-				html: true,  
-				placement: 'right',
-				animation: true,
-				trigger: 'click, focus',
-				sanitize: true,
-				content: popoverContent
-			});
-
-	/*
-	 * Ordinamento colonne
-	 */
-	$(".ordina").click(function(e) {
-		e.preventDefault();
-
-		/*
-		 * Setto il tipo di ordinamento per la colonna
-		 * selezionata. A differenza delle normali query
-		 * SQL, Django non usa ASC o DESC per gli ordinamenti
-		 * crescenti/decrescenti, ma una semplicemente 
-		 * nomecampo per l'ordinamento crescente e
-		 * -nomecampo per quelli decrescenti. L'unico modo
-		 * per tenere traccia di quale ordinamento si sta
-		 * visualizzando ora per una data colonna è sostituire
-		 * il campo "sort" appositamente messo nel tag <span>
-		 * di ogni colonna
-		 */
-		sort = $(this).attr('sort');
-
-		// Controllo se il primo carattere della stringa è "-":
-		// se non lo è, aggiungo il "-" alla stringa, per
-		// poter poi eventualmente fare l'ordinamento 
-		// decrescente per la colonna considerata,
-		// altrimento lo tolgo per fare poi l'ordinamento
-		// crescente
-		if(sort.charAt(0) != "-") {
-			$(this).attr('sort', '-' + sort);
-		}
-		else {
-			$(this).attr('sort', sort.substring(1));
-		}
-
-		// Richiesta AJAX GET per recuperare i dati
-		// di tutti gli ordini
-		$.ajax({
-        url: '/api/customers/?sort_by=' + sort,
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-					// Svuoto il il tbody prima di fare l'append
-					// delle righe ordinate!
-					$('#customerTable').empty();
-
-					// Recupero i dati dall'oggetto response 
-					// restituito dalla chiamata all'API
-					// e appendo le righe ordinate
-          var len = response.length;
-
-					for(var i=0; i<len; i++){
-                var cust_code = response[i].cust_code;
-                var cust_name = response[i].cust_name;
-                var cust_city = response[i].cust_city;
-                var cust_country = response[i].cust_country;
-                var grade = response[i].grade;
-                var agent_code = response[i].agent_code;
-                var agent_name = response[i].agent_name;
-
-                var tr_str = '<tr id="row_'+ cust_code + '">' +
-                    '<td>' + cust_code + '</td>' +
-                    '<td>' + cust_name + '</td>' +
-                    '<td>' + cust_city + '</td>' +
-                    '<td>' + cust_country + '</td>' +
-                    '<td>' + grade + '</td>' +
-                {% if request.session.gruppo == "managers"  %}
-                    '<td id="' + agent_code + '"><a href="javascript:return false;" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>' +
-                {% endif %}
-                    '<td class="nowrap"><a href="#" title="Modifica cliente"><i class="fas fa-edit"></i></a>' +
-										'&nbsp;&nbsp;&nbsp;' + 
-                {% if request.session.gruppo == "managers"  %}
-										'<a class="delete_order" id="' + cust_code + '" title="Elimina cliente"><i class="fas fa-trash-alt"></i></a></td>' +
-                {% endif %}
-                    '</tr>';
-
-                $("#customerTable").append(tr_str);
-          }
-				},
-				error(response) {
-					console.log(response.responseText);
-				}
-			});
-	});
-});
-
-
-	</script>
+	{% load static %}
+	<script src="{% static 'js/popoverAgent.js' %}"></script>
+	<script src="{% static 'js/ajax_popoverAgent.js' %}"></script>
+	<script src="{% static 'js/sortCustomers.js' %}"></script>
 
 {% endblock %}
