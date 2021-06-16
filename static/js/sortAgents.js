@@ -49,26 +49,29 @@ $(document).ready(function() {
           var len = response.length;
 
           for(var i=0; i<len; i++){
-                var agent_code = response[i].agent_code;
-                var agent_name = response[i].agent_name;
-                var working_area = response[i].working_area;
-                var country = response[i].country;
-                var commission = response[i].commission;
-                var phone_no = response[i].phone_no;
+            var agent_code = response[i].agent_code;
+            var agent_name = response[i].agent_name;
+            var working_area = response[i].working_area;
+            var country = response[i].country;
+            var commission = response[i].commission;
+            var phone_no = response[i].phone_no;
 
-                var tr_str = '<tr id="row_'+ agent_code + '">' +
-                    '<td>' + agent_code + '</td>' +
-                    '<td>' + agent_name + '</td>' +
-                    '<td>' + working_area + '</td>' +
-                    '<td>' + country + '</td>' +
-                    '<td>' + commission + '</td>' +
-                    '<td>' + phone_no + '</td>' +
-                    '<td class="nowrap"><a href="#" title="Modifica agente"><i class="fas fa-edit"></i></a>' +
-                    '&nbsp;&nbsp;&nbsp;' +
-                    '<a class="delete_agent" id="' + agent_code + '" title="Elimina agente"><i class="fas fa-trash-alt"></i></a></td>' +
-                    '</tr>';
+            var tr_str = '<tr id="row_'+ agent_code + '">' +
+                '<td>' + agent_code + '</td>' +
+                '<td>' + agent_name + '</td>' +
+                '<td>' + working_area + '</td>' +
+                '<td>' + country + '</td>' +
+                '<td>' + commission + '</td>' +
+                '<td>' + phone_no + '</td>' +
+                '<td class="nowrap">' +
+                '<a href="/agenti/' + agent_code + '/" title="Dettagli agente"><i class="fas fa-search"></i></a>' +
+                '&nbsp;&nbsp;&nbsp;' +
+                '<a href="#" title="Modifica agente"><i class="fas fa-edit"></i></a>' +
+                '&nbsp;&nbsp;&nbsp;' +
+                '<a class="delete_agent" id="' + agent_code + '" title="Elimina agente"><i class="fas fa-trash-alt"></i></a></td>' +
+                '</tr>';
 
-                $("#agentsTable").append(tr_str);
+            $("#agentsTable").append(tr_str);
           }
         },
         error(response) {

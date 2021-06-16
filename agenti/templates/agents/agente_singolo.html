@@ -1,0 +1,56 @@
+{% extends "page_skeleton.html" %}
+
+{% block content %}
+
+<div class="heading bg-secondary text-white"><i class="fas fa-table"></i> Agente {{ agente.agent_code }}</div>
+
+<div class="card">
+  <div class="card-header">
+    <i class="fas fa-user-tie"></i> Details
+  </div>
+  <div class="card-body">
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      <div class="mb-3">
+        <label for="agent_code" class="form-label dettaglio">Agent</label>
+        <div id="agent_code" name="agent_name">{{ agente.agent_name }} ({{ agente.agent_code }})</div>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="working_area" class="form-label dettaglio">Working Area</label>
+        <div id="working_area" name="working_area">{{ agente.working_area }}</div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="country" class="form-label dettaglio">Country</label>
+        <div id="country" name="country">{{ agente.country }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="phone_no" class="form-label dettaglio">Phone</label>
+        <div id="phone_no" name="phone_no">{{ agente.phone_no }}</div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+      <div class="mb-3">
+        <label for="commission" class="form-label dettaglio">Commission</label>
+        <div id="commission" name="commission">{{ agente.commission }}</div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+{% endblock %}

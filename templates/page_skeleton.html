@@ -43,7 +43,7 @@
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
             {% if request.session.gruppo == "agents" %}
-                <a class="nav-link" href="/agente/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
+                <a class="nav-link" href="/agenti/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
             {% elif request.session.gruppo == "customers" %}
                 <a class="nav-link" href="/clienti/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
             {% elif request.session.gruppo == "managers" %}

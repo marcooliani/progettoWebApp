@@ -26,6 +26,8 @@
           <td>{{ i.commission }}</td>
           <td>{{ i.phone_no }}</td>
           <td class="nowrap">
+            <a href="/agenti/{{ i.agent_code }}/" title="Dettagli agente"><i class='fas fa-search'></i></a>
+              &nbsp;&nbsp;&nbsp;
             <a href="#" title="Modifica agente"><i class='fas fa-edit'></i></a>
               &nbsp;&nbsp;&nbsp;
             <a class="delete_agent" id="{{ i.agent_code }}" title="Elimina agente"><i class='fas fa-trash-alt'></i></a>
