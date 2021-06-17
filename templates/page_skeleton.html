@@ -43,11 +43,11 @@
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
             {% if request.session.gruppo == "agents" %}
-                <a class="nav-link" href="/agenti/{{ request.session.utente }}/">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
+                <a class="nav-link" href="/agenti/{{ request.session.utente }}/" title="Visualizza profilo">{{ request.session.nome }} <i class="fas fa-user-tie"></i></a>
             {% elif request.session.gruppo == "customers" %}
-                <a class="nav-link" href="/clienti/{{ request.session.utente }}/">{{ request.session.utente }} <i class="fas fa-user"></i></a>
+                <a class="nav-link" href="/clienti/{{ request.session.utente }}/" title="Visualizza profilo">{{ request.session.utente }} <i class="fas fa-user"></i></a>
             {% elif request.session.gruppo == "managers" %}
-                <a class="nav-link" href="#">{{ request.session.utente }} <i class="fas fa-user-graduate"></i></a>
+                <a class="nav-link">{{ request.session.utente }} <i class="fas fa-user-graduate"></i></a>
             {% endif %}
 
               </li>
@@ -76,7 +76,7 @@
             
           {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
             <li class="nav-item">
-              <a href="/ordini/nuovo/" class="nav-link px-sm-0 px-2" title="Inserisci nuovo ordini">
+              <a href="/ordini/nuovo/" class="nav-link px-sm-0 px-2" title="Inserisci nuovo ordine">
                 <i class="fas fa-plus"></i><span class="ms-1 d-none d-sm-inline">Nuovo Ordine</span>
               </a>
             </li>

@@ -13,41 +13,41 @@
  * padding, e il resto mancia)
  */
 .vh-100 {
-	height: calc(100vh - 2.5rem) !important; 
+  height: calc(100vh - 2.5rem) !important; 
 }
 
 .content {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .heading {
-	font-size: 1.2rem;
-	display: block;
-	margin-bottom: 0.7rem;
-	padding: 0.3rem 0.3rem 0.3rem 0.6rem;
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 0.7rem;
+  padding: 0.3rem 0.3rem 0.3rem 0.6rem;
 }
 
 .dettaglio {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .delete_order,
 .delete_customer,
 .delete_agent,
 .ordina {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 a.delete_order:hover,
 a.delete_customer:hover,
 a.delete_agent:hover {
-	color: #ff0000;
+  color: #ff0000;
 }
 
 th,
 .nowrap {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 /*
@@ -59,11 +59,14 @@ th,
 .nav-link:visited,
 a,
 a:visited {
-	color:#333333;
+  color: #333333;
 }
 
 .nav-link:hover,
 a:hover {
-	color:#999999;
+  color: #999999;
 }
 
+.hidden {
+  display:none;
+}
