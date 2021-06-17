@@ -13,17 +13,17 @@ Inserisce un nuovo ordine all'interno del database.
 **Nota**: l'id dell'ordine nonché chiave primaria, *ord_num*, penso sia da intendere come autoincrementale: in questo caso l'API (o meglio, il relativo serializer) *non* si preoccupa di generare il suddetto id, ma deve essere esplicitamente passato assieme agli altri dati!
 
 ##### *Permissions* 
--- `IsLogged`: l'utente deve aver effettuato il login per accedere alla risorsa
--- `CanInsertModifyDeleteOrders`: l'utente deve far parte dei gruppi predefiniti *agents* oppure *managers* per poter effettuare l'operazione di inserimento.
+- `IsLogged`: l'utente deve aver effettuato il login per accedere alla risorsa
+- `CanInsertModifyDeleteOrders`: l'utente deve far parte dei gruppi predefiniti *agents* oppure *managers* per poter effettuare l'operazione di inserimento.
 
 ####  - Reading (orders list)
 `GET /api/orders/[?sort_by={[-]column}]`
 
 Ritorna la lista degli ordini. L'output differisce in base all'utente loggato sul sistema:
 
--- se l'utente è di tipo **customer**, viene ritornato l'elenco di tutti gli ordini da lui effettuati, con l'indicazione dell'agent che ha gestito l'ordine;
--- se l'utente è di tipo **agent**, viene ritornato l'elenco di tutti gli ordini dei customer da lui gestiti, con l'indicazione dei clienti relativa a ogni ordine;
--- se l'utente è di tipo **manager**, viene ritornato l'intero elenco degli ordini presenti, con indicazione di agent e customer per ogni ordine.
+- se l'utente è di tipo **customer**, viene ritornato l'elenco di tutti gli ordini da lui effettuati, con l'indicazione dell'agent che ha gestito l'ordine;
+- se l'utente è di tipo **agent**, viene ritornato l'elenco di tutti gli ordini dei customer da lui gestiti, con l'indicazione dei clienti relativa a ogni ordine;
+- se l'utente è di tipo **manager**, viene ritornato l'intero elenco degli ordini presenti, con indicazione di agent e customer per ogni ordine.
 
 ##### *Query String Parameters*
 `{[-]columm}`: indica la colonna per la quale si desidera l'ordinamento  dei dati. In accordo con la sintassi di Django, il segno `-` davanti al nome della colonna indica un **ordinamento discendente**, mentre il semplice nome indica un **ordinamento ascendente**.
@@ -64,8 +64,8 @@ Ritorna il singolo ordine, indicato per numero d'ordine.
 - `ord_description`
 
 ##### *Permissions*
--- `IsLogged`: l'utente deve aver effettuato il login per accedere alla risorsa
--- `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customer*. *agents*, *managers*) per poter effettuare l'operazione di visualizzazione. 
+- `IsLogged`: l'utente deve aver effettuato il login per accedere alla risorsa
+- `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customer*. *agents*, *managers*) per poter effettuare l'operazione di visualizzazione. 
 
 ####  - Updating
 - `PUT /api/orders/update/{ord_num}/`
@@ -95,8 +95,8 @@ Questa operazione non è disponibile.
 
 Ritorna la lista degli ordini. L'output differisce in base all'utente loggato sul sistema:
 
--- se l'utente è di tipo **customer**, non può visualizzare l'elenco dei clienti
--- se l'utente è di tipo **agent**, viene ritornato l'elenco di tutti i customer da lui gestiti
+- se l'utente è di tipo **customer**, non può visualizzare l'elenco dei clienti
+- se l'utente è di tipo **agent**, viene ritornato l'elenco di tutti i customer da lui gestiti
 -- se l'utente è di tipo **manager**, viene ritornato l'intero elenco dei customer, con indicazione dell'agent associato
 
 ##### *Query String Parameters*
@@ -179,7 +179,7 @@ Per ogni agent, l'API ritorna i seguenti campi:
 ##### *Permissions* 
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `IsManager`: l'utente deve far parte del gruppo predefinito *managers* per poter effettuare l'operazione di visualizzazione.
-- 
+ 
 #### - Reading (single agent)
 `GET /api/agents/{agent_code}/`
 
@@ -198,7 +198,7 @@ Per ogni agent, l'API ritorna i seguenti campi:
 ##### *Permissions* 
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customer*. *agents*, *managers*) per poter effettuare l'operazione di visualizzazione. 
-- 
+ 
 #### - Updating
 Questa operazione non è disponibile.
 
