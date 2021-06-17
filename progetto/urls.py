@@ -14,19 +14,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
+"""
+"Riabilita" la direttiva {% load static %} quando DEBUG=False
+in settings.py. A quanto pare la gestione automatica degli
+statics non è una pratica corretta in produzione, ma si può
+fare un'eccezione ad esempio se l'app ha poco traffico o cose
+del genere (cercare meglio in Rete!). La configurazione qui
+sotto può essere usata anche su webserver di produzione (non 
+solo quello di test integrato), però con tutte le cautele 
+del caso...
+"""
+from django.contrib.staticfiles.views import serve as serve_static
+
+def _static_butler(request, path, **kwargs):
+  return serve_static(request, path, insecure=True, **kwargs)
+
 urlpatterns = [
-    path('admin/', admin.site.urls), # Admin
-    path('api/', include('api.urls')), # API
-    path('auth/', include('django.contrib.auth.urls')), # Login
-    path('ordini/', include('ordini.urls')), # Ordini
-    path('clienti/', include('clienti.urls')), # Clienti
-    path('agenti/', include('agenti.urls')), # Clienti
-    path('checklogin/', include('checklogin.urls')), # Controllo post login
-    path('error/', include('error.urls')), # Gestione errori
-    path('', RedirectView.as_view(url='/checklogin/')), # Home
+  path('admin/', admin.site.urls), # Admin
+  path('api/', include('api.urls')), # API
+  path('auth/', include('django.contrib.auth.urls')), # Login
+  path('ordini/', include('ordini.urls')), # Ordini
+  path('clienti/', include('clienti.urls')), # Clienti
+  path('agenti/', include('agenti.urls')), # Clienti
+  path('checklogin/', include('checklogin.urls')), # Controllo post login
+  path('error/', include('error.urls')), # Gestione errori
+  path('', RedirectView.as_view(url='/checklogin/')), # Home
+  re_path(r'static/(.+)', _static_butler) # Gestione file statici con DEBUG=False
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

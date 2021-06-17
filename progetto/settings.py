@@ -25,8 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@9kho^d$mjxxjr!+!7a4*8y&z$3l-d69gh=ryn8!fj4u(as)gi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = False
+# NOTA: in condizioni normali, se DEBUG viene messo a False
+# non verranno più gestita automaticamente la directory STATIC
+# e non verranno più richiamati i file statici al suo interno.
+# Per ovviare al problema, si veda la soluzione in urls.py
+# generale
+#DEBUG = True
+DEBUG = False
 
 #ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.107']
