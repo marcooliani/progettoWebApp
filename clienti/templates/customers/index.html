@@ -16,7 +16,7 @@
       {% if request.session.gruppo == "managers"  %}
         <th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
       {% endif %}
-        <th scope="col">&nbsp;</th>
+        <th scope="col">Options</th>
       </thead>
       <tbody id="customerTable">
     {% for i in customer_list %} 
@@ -27,7 +27,7 @@
           <td>{{ i.cust_country }}</td>
           <td>{{ i.grade }}</td>
       {% if request.session.gruppo == "managers"  %}
-          <td><a href="javascript:return false;" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
+          <td><a href="javascript:void(0);" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
           </td>
       {% endif %}
           <td class="nowrap">

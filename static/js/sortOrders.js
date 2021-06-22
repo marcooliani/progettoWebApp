@@ -101,10 +101,10 @@ $(document).ready(function() {
                     '<td>' + ord_amount + '</td>' +
                     '<td>' + advance_amount + '</td>';
                 if(gruppo == "agents" || gruppo == "managers")
-                    tr_str = tr_str + '<td id="' + cust_code + '"><a href="javascript:return false;" class="popover_cli" code="' + cust_code + '">' + cust_name + '</td>';
+                    tr_str = tr_str + '<td id="' + cust_code + '"><a href="javascript:void(0);" class="popover_cli" code="' + cust_code + '">' + cust_name + '</td>';
                 
                 if(gruppo == "customers" || gruppo == "managers")
-                    tr_str = tr_str + '<td id="' + agent_code + '"><a href="javascript:return false;" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
+                    tr_str = tr_str + '<td id="' + agent_code + '"><a href="javascript:void(0);" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
               
                 tr_str = tr_str + '<td>' + ord_description + '</td>' +
                     '<td class="nowrap">'+

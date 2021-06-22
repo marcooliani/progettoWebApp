@@ -45,7 +45,7 @@ $(document).ready(function() {
               '<td>' + cust_country + '</td>' +
               '<td>' + grade + '</td>';
           if(gruppo == "managers")
-            tr_str = tr_str + '<td id="' + agent_code + '"><a href="javascript:return false;" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
+            tr_str = tr_str + '<td id="' + agent_code + '"><a href="javascript:void(0);" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
 
           tr_str = tr_str + '<td class="nowrap"><a href="/clienti/' + cust_code + '/" title="Dettaglio cliente"><i class="fas fa-search"></i></a>' +
               '&nbsp;&nbsp;&nbsp;';

@@ -19,7 +19,7 @@
         <th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
       {% endif %}
         <th scope="col">Description</th>
-        <th scope="col"><span class="hidden">Actions</span></th>
+        <th scope="col">Options</th>
       </thead>
       <tbody id="orderTable">
     {% for i in order_list %} 
@@ -29,11 +29,11 @@
           <td>{{ i.ord_amount }}</td>
           <td>{{ i.advance_amount }}</td>
       {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-          <td><a href="javascript:return false;" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
+          <td><a href="javascript:void(0);" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
           </td>
       {% endif %}
       {% if request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-          <td><a href="javascript:return false;" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
+          <td><a href="javascript:void(0);" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
           </td>
       {% endif %}
           <td>{{ i.ord_description }}</td>
