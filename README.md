@@ -5,7 +5,7 @@
 
 ### Orders
 
-#### - Creating
+#### \# Creating
 `POST /api/orders/new/`
 
 Inserisce un nuovo ordine all'interno del database.
@@ -13,10 +13,10 @@ Inserisce un nuovo ordine all'interno del database.
 **Nota**: l'id dell'ordine nonché chiave primaria, *ord_num*, penso sia da intendere come autoincrementale: in questo caso l'API (o meglio, il relativo serializer) *non* si preoccupa di generare il suddetto id, ma deve essere esplicitamente passato assieme agli altri dati!
 
 ##### *Permissions* 
-- `IsLogged`: l'utente deve aver effettuato il login per accedere alla risorsa
+- `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `CanInsertModifyDeleteOrders`: l'utente deve far parte dei gruppi predefiniti *agents* oppure *managers* per poter effettuare l'operazione di inserimento.
 
-####  - Reading (orders list)
+####  \# Reading (orders list)
 `GET /api/orders/[?sort_by={[-]column}]`
 
 Ritorna la lista degli ordini. L'output differisce in base all'utente loggato sul sistema:
@@ -45,7 +45,7 @@ Per ogni ordine, l'API ritorna i seguenti campi:
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customers*, *agents*, *managers*) per poter effettuare l'operazione di visualizzazione.
 
-#### - Reading (single order)
+#### \# Reading (single order)
  `GET /api/orders/{ord_num}/`
 
 Ritorna il singolo ordine, indicato per numero d'ordine. 
@@ -64,10 +64,10 @@ Ritorna il singolo ordine, indicato per numero d'ordine.
 - `ord_description`
 
 ##### *Permissions*
-- `IsLogged`: l'utente deve aver effettuato il login per accedere alla risorsa
+- `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customer*. *agents*, *managers*) per poter effettuare l'operazione di visualizzazione. 
 
-####  - Updating
+####  \# Updating
 - `PUT /api/orders/update/{ord_num}/`
 Aggiorna un ordine, specificato da `{ord_num}`.
 
@@ -75,7 +75,7 @@ Aggiorna un ordine, specificato da `{ord_num}`.
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `CanInsertModifyDeleteOrders`: l'utente deve far parte dei gruppi predefiniti *agents* oppure *managers* per poter effettuare l'operazione di aggiornamento.
 
-#### - Deleting
+#### \# Deleting
 `DELETE /api/orders/delete/{ord_num}/`
 
 Elimina un ordine, specificato da `{ord_num}`.
@@ -84,12 +84,14 @@ Elimina un ordine, specificato da `{ord_num}`.
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `CanInsertModifyDeleteOrders`: l'utente deve far parte dei gruppi predefiniti *agents* oppure *managers* per poter effettuare l'operazione di aggiornamento.
 
+
+
 ### Customers
 
-#### - Creating
-Questa operazione non è disponibile.
+#### \# Creating
+_Questa operazione non è disponibile._
 
-#### - Reading (customers list)
+#### \#Reading (customers list)
 
 `GET /api/customers/[?sort_by={[-]column}]`
 
@@ -123,7 +125,7 @@ Per ogni customer, l'API ritorna i seguenti campi:
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `IsAgentOrManager`: l'utente deve far parte del gruppo predefinito *agents* oppure *managers* per poter effettuare l'operazione di visualizzazione.
 
-#### - Reading (single customer)
+#### \# Reading (single customer)
 `GET /api/customers/{cust_code}/`
 
 Ritorna il singolo customer, indicato per codice.
@@ -147,18 +149,20 @@ Ritorna il singolo customer, indicato per codice.
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `IsAgentOrManager`: l'utente deve far parte del gruppo predefinito *agents* oppure *managers* per poter effettuare l'operazione di visualizzazione.
 
-#### - Updating
-Questa operazione non è disponibile.
+#### \# Updating
+_Questa operazione non è disponibile._
 
-#### - Deleting
-Questa operazione non è disponibile.
+#### \# Deleting
+_Questa operazione non è disponibile._
+
+
 
 ### Agents
 
-#### - Creating
-Questa operazione non è disponibile.
+#### \# Creating
+_Questa operazione non è disponibile._
 
-#### - Reading (agents list)
+#### \# Reading (agents list)
 `GET /api/agents/[?sort_by={[-]column}]`
 
 Ritorna la lista degli agenti. Solo gli utenti di tipo **managers** possono visualizzare la lista completa degli agenti
@@ -179,8 +183,8 @@ Per ogni agent, l'API ritorna i seguenti campi:
 ##### *Permissions* 
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `IsManager`: l'utente deve far parte del gruppo predefinito *managers* per poter effettuare l'operazione di visualizzazione.
- 
-#### - Reading (single agent)
+
+#### \# Reading (single agent)
 `GET /api/agents/{agent_code}/`
 
 Ritorna il singolo customer, indicato per codice.
@@ -198,12 +202,12 @@ Per ogni agent, l'API ritorna i seguenti campi:
 ##### *Permissions* 
 - `IsAuthenticated`: l'utente deve aver effettuato il login per accedere alla risorsa
 - `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customer*. *agents*, *managers*) per poter effettuare l'operazione di visualizzazione. 
- 
-#### - Updating
-Questa operazione non è disponibile.
 
-#### - Deleting
-Questa operazione non è disponibile.
+#### \# Updating
+_Questa operazione non è disponibile._
+
+#### \# Deleting
+_Questa operazione non è disponibile._
 
 
 
