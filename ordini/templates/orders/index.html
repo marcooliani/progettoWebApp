@@ -38,12 +38,12 @@
       {% endif %}
           <td>{{ i.ord_description }}</td>
           <td class="nowrap">
-            <a href="/ordini/{{ i.ord_num  }}/" title="Dettaglio ordine"><i class='fas fa-search'></i></a>
+            <a href="/ordini/{{ i.ord_num  }}/" title="Dettaglio ordine {{ i.ord_num  }}"><i class='fas fa-search'></i></a>
               &nbsp;&nbsp;&nbsp;
       {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-            <a href="/ordini/modifica/{{ i.ord_num  }}/" title="Modifica ordine"><i class='fas fa-edit'></i></a>
+            <a href="/ordini/modifica/{{ i.ord_num  }}/" title="Modifica ordine {{ i.ord_num  }}"><i class='fas fa-edit'></i></a>
               &nbsp;&nbsp;&nbsp;
-            <a class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine"><i class='fas fa-trash-alt'></i></a>
+            <a class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine {{ i.ord_num  }}"><i class='fas fa-trash-alt'></i></a>
           </td>
       {% endif %}
         </tr>

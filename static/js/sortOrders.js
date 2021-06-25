@@ -108,13 +108,13 @@ $(document).ready(function() {
               
                 tr_str = tr_str + '<td>' + ord_description + '</td>' +
                     '<td class="nowrap">'+
-                    '<a href="/ordini/'+ ord_num + '" title="Dettaglio ordine"><i class="fas fa-search"></i></a>' +
+                    '<a href="/ordini/'+ ord_num + '" title="Dettaglio ordine '+ ord_num + '"><i class="fas fa-search"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;';
 
                 if(gruppo == "agents" || gruppo == "managers") {
-                    tr_str = tr_str + '<a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine"><i class="fas fa-edit"></i></a>' +
+                    tr_str = tr_str + '<a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine '+ ord_num + '"><i class="fas fa-edit"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;' +
-                    '<a class="delete_order" id="' + ord_num + '" title="Elimina ordine"><i class="fas fa-trash-alt"></i></a>';
+                    '<a class="delete_order" id="' + ord_num + '" title="Elimina ordine '+ ord_num + '"><i class="fas fa-trash-alt"></i></a>';
                 }
 
                 tr_str = tr_str + '</td>' +
