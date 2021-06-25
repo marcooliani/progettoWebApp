@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
-        <label for="cust_code" class="form-label dettaglio">Customer</label>
+        <label class="form-label dettaglio">Customer</label>
         <div id="cust_code" name="cust_name">{{ ordine.cust_code.cust_name }} ({{ ordine.cust_code }})</div>
       </div>
     </div>
@@ -23,7 +23,7 @@
   {% if request.session.gruppo == "managers" %}
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
-        <label for="agent_code" class="form-label dettaglio">Agent</label>
+        <label class="form-label dettaglio">Agent</label>
         <div id="agent_code" name="agent_code">{{ ordine.agent_code.agent_name }} ({{ ordine.agent_code }})</div>
       </div>
     </div>
@@ -33,14 +33,14 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="ord_amount" class="form-label dettaglio">Order Amount</label>
+        <label class="form-label dettaglio">Order Amount</label>
         <div id="ord_amount" name="ord_amount">{{ ordine.ord_amount }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="advance_amount" class="form-label dettaglio">Advance Amount</label>
+        <label class="form-label dettaglio">Advance Amount</label>
         <div id="advance_amount" name="advance_amount">{{ ordine.advance_amount }}</div>
       </div>
     </div>
@@ -49,14 +49,14 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="ord_date" class="form-label dettaglio">Order Date</label>
+        <label class="form-label dettaglio">Order Date</label>
         <div id="ord_date" name="ord_date">{{ ordine.ord_date|date:'d/m/Y' }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="ord_description" class="form-label dettaglio">Order Description</label>
+        <label class="form-label dettaglio">Order Description</label>
         <div id="ord_description" name="ord_description">{{ ordine.ord_description }}</div>
       </div>
     </div>

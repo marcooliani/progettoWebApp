@@ -14,7 +14,7 @@
 {% endif %}
 </div>
 
-<form name="new_order" id="new_order" class="needs-validation">
+<form name="new_order" id="new_order" class="needs-validation" aria-label="Aggiungi nuovo ordine">
 
   {% csrf_token %} <!-- !!! -->
 
@@ -26,7 +26,7 @@
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
         <label for="cust_code" class="form-label">Agent</label>
-        <select class="form-select" aria-label="Seleziona agente" name="agent_code" id="agent_code" required>
+        <select class="form-select" aria-label="Seleziona agente" aria-required="true" name="agent_code" id="agent_code" required>
           <option value=""> Select Agent </option>
           <option value="" disabled> --- </option>
         {% for j in agent_list %}
@@ -42,7 +42,7 @@
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
         <label for="cust_code" class="form-label">Customer</label>
-        <select class="form-select" aria-label="Seleziona cliente" name="cust_code" id="cust_code" required>
+        <select class="form-select" aria-label="Seleziona cliente" aria-required="true" name="cust_code" id="cust_code" required>
       {% if request.session.gruppo == "managers" %}
           <option value=""> --- </option>
       {% else %}
@@ -67,7 +67,7 @@
         <label for="ord_amount" class="form-label">Order Amount</label>
         <div class="input-group">
           <div class="input-group-text">$</div>
-          <input type="text" class="form-control" id="ord_amount" name="ord_amount" placeholder="4000.11" aria-label="Order amount" required>
+          <input type="text" class="form-control" id="ord_amount" name="ord_amount" placeholder="4000.11" aria-label="Order amount" aria-required="true" required>
         </div>
         <div id="ord_amount_help" class="form-text">Use "." for decimals separator</div>
       </div>
@@ -78,7 +78,7 @@
         <label for="advance_amount" class="form-label">Advance Amount</label>
         <div class="input-group">
           <div class="input-group-text">$</div>
-          <input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" aria-label="Advance amount" required>
+          <input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" aria-label="Advance amount" aria-required="true" required>
         </div>
         <div id="advance_amount_help" class="form-text">Use "." for decimals separator</div>
       </div>
@@ -91,7 +91,7 @@
         <label for="ord_date" class="form-label">Order Date</label>
         <div class="input-group">
           <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-          <input type="date" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" aria-label="Order date" required>
+          <input type="date" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" aria-label="Order date" aria-required="true" required>
         </div>
         <div id="ord_date_help" class="form-text">Date format depends on your browser locales!</div>
       </div>
@@ -100,7 +100,8 @@
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
         <label for="ord_description" class="form-label">Order Description</label>
-        <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Insert order description" aria-label="Order description">
+        <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Insert order description" 
+            aria-label="Order description" aria-required="true" required>
         <div id="ord_desc_help" class="form-text">Max 60 chars</div>
       </div>
     </div>

@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
-        <label for="cust_code" class="form-label dettaglio">Customer</label>
+        <label class="form-label dettaglio">Customer</label>
         <div id="cust_code" name="cust_name">{{ cliente.cust_name }} ({{ cliente.cust_code }})</div>
       </div>
     </div>
@@ -23,7 +23,7 @@
   {% if request.session.gruppo == "managers" %}
     <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       <div class="mb-3">
-        <label for="agent_code" class="form-label dettaglio">Agent</label>
+        <label class="form-label dettaglio">Agent</label>
         <div id="agent_code" name="agent_code">{{ cliente.agent_code.agent_name }} ({{ cliente.agent_code }})</div>
       </div>
     </div>
@@ -34,14 +34,14 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="cust_city" class="form-label dettaglio">City</label>
+        <label class="form-label dettaglio">City</label>
         <div id="cust_city" name="cust_city">{{ cliente.cust_city }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="cust_country" class="form-label dettaglio">Country</label>
+        <label class="form-label dettaglio">Country</label>
         <div id="cust_country" name="cust_country">{{ cliente.cust_country }}</div>
       </div>
     </div>
@@ -50,14 +50,14 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="working_area" class="form-label dettaglio">Working Area</label>
+        <label class="form-label dettaglio">Working Area</label>
         <div id="working_area" name="working_area">{{ cliente.working_area }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="grade" class="form-label dettaglio">Grade</label>
+        <label class="form-label dettaglio">Grade</label>
         <div id="grade" name="grade">{{ cliente.grade }}</div>
       </div>
     </div>
@@ -77,14 +77,14 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="opening_amt" class="form-label dettaglio">Opening Amount</label>
+        <label class="form-label dettaglio">Opening Amount</label>
         <div id="opening_amt" name="working_area">{{ cliente.opening_amt }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="receive_amt" class="form-label dettaglio">Receive Amount</label>
+        <label class="form-label dettaglio">Receive Amount</label>
         <div id="receive_amt" name="grade">{{ cliente.receive_amt }}</div>
       </div>
     </div>
@@ -93,14 +93,14 @@
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="payment_amt" class="form-label dettaglio">Payment Amount</label>
+        <label class="form-label dettaglio">Payment Amount</label>
         <div id="payment_amt" name="working_area">{{ cliente.payment_amt }}</div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
-        <label for="outstanding_amt" class="form-label dettaglio">Outstanding Amount</label>
+        <label class="form-label dettaglio">Outstanding Amount</label>
         <div id="outstanding_amt" name="outstanding_amt">{{ cliente.outstanding_amt }}</div>
       </div>
     </div>
