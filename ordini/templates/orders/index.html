@@ -1,5 +1,7 @@
 {% extends "page_skeleton.html" %}
 
+{%block title%} <title>Progetto WebApp - Lista Ordini</title> {% endblock%}
+
 {% block content %}
 <div class="heading bg-secondary text-white"><i class="fas fa-list"></i> Tabella ordini per {{request.session.nome}}</div>
 <input type="hidden" name="gruppo" value="{{ gruppo }}" />
