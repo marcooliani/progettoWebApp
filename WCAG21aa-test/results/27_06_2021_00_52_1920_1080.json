@@ -1,0 +1,66 @@
+{
+    "id": "66db6a99-42c0-4f21-ac3b-d4d1e18f4ecb",
+    "name": "",
+    "toolOptions": {
+        "runOnly": {
+            "type": "tag",
+            "values": [
+                "wcag2a",
+                "wcag2aa",
+                "wcag21a",
+                "wcag21aa",
+                "best-practice",
+                "ACT"
+            ]
+        },
+        "resultTypes": [
+            "violations",
+            "incomplete"
+        ],
+        "reporter": "v1"
+    },
+    "testEngine": {
+        "name": "axe-core",
+        "version": "4.2.2"
+    },
+    "testRunner": {
+        "name": "axe"
+    },
+    "testEnvironment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/90.0.4427.0 Safari/537.36",
+        "windowWidth": 1920,
+        "windowHeight": 1080,
+        "orientationAngle": 0,
+        "orientationType": "portrait-primary"
+    },
+    "timestamp": "2021-06-26T22:52:14.522Z",
+    "analyzedUrls": [
+        "http://3.143.240.119:8000/ordini/",
+        "http://3.143.240.119:8000/ordini/200123/",
+        "http://3.143.240.119:8000/clienti/C00022/"
+    ],
+    "countViolations": 1,
+    "countPasses": 27,
+    "countIncomplete": 0,
+    "countInapplicable": 62,
+    "tabableImages": [
+        {
+            "url": "http://3.143.240.119:8000/ordini/",
+            "images": [
+                "59e4ba8a-db7e-4f75-949b-8207d9cc1b20_0.png"
+            ]
+        },
+        {
+            "url": "http://3.143.240.119:8000/ordini/200123/",
+            "images": [
+                "e8b7d7a4-4bca-4657-8555-d425fbbbd07d_0.png"
+            ]
+        },
+        {
+            "url": "http://3.143.240.119:8000/clienti/C00022/",
+            "images": [
+                "945bc3c2-1f6e-4155-b5a9-a8c0709b83b1_0.png"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1092 @@
+[
+    {
+        "help": "ARIA role should be appropriate for the element",
+        "description": "Ensures role attribute has an appropriate value for the element",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/aria-allowed-role?application=axe-puppeteer",
+        "id": "aria-allowed-role",
+        "impact": null,
+        "tags": [
+            "cat.aria",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<svg class=\"svg-inline--fa fa-rebel fa-w-16\" aria-hidden=\"true\" focusable=\"false\" data-prefix=\"fab\" data-icon=\"rebel\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" data-fa-i2svg=\"\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "aria-allowed-role",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "minor",
+                        "message": "ARIA role is allowed for given element"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        ".fa-rebel"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "aria-hidden='true' must not be present on the document body",
+        "description": "Ensures aria-hidden='true' is not present on the document body.",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/aria-hidden-body?application=axe-puppeteer",
+        "id": "aria-hidden-body",
+        "impact": null,
+        "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412"
+        ],
+        "nodes": [
+            {
+                "html": "<body>",
+                "all": [],
+                "any": [
+                    {
+                        "id": "aria-hidden-body",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "critical",
+                        "message": "No aria-hidden attribute is present on document body"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "body"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "ARIA hidden element must not contain focusable elements",
+        "description": "Ensures aria-hidden elements do not contain focusable elements",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/aria-hidden-focus?application=axe-puppeteer",
+        "id": "aria-hidden-focus",
+        "impact": null,
+        "tags": [
+            "cat.name-role-value",
+            "wcag2a",
+            "wcag412",
+            "wcag131"
+        ],
+        "nodes": [
+            {
+                "html": "<svg class=\"svg-inline--fa fa-rebel fa-w-16\" aria-hidden=\"true\" focusable=\"false\" data-prefix=\"fab\" data-icon=\"rebel\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" data-fa-i2svg=\"\">",
+                "all": [
+                    {
+                        "id": "focusable-modal-open",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "No focusable elements while a modal is open"
+                    },
+                    {
+                        "id": "focusable-disabled",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "No focusable elements contained within element"
+                    },
+                    {
+                        "id": "focusable-not-tabbable",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "No focusable elements contained within element"
+                    }
+                ],
+                "any": [],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        ".fa-rebel"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Page must have means to bypass repeated blocks",
+        "description": "Ensures each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/bypass?application=axe-puppeteer",
+        "id": "bypass",
+        "impact": null,
+        "tags": [
+            "cat.keyboard",
+            "wcag2a",
+            "wcag241",
+            "section508",
+            "section508.22.o"
+        ],
+        "nodes": [
+            {
+                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "landmark",
+                        "data": null,
+                        "relatedNodes": [
+                            {
+                                "html": "<main class=\"row vh-100\">",
+                                "target": [
+                                    "main"
+                                ]
+                            }
+                        ],
+                        "impact": "serious",
+                        "message": "Page has a landmark region"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "html"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Elements must have sufficient color contrast",
+        "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/color-contrast?application=axe-puppeteer",
+        "id": "color-contrast",
+        "impact": null,
+        "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143"
+        ],
+        "nodes": [
+            {
+                "html": "<a class=\"navbar-brand\" href=\"/\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "color-contrast",
+                        "data": {
+                            "fgColor": "#ffffff",
+                            "bgColor": "#212529",
+                            "contrastRatio": 15.42,
+                            "fontSize": "15.0pt (20px)",
+                            "fontWeight": "normal",
+                            "expectedContrastRatio": "4.5:1"
+                        },
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "Element has sufficient color contrast of 15.42"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        ".navbar-brand"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Documents must have <title> element to aid in navigation",
+        "description": "Ensures each HTML document contains a non-empty <title> element",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/document-title?application=axe-puppeteer",
+        "id": "document-title",
+        "impact": null,
+        "tags": [
+            "cat.text-alternatives",
+            "wcag2a",
+            "wcag242",
+            "ACT"
+        ],
+        "nodes": [
+            {
+                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "doc-has-title",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "Document has a non-empty <title> element"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "html"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "IDs used in ARIA and labels must be unique",
+        "description": "Ensures every id attribute value used in ARIA and in labels is unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/duplicate-id-aria?application=axe-puppeteer",
+        "id": "duplicate-id-aria",
+        "impact": null,
+        "tags": [
+            "cat.parsing",
+            "wcag2a",
+            "wcag411"
+        ],
+        "nodes": [
+            {
+                "html": "<div class=\"collapse navbar-collapse\" id=\"navbarNav\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "duplicate-id-aria",
+                        "data": "navbarNav",
+                        "relatedNodes": [],
+                        "impact": "critical",
+                        "message": "Document has no elements referenced with ARIA or labels that share the same id attribute"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "#navbarNav"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "id attribute value must be unique",
+        "description": "Ensures every id attribute value is unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/duplicate-id?application=axe-puppeteer",
+        "id": "duplicate-id",
+        "impact": null,
+        "tags": [
+            "cat.parsing",
+            "wcag2a",
+            "wcag411"
+        ],
+        "nodes": [
+            {
+                "html": "<ul class=\"nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto \n              mb-0 justify-content-center align-items-center align-items-sm-start\" id=\"menu\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "duplicate-id",
+                        "data": "menu",
+                        "relatedNodes": [],
+                        "impact": "minor",
+                        "message": "Document has no static elements that share the same id attribute"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "#menu"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "<html> element must have a lang attribute",
+        "description": "Ensures every HTML document has a lang attribute",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/html-has-lang?application=axe-puppeteer",
+        "id": "html-has-lang",
+        "impact": null,
+        "tags": [
+            "cat.language",
+            "wcag2a",
+            "wcag311",
+            "ACT"
+        ],
+        "nodes": [
+            {
+                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "has-lang",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "The <html> element has a lang attribute"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "html"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "<html> element must have a valid value for the lang attribute",
+        "description": "Ensures the lang attribute of the <html> element has a valid value",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/html-lang-valid?application=axe-puppeteer",
+        "id": "html-lang-valid",
+        "impact": null,
+        "tags": [
+            "cat.language",
+            "wcag2a",
+            "wcag311",
+            "ACT"
+        ],
+        "nodes": [
+            {
+                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "valid-lang",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "Value of lang attribute is included in the list of valid languages"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "html"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Links with the same name have a similar purpose",
+        "description": "Ensure that links with the same accessible name serve a similar purpose",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/identical-links-same-purpose?application=axe-puppeteer",
+        "id": "identical-links-same-purpose",
+        "impact": null,
+        "tags": [
+            "cat.semantics",
+            "wcag2aaa",
+            "wcag249",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<a class=\"navbar-brand\" href=\"/\">",
+                "all": [
+                    {
+                        "id": "identical-links-same-purpose",
+                        "data": {
+                            "name": "progetto webapp",
+                            "urlProps": {
+                                "protocol": "http:",
+                                "hostname": "3.143.240.119",
+                                "port": "8000",
+                                "pathname": "/",
+                                "search": {},
+                                "hash": "",
+                                "filename": ""
+                            }
+                        },
+                        "relatedNodes": [],
+                        "impact": "minor",
+                        "message": "There are no other links with the same name, that go to a different URL"
+                    }
+                ],
+                "any": [],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        ".navbar-brand"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Banner landmark should not be contained in another landmark",
+        "description": "Ensures the banner landmark is at top level",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/landmark-banner-is-top-level?application=axe-puppeteer",
+        "id": "landmark-banner-is-top-level",
+        "impact": null,
+        "tags": [
+            "cat.semantics",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<header class=\"row\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "landmark-is-top-level",
+                        "data": {
+                            "role": "banner"
+                        },
+                        "relatedNodes": [],
+                        "impact": "moderate",
+                        "message": "The banner landmark is at the top level."
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "header"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Main landmark should not be contained in another landmark",
+        "description": "Ensures the main landmark is at top level",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/landmark-main-is-top-level?application=axe-puppeteer",
+        "id": "landmark-main-is-top-level",
+        "impact": null,
+        "tags": [
+            "cat.semantics",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<main class=\"row vh-100\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "landmark-is-top-level",
+                        "data": {
+                            "role": "main"
+                        },
+                        "relatedNodes": [],
+                        "impact": "moderate",
+                        "message": "The main landmark is at the top level."
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "main"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Document should not have more than one banner landmark",
+        "description": "Ensures the document has at most one banner landmark",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/landmark-no-duplicate-banner?application=axe-puppeteer",
+        "id": "landmark-no-duplicate-banner",
+        "impact": null,
+        "tags": [
+            "cat.semantics",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<header class=\"row\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "page-no-duplicate-banner",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "moderate",
+                        "message": "Document does not have more than one banner landmark"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "header"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Document should not have more than one main landmark",
+        "description": "Ensures the document has at most one main landmark",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/landmark-no-duplicate-main?application=axe-puppeteer",
+        "id": "landmark-no-duplicate-main",
+        "impact": null,
+        "tags": [
+            "cat.semantics",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<main class=\"row vh-100\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "page-no-duplicate-main",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "moderate",
+                        "message": "Document does not have more than one main landmark"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "main"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Document should have one main landmark",
+        "description": "Ensures the document has a main landmark",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/landmark-one-main?application=axe-puppeteer",
+        "id": "landmark-one-main",
+        "impact": null,
+        "tags": [
+            "cat.semantics",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "all": [
+                    {
+                        "id": "page-has-main",
+                        "data": null,
+                        "relatedNodes": [
+                            {
+                                "html": "<main class=\"row vh-100\">",
+                                "target": [
+                                    "main"
+                                ]
+                            }
+                        ],
+                        "impact": "moderate",
+                        "message": "Document has at least one main landmark"
+                    }
+                ],
+                "any": [],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "html"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Ensures landmarks are unique",
+        "description": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/landmark-unique?application=axe-puppeteer",
+        "id": "landmark-unique",
+        "impact": null,
+        "tags": [
+            "cat.semantics",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<header class=\"row\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "landmark-is-unique",
+                        "data": {
+                            "role": "banner",
+                            "accessibleText": null
+                        },
+                        "relatedNodes": [],
+                        "impact": "moderate",
+                        "message": "Landmarks must have a unique role or role/label/title (i.e. accessible name) combination"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "header"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Links must have discernible text",
+        "description": "Ensures links have discernible text",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/link-name?application=axe-puppeteer",
+        "id": "link-name",
+        "impact": null,
+        "tags": [
+            "cat.name-role-value",
+            "wcag2a",
+            "wcag412",
+            "wcag244",
+            "section508",
+            "section508.22.a",
+            "ACT"
+        ],
+        "nodes": [
+            {
+                "html": "<a class=\"navbar-brand\" href=\"/\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "has-visible-text",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "minor",
+                        "message": "Element has text that is visible to screen readers"
+                    }
+                ],
+                "none": [
+                    {
+                        "id": "focusable-no-name",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "Element is not in tab order or has accessible text"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        ".navbar-brand"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+        "description": "Ensures that lists are structured correctly",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/list?application=axe-puppeteer",
+        "id": "list",
+        "impact": null,
+        "tags": [
+            "cat.structure",
+            "wcag2a",
+            "wcag131"
+        ],
+        "nodes": [
+            {
+                "html": "<ul class=\"navbar-nav me-auto\">&nbsp;</ul>",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "only-listitems",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "List element only has direct children that are allowed inside <li> elements"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        ".me-auto"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "<li> elements must be contained in a <ul> or <ol>",
+        "description": "Ensures <li> elements are used semantically",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/listitem?application=axe-puppeteer",
+        "id": "listitem",
+        "impact": null,
+        "tags": [
+            "cat.structure",
+            "wcag2a",
+            "wcag131"
+        ],
+        "nodes": [
+            {
+                "html": "<li class=\"nav-item\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "listitem",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        ".ms-auto > li:nth-child(1)"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Users should be able to zoom and scale the text up to 500%",
+        "description": "Ensures <meta name=\"viewport\"> can scale a significant amount",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/meta-viewport-large?application=axe-puppeteer",
+        "id": "meta-viewport-large",
+        "impact": null,
+        "tags": [
+            "cat.sensory-and-visual-cues",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "meta-viewport-large",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "minor",
+                        "message": "<meta> tag does not prevent significant zooming on mobile devices"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "meta[name=\"viewport\"]"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "Zooming and scaling should not be disabled",
+        "description": "Ensures <meta name=\"viewport\"> does not disable text scaling and zooming",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/meta-viewport?application=axe-puppeteer",
+        "id": "meta-viewport",
+        "impact": null,
+        "tags": [
+            "cat.sensory-and-visual-cues",
+            "best-practice",
+            "ACT"
+        ],
+        "nodes": [
+            {
+                "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "meta-viewport",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "critical",
+                        "message": "<meta> tag does not disable zooming on mobile devices"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "meta[name=\"viewport\"]"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "All page content should be contained by landmarks",
+        "description": "Ensures all page content is contained by landmarks",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/region?application=axe-puppeteer",
+        "id": "region",
+        "impact": null,
+        "tags": [
+            "cat.keyboard",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<div class=\"container-fluid\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "region",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "moderate",
+                        "message": "All page content is contained by landmarks"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/",
+                        "http://3.143.240.119:8000/ordini/200123/",
+                        "http://3.143.240.119:8000/clienti/C00022/"
+                    ],
+                    "target": [
+                        "body > .container-fluid"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "scope attribute should be used correctly",
+        "description": "Ensures the scope attribute is used correctly on tables",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/scope-attr-valid?application=axe-puppeteer",
+        "id": "scope-attr-valid",
+        "impact": null,
+        "tags": [
+            "cat.tables",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<th scope=\"col\">",
+                "all": [
+                    {
+                        "id": "html5-scope",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "moderate",
+                        "message": "Scope attribute is only used on table header elements (<th>)"
+                    },
+                    {
+                        "id": "scope-value",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "critical",
+                        "message": "Scope attribute is used correctly"
+                    }
+                ],
+                "any": [],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "th:nth-child(1)"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "The <caption> element should not contain the same text as the summary attribute",
+        "description": "Ensure that tables do not have the same summary and caption",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/table-duplicate-name?application=axe-puppeteer",
+        "id": "table-duplicate-name",
+        "impact": null,
+        "tags": [
+            "cat.tables",
+            "best-practice"
+        ],
+        "nodes": [
+            {
+                "html": "<table class=\"table table-hover\" id=\"order_list_table\" name=\"order_list_table\">",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "same-caption-summary",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "minor",
+                        "message": "Content of summary attribute and <caption> are not duplicated"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "#order_list_table"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "All cells in a table element that use the headers attribute must only refer to other cells of that same table",
+        "description": "Ensure that each cell in a table using the headers refers to another cell in that table",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/td-headers-attr?application=axe-puppeteer",
+        "id": "td-headers-attr",
+        "impact": null,
+        "tags": [
+            "cat.tables",
+            "wcag2a",
+            "wcag131",
+            "section508",
+            "section508.22.g"
+        ],
+        "nodes": [
+            {
+                "html": "<table class=\"table table-hover\" id=\"order_list_table\" name=\"order_list_table\">",
+                "all": [
+                    {
+                        "id": "td-headers-attr",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "The headers attribute is exclusively used to refer to other cells in the table"
+                    }
+                ],
+                "any": [],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "#order_list_table"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "All th elements and elements with role=columnheader/rowheader must have data cells they describe",
+        "description": "Ensure that each table header in a data table refers to data cells",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/th-has-data-cells?application=axe-puppeteer",
+        "id": "th-has-data-cells",
+        "impact": null,
+        "tags": [
+            "cat.tables",
+            "wcag2a",
+            "wcag131",
+            "section508",
+            "section508.22.g"
+        ],
+        "nodes": [
+            {
+                "html": "<table class=\"table table-hover\" id=\"order_list_table\" name=\"order_list_table\">",
+                "all": [
+                    {
+                        "id": "th-has-data-cells",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "All table header cells refer to data cells"
+                    }
+                ],
+                "any": [],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "#order_list_table"
+                    ]
+                }
+            }
+        ]
+    }
+]
