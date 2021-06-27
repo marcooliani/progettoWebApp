@@ -30,9 +30,9 @@
           <td class="nowrap">
             <a href="/agenti/{{ i.agent_code }}/" title="Dettagli {{ i.agent_name }}"><i class='fas fa-search'></i></a>
               &nbsp;&nbsp;&nbsp;
-            <a href="#" title="Modifica agente"><i class='fas fa-edit'></i></a>
+            <a href="javascript:void(0)" title="Modifica {{ i.agent_name }}"><i class='fas fa-edit'></i></a>
               &nbsp;&nbsp;&nbsp;
-            <a class="delete_agent" id="{{ i.agent_code }}" title="Elimina {{ i.agent_name }}"><i class='fas fa-trash-alt'></i></a>
+            <a href="javascript:void(0)" class="delete_agent" id="{{ i.agent_code }}" title="Elimina {{ i.agent_name }}"><i class='fas fa-trash-alt'></i></a>
           </td>
         </tr>
     {% endfor %}

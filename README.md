@@ -1,12 +1,18 @@
 # progettoWebApp
 ## Overview
 
+
+
+
+
 ## API
 
 ### Orders
 
 #### \# Creating
-`POST /api/orders/new/`
+```http
+POST /api/orders/new/
+```
 
 Inserisce un nuovo ordine all'interno del database.
 
@@ -17,7 +23,9 @@ Inserisce un nuovo ordine all'interno del database.
 - `CanInsertModifyDeleteOrders`: l'utente deve far parte dei gruppi predefiniti *agents* oppure *managers* per poter effettuare l'operazione di inserimento.
 
 ####  \# Reading (orders list)
-`GET /api/orders/[?sort_by={[-]column}]`
+```http
+GET /api/orders/[?sort_by={[-]column}]
+```
 
 Ritorna la lista degli ordini. L'output differisce in base all'utente loggato sul sistema:
 
@@ -46,7 +54,9 @@ Per ogni ordine, l'API ritorna i seguenti campi:
 - `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customers*, *agents*, *managers*) per poter effettuare l'operazione di visualizzazione.
 
 #### \# Reading (single order)
- `GET /api/orders/{ord_num}/`
+```http
+GET /api/orders/{ord_num}/
+```
 
 Ritorna il singolo ordine, indicato per numero d'ordine. 
 *`TODO`: migliorare la query affinché un customer non possa visualizzare altri ordini oltre ai propri* 
@@ -68,7 +78,10 @@ Ritorna il singolo ordine, indicato per numero d'ordine.
 - `CanView`: l'utente deve far parte di uno dei tre gruppi predefiniti (*customer*. *agents*, *managers*) per poter effettuare l'operazione di visualizzazione. 
 
 ####  \# Updating
-- `PUT /api/orders/update/{ord_num}/`
+```http
+PUT /api/orders/update/{ord_num}/
+```
+
 Aggiorna un ordine, specificato da `{ord_num}`.
 
 ##### *Permissions*
@@ -76,7 +89,9 @@ Aggiorna un ordine, specificato da `{ord_num}`.
 - `CanInsertModifyDeleteOrders`: l'utente deve far parte dei gruppi predefiniti *agents* oppure *managers* per poter effettuare l'operazione di aggiornamento.
 
 #### \# Deleting
-`DELETE /api/orders/delete/{ord_num}/`
+```http
+DELETE /api/orders/delete/{ord_num}/
+```
 
 Elimina un ordine, specificato da `{ord_num}`.
 
@@ -93,7 +108,9 @@ _Questa operazione non è disponibile._
 
 #### \#Reading (customers list)
 
-`GET /api/customers/[?sort_by={[-]column}]`
+```http
+GET /api/customers/[?sort_by={[-]column}]
+```
 
 Ritorna la lista degli ordini. L'output differisce in base all'utente loggato sul sistema:
 
@@ -126,7 +143,9 @@ Per ogni customer, l'API ritorna i seguenti campi:
 - `IsAgentOrManager`: l'utente deve far parte del gruppo predefinito *agents* oppure *managers* per poter effettuare l'operazione di visualizzazione.
 
 #### \# Reading (single customer)
-`GET /api/customers/{cust_code}/`
+```http
+GET /api/customers/{cust_code}/
+```
 
 Ritorna il singolo customer, indicato per codice.
 
@@ -163,7 +182,9 @@ _Questa operazione non è disponibile._
 _Questa operazione non è disponibile._
 
 #### \# Reading (agents list)
-`GET /api/agents/[?sort_by={[-]column}]`
+```http
+GET /api/agents/[?sort_by={[-]column}]
+```
 
 Ritorna la lista degli agenti. Solo gli utenti di tipo **managers** possono visualizzare la lista completa degli agenti
 
@@ -185,7 +206,9 @@ Per ogni agent, l'API ritorna i seguenti campi:
 - `IsManager`: l'utente deve far parte del gruppo predefinito *managers* per poter effettuare l'operazione di visualizzazione.
 
 #### \# Reading (single agent)
-`GET /api/agents/{agent_code}/`
+```http
+GET /api/agents/{agent_code}/
+```
 
 Ritorna il singolo customer, indicato per codice.
 
@@ -211,14 +234,82 @@ _Questa operazione non è disponibile._
 
 
 
-### Sviluppo RESTful API
-Ricordarsi di installare Django Rest Framework, se non lo si ha già installato!
-pip3 install djangorestframework
+### API Testing
+Per il **testing delle AP**I ho utilizzato **Postman**: [https://www.postman.com/downloads/][https://www.postman.com/downloads/] . 
 
-### API Test
-Utilizzare Postman: https://www.postman.com/downloads/
+Questo tool si è dimostrato molto potente ed efficiente, nonché facile da utilizzare. Di contro, necessita di un account (gratuito) e non zippato pesa oltre 400 MB 
 
-### Vademecum al volo sui comandi:
+
+
+## WCAG 2.1 AA Testing
+
+Per i **test di accessibilità WCAG 2.1** ho utilizzato `a11y-sitechecker` ([https://github.com/forsti0506/a11y-sitechecker][https://github.com/forsti0506/a11y-sitechecker]). 
+
+Dopo l'installazione, configurare il tool editando `~/node_modules/a11y-sitechecker/lib/utils/setup-config.js`. La configurazione non è esattamente delle più intuitive, ad ogni modo quella usata per testare il progetto è la seguente, all'interno della funzione `setupConfig()` :
+
+```javascript
+const config = {
+    json: true,
+    resultsPath: '/home/marcuzzo/UniVr/WebApp/progetto/WCAG21aa-test/results',
+    resultsPathPerUrl: '', 
+    axeConfig: {}, 
+    threshold: 1000,
+    imagesPath: '/home/marcuzzo/UniVr/WebApp/progetto/WCAG21aa-test/results/images',
+    timeout: 30000,
+    debugMode: false,
+    viewports: [
+    	{
+        	width: 1920,
+         	height: 1080,
+      	},
+   	],
+    resultTypes: ['violations', 'incomplete'],
+    runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice', 'ACT'],
+    crawl: false,
+    name: '', 
+    urlsToAnalyze: ['http://3.143.240.119:8000/ordini/', 'http://3.143.240.119:8000/ordini/200123/', 'http://3.143.240.119:8000/clienti/C00022/'],
+    login: {
+        url: 'http://3.143.240.119:8000/auth/login/',
+        steps: [
+       		{
+           		input: [
+                    {
+                        selector: '#id_username',
+                        value: "C00022"
+                    },
+                    {
+                        selector: '#id_password',
+                        value: 'clientecliente'
+                    }
+                ],
+                submit: '#sendlogin'
+            }
+        ]
+      }   
+    };
+```
+
+
+
+Come si nota dalla configurazione, dovendo garantire il **livello AA** per le pagine accessibili ai clienti si sono testate:
+
+-  la **pagina principale** della sezione **ordini**
+- la pagina che mostra **i dettagli di un singolo ordine** (appartenente al cliente)
+- la pagina che mostra **i dati del cliente stesso**, accessibile dalla navbar in alto a destra
+
+I **test effettuati** sono specificati dalla direttiva `runOnly`, mentre alla direttiva `resultTypes` sono specificati i tipi di risultato che verranno restituiti.
+
+Dato che la webapp richiede l'**accesso dell'utente**, alla direttiva `login` ho impostato le credenziali di uno dei clienti (ne ho preso uno con più di un ordine effettuato, così da avere più elementi visualizzati sulla pagina e quindi un testing più accurato).
+
+Una volta terminata la configurazione, **lanciare il sitechecker** spostandosi in  `~/node_modules/a11y-sitechecker/bin/` e dando il comando `./a11y-sitechecker.js -T=1000`
+
+I risultati verranno salvati in formato JSON all'interno della directory _WCAG21aa-test/results_ per i risultati testuali e _WCAG21aa-test/results/images_ per le immagini (ricordarsi di creare le directory prima, altrimenti i dati non verranno salvati).
+
+Per riguarda il progetto in questione, **tutti i test** relativi alle linee guida _WCAG 2.1_ inerenti al livello _AA_ **sono stati superati**. L'unica _violation_ riguarda una _best practice_, precisamente relativa all'_heading_: tale violazione, però, non inficia sull'accessibilità della webapp sviluppata.
+
+
+
+## Recap comandi:
 
 - python3 manage.py inspectdb [--database nome_database > myapp/models.py]
 

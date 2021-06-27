@@ -49,11 +49,11 @@ $(document).ready(function() {
 
           tr_str = tr_str + '<td class="nowrap"><a href="/clienti/' + cust_code + '/" title="Dettaglio '+ cust_name +'"><i class="fas fa-search"></i></a>' +
               '&nbsp;&nbsp;&nbsp;';
-          tr_str = tr_str + '<a href="#" title="Modifica '+ cust_name +'"><i class="fas fa-edit"></i></a>' +
+          tr_str = tr_str + '<a href="javascript:void(0)" title="Modifica '+ cust_name +'"><i class="fas fa-edit"></i></a>' +
               '&nbsp;&nbsp;&nbsp;';
 
           if(gruppo == "managers")
-            tr_str = tr_str + '<a class="delete_order" id="' + cust_code + '" title="Elimina '+ cust_name +'"><i class="fas fa-trash-alt"></i></a>';
+            tr_str = tr_str + '<a href="javascript:void(0)" class="delete_order" id="' + cust_code + '" title="Elimina '+ cust_name +'"><i class="fas fa-trash-alt"></i></a>';
                 
           tr_str = tr_str + '</td></tr>';
 

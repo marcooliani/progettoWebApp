@@ -114,7 +114,7 @@ $(document).ready(function() {
                 if(gruppo == "agents" || gruppo == "managers") {
                     tr_str = tr_str + '<a href="/ordini/modifica/' + ord_num + '" title="Modifica ordine '+ ord_num + '"><i class="fas fa-edit"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;' +
-                    '<a class="delete_order" id="' + ord_num + '" title="Elimina ordine '+ ord_num + '"><i class="fas fa-trash-alt"></i></a>';
+                    '<a href="javascript:void(0)" class="delete_order" id="' + ord_num + '" title="Elimina ordine '+ ord_num + '"><i class="fas fa-trash-alt"></i></a>';
                 }
 
                 tr_str = tr_str + '</td>' +

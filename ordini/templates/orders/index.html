@@ -1,6 +1,6 @@
 {% extends "page_skeleton.html" %}
 
-{%block title%} <title>Progetto WebApp - Lista Ordini</title> {% endblock%}
+{%block title%} <title>Progetto WebApp - Lista Ordini {{request.session.nome}}</title> {% endblock%}
 
 {% block content %}
 <div class="heading bg-secondary text-white"><i class="fas fa-list"></i> Tabella ordini per {{request.session.nome}}</div>
@@ -10,15 +10,15 @@
     <table class="table table-hover" id="order_list_table" name="order_list_table">
       <caption>Lista ordini per {{request.session.nome}}</caption>
       <thead class="table-light">
-        <th scope="col"><span class="ordina" sort="ord_num"><i class="fas fa-sort"></i> Order ID</span></th>
-        <th scope="col"><span class="ordina" sort="ord_date"><i class="fas fa-sort"></i> Date</span></th>
-        <th scope="col"><span class="ordina" sort="ord_amount"><i class="fas fa-sort"></i> Amount</span></th>
-        <th scope="col"><span class="ordina" sort="advance_amount"><i class="fas fa-sort"></i> Advance amount</span></th>
+        <th scope="col"><span class="ordina" sort="ord_num" aria-label="Ordina per ID"><i class="fas fa-sort"></i> Order ID</span></th>
+        <th scope="col"><span class="ordina" sort="ord_date" aria-label="Ordina per data"><i class="fas fa-sort"></i> Date</span></th>
+        <th scope="col"><span class="ordina" sort="ord_amount" aria-label="Ordina per amount"><i class="fas fa-sort"></i> Amount</span></th>
+        <th scope="col"><span class="ordina" sort="advance_amount" aria-label="Ordina per advance amount"><i class="fas fa-sort"></i> Advance amount</span></th>
       {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-        <th scope="col"><span class="ordina" sort="cust_code"><i class="fas fa-sort"></i> Customer</span></th>
+        <th scope="col"><span class="ordina" sort="cust_code" aria-label="Ordina per customer ID"><i class="fas fa-sort"></i> Customer</span></th>
       {% endif %}
       {% if request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-        <th scope="col"><span class="ordina" sort="agent_code"><i class="fas fa-sort"></i> Agent</span></th>
+        <th scope="col"><span class="ordina" sort="agent_code" aria-label="Ordina per agent ID"><i class="fas fa-sort"></i> Agent</span></th>
       {% endif %}
         <th scope="col">Description</th>
         <th scope="col">Options</th>
@@ -45,7 +45,7 @@
       {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
             <a href="/ordini/modifica/{{ i.ord_num  }}/" title="Modifica ordine {{ i.ord_num  }}"><i class='fas fa-edit'></i></a>
               &nbsp;&nbsp;&nbsp;
-            <a class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine {{ i.ord_num  }}"><i class='fas fa-trash-alt'></i></a>
+            <a href="javascript:void(0)" class="delete_order" id="{{ i.ord_num }}" title="Elimina ordine {{ i.ord_num  }}"><i class='fas fa-trash-alt'></i></a>
           </td>
       {% endif %}
         </tr>

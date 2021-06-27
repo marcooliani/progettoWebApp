@@ -66,9 +66,9 @@ $(document).ready(function() {
                 '<td class="nowrap">' +
                 '<a href="/agenti/' + agent_code.trim() + '/" title="Dettagli '+ agent_name +'"><i class="fas fa-search"></i></a>' +
                 '&nbsp;&nbsp;&nbsp;' +
-                '<a href="#" title="Modifica '+ agent_name +'"><i class="fas fa-edit"></i></a>' +
+                '<a href="javascript:void(0)" title="Modifica '+ agent_name +'"><i class="fas fa-edit"></i></a>' +
                 '&nbsp;&nbsp;&nbsp;' +
-                '<a class="delete_agent" id="' + agent_code.trim() + '" title="Elimina '+ agent_name +'"><i class="fas fa-trash-alt"></i></a></td>' +
+                '<a href="javascript:void(0)" class="delete_agent" id="' + agent_code.trim() + '" title="Elimina '+ agent_name +'"><i class="fas fa-trash-alt"></i></a></td>' +
                 '</tr>';
 
             $("#agentsTable").append(tr_str);
