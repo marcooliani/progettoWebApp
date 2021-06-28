@@ -1,7 +1,57 @@
-# progettoWebApp
+# Progetto WebApplication (sessione estiva 2021)
 ## Overview
 
+Le specifiche del progetto si trovano in `/static/doc/Progetto Esame WebApplication - Giugno 2021.pdf`. 
 
+Per questo progetto ho scelto di utilizzare:
+
+-  **Django 3.2.4** come **framework lato server**. La scelta è caduta su questo framework perché:
+
+  + ha una **struttura semplice e ordinata**. Ho apprezzato molto il fatto che ogni sezione della webapp principale possa essere trattata come una webapp più piccola, con le sezioni (quasi) totalmente indipendenti tra loro. Cioè permette una **migliore organizzazione del lavoro**. Inoltre il framework si compone di **pochi file**, il che rende molto più **agevole lo sviluppo** delle applicazioni.
+
+  + ha una **curva di apprendimeno abbastanza rapida**, anche se si parte da zero.
+
+  + c'è abbondanza di **documentazione** e supporto in Rete. Molto utile, soprattutto per chi inizia, la documentazione presente sulla [MDN Web Docs][https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django] di Mozilla.
+
+  +  grazie a **Django REST Framework**, installato come plugin, si riescono a scrivere **API RESTful in maniera rapida ed efficace**.
+
+  + utilizza **Python** come linguaggio. Nonostante la mia esperienza in materia di sviluppatore Web sia basata interamente su Php, ho scelto un framework in Python (pur non avendo esperienza con questo linguaggio) per una questione di **continuità** con altri progetti di altri corsi, progetti sviluppati (per scelta più o meno libera) appunto in Python. In questo modo acquisisco **ulteriore esperienza sul linguaggio**, oltre a **imparare un metodo di lavoro differente** rispetto al quale ero abituato.
+
+  + utilizza un **sistema di autenticazione integrato**. Pur non essendo obbligatorio il suo utilizzo, è molto comodo e permette anche di inserire gli utenti in gruppi e assegnare loro **permissions specifiche** sulla webapp. Nel progetto in questione, ho utilizzato questo sistema per gestire l'autenticazione degli utenti e la loro appartenenza ai gruppi.
+
+  + c'è la possibilità di **modificare la struttura della base di dati** operando direttamente sui model, grazie all'ORM (non serve più entrare nel prompt del DBRM e dare i comandi SQL a mano) e al sistema delle **migrations**.
+
+    
+
+  Questi sono i **pro** della mia scelta. C'è però anche qualche **contro**, che ho potuto verificare durante lo sviluppo. I principali riguardano l'**ORM** e sono:
+
+  + la **minor potenza rispetto al raw SQL nelle query al database**. Pur essendo ORM obiettivamente più facile e immediato di SQL quando si ha a che fare con interrogazioni semplici, le stesse query in ORM diventano di **difficile gestione** quando queste si complicano (ad esempio quando si deve effettuare una o più _join_ tra tabelle diverse). Per quel che è la mia esperienza pregressa e per quel che è stata l'esperienza con Django, trovo ancora più potente (ed efficiente) effettuare query direttamente in SQL. Ma con una maggiore esperienza sull'ORM di Django probabilmente il mio giudizio sarebbe stato differente.
+
+  + la **gestione di database separati**, soprattutto se il database dei dati non è quello di default. Pur potendo specificare la base di dati da utilizzare direttamente _inline_ nelle query in ORM, nelle chiamate alle API in scrittura queste si sono rivelate spesso inutili (ottenevo puntualmente _relation nome_tabella> not found_ pur avendo specificato correttamente dove volevo scrivere). L'unica soluzione al problema si è rivelata il **routing dei database**, soluzione non sempre elementare e che comporta modifiche alla configurazione del sistema.
+
+  + il **caching delle query**. Mi è capitato di dover modificare alcuni dati all'interno della database della parte dati direttamente dal prompt di PostgreSQL a causa della presenza di spazi bianchi alla fine delle stringhe, questo dopo aver fatto svariate prove per testare il funzionamento corretto della webapp in quanto questi spazi causavano talvolta problemi. Nonostante le modifiche ai dati, rieseguendo la query dalla webapp continuavo ad ottenere il dato non aggiornato, appunto per via del meccanismo di caching delle query che Django effettua. Ho dovuto risolvere il problema inserendo all'interno del codice i vari metodi di _trim_ delle stringhe, sia lato Django, sia lato Javascript. 
+
+    
+
+- **Django REST Framework 3.12.4** ([https://www.django-rest-framework.org/][https://www.django-rest-framework.org/]) per lo **sviluppo delle API RESTful**, come già accennato al punto precedente, con i seguenti **pro**:
+
+  + **creazione rapida** delle API e supporto per autenticazione e _permissions_
+  + **integrazione con l'ORM** di Django tramite i _serializers_
+
+  e i seguenti **contro**:
+
+  + **non molto intuitivo l'aspetto dei serializers**, almeno per quella che è stata la mia esperienza, soprattutto nella gestione delle **foreign keys**. Una volta compreso il meccanismo, però, il tutto diventa relativamente agevole da utilizzare
+
+- **jQuery 3.6.0** come **framework lato client**. La scelta è caduta su jQuery invece che su altri framework perché:
+
+  + **ho già esperienza** con questo framework e lo ritengo ancora il più adatto a me e all'uso che di solito faccio di javascript all'interno di una webapp
+  + **semplifica** molto l'utilizzo di **javascript**
+  + **facile da capire** e da imparare (soprattutto se con Javascript "puro" si ha qualche difficoltà...)
+
+  Di **contro**, jQuery ha forse accusato un po' il passo dopo l'avvento di framework lato client più recenti e basati su template come Angular, VueJS e React ed è ora meno utilizzato rispetto a qualche anno fa risultando un po' **obsoleto**. Resta però, a mio avviso, ancora uno strumento molto valido, soprattutto per progetti medio-piccoli come questo.
+  
+
+- **Bootstrap 5.0** per garantire alla webapp un'**interfaccia grafica il più possibile gradevole** e, soprattutto, la sua **responsiveness**. Non penso di dover giustificare pro e contro di questa scelta, perchè mi pare ovvia la necessità di non dover "reinventare la ruota" perdendo molto tempo nella scrittura di CSS. Se servono dei CSS particolari per un particolare tipo di design, quasi sempre è sufficiente fare l'overloading di una classe CSS di Bootstrap già esistente o scrivere classi CSS di piccola entità, molto più facilmente gestibili. 
 
 
 
@@ -303,7 +353,7 @@ Dato che la webapp richiede l'**accesso dell'utente**, alla direttiva `login` ho
 
 Una volta terminata la configurazione, **lanciare il sitechecker** spostandosi in  `~/node_modules/a11y-sitechecker/bin/` e dando il comando `./a11y-sitechecker.js -T=1000`
 
-I risultati verranno salvati in formato JSON all'interno della directory _WCAG21aa-test/results_ per i risultati testuali e _WCAG21aa-test/results/images_ per le immagini (ricordarsi di creare le directory prima, altrimenti i dati non verranno salvati).
+I risultati verranno salvati in **formato JSON** all'interno della directory _WCAG21aa-test/results_ per i risultati testuali e _WCAG21aa-test/results/images_ per le immagini (ricordarsi di creare le directory prima, altrimenti i dati non verranno salvati).
 
 Per riguarda il progetto in questione, **tutti i test** relativi alle linee guida _WCAG 2.1_ inerenti al livello _AA_ **sono stati superati**. L'unica _violation_ riguarda una _best practice_, precisamente relativa all'_heading_: tale violazione, però, non inficia sull'accessibilità della webapp sviluppata.
 
