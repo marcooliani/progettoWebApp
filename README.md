@@ -13,7 +13,7 @@ Per questo progetto ho scelto di utilizzare:
 
   + ha una **curva di apprendimeno abbastanza rapida**, anche se si parte da zero.
 
-  + c'è abbondanza di **documentazione** e supporto in Rete. Molto utile, soprattutto per chi inizia, la documentazione presente sulla [MDN Web Docs][https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django] di Mozilla.
+  + c'è abbondanza di **documentazione** e supporto in Rete. Molto utile, soprattutto per chi inizia, la documentazione presente sulla [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django) di Mozilla.
 
   +  grazie a **Django REST Framework**, installato come plugin, si riescono a scrivere **API RESTful in maniera rapida ed efficace**.
 
