@@ -323,7 +323,7 @@ Questo tool si è dimostrato molto potente ed efficiente, nonché facile da util
 
 ## WCAG 2.1 AA Testing
 
-Per i **test di accessibilità WCAG 2.1** ho utilizzato `a11y-sitechecker` ([https://github.com/forsti0506/a11y-sitechecker][https://github.com/forsti0506/a11y-sitechecker]). 
+Per i **test di accessibilità WCAG 2.1** ho utilizzato **a11y-sitechecker** ([https://github.com/forsti0506/a11y-sitechecker][https://github.com/forsti0506/a11y-sitechecker]). 
 
 Dopo l'installazione, configurare il tool editando `~/node_modules/a11y-sitechecker/lib/utils/setup-config.js`. La configurazione non è esattamente delle più intuitive, ad ogni modo quella usata per testare il progetto è la seguente, all'interno della funzione `setupConfig()` :
 
