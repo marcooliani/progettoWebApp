@@ -3,6 +3,8 @@
 
 Le specifiche del progetto si trovano in `/static/doc/Progetto Esame WebApplication - Giugno 2021.pdf`. 
 
+### Frameworks
+
 Per questo progetto ho scelto di utilizzare:
 
 -  **Django 3.2.4** come **framework lato server**. La scelta è caduta su questo framework perché:
@@ -50,8 +52,36 @@ Per questo progetto ho scelto di utilizzare:
 
   Di **contro**, jQuery ha forse accusato un po' il passo dopo l'avvento di framework lato client più recenti e basati su template come Angular, VueJS e React ed è ora meno utilizzato rispetto a qualche anno fa risultando un po' **obsoleto**. Resta però, a mio avviso, ancora uno strumento molto valido, soprattutto per progetti medio-piccoli come questo.
   
+- **Bootstrap 5.0** per garantire alla webapp un'**interfaccia grafica il più possibile gradevole** e, soprattutto, la sua **responsiveness**. Non penso di dover giustificare pro e contro di questa scelta, perchè mi pare ovvia la necessità di non dover "reinventare la ruota" perdendo molto tempo nella scrittura di CSS. Se servono dei CSS particolari per un particolare tipo di design, quasi sempre è sufficiente fare l'**overloading** di una classe CSS di Bootstrap già esistente o scrivere classi CSS di piccola entità, molto più facilmente gestibili. 
 
-- **Bootstrap 5.0** per garantire alla webapp un'**interfaccia grafica il più possibile gradevole** e, soprattutto, la sua **responsiveness**. Non penso di dover giustificare pro e contro di questa scelta, perchè mi pare ovvia la necessità di non dover "reinventare la ruota" perdendo molto tempo nella scrittura di CSS. Se servono dei CSS particolari per un particolare tipo di design, quasi sempre è sufficiente fare l'overloading di una classe CSS di Bootstrap già esistente o scrivere classi CSS di piccola entità, molto più facilmente gestibili. 
+
+
+### Databases
+
+Come da specifica, la base di dati non deve essere unica, bensì una per gestire gli account utenti e un'altra per gestire i dati dell'applicazione. Il DBMS utilizzato è **PostgreSQL 13** (a fronte di una richiesta minima che prevedeva la versione 12). Per verificare di avere installata la versione corretta sulla macchina su cui girerà la webapp, dare semplicemente
+
+```bash
+marcuzzo@LoHacker:~$ psql --version
+psql (PostgreSQL) 13.2 (Debian 13.2-1)`
+```
+
+Le basi di dati utilizzate (e da creare se il progetto viene clonato da qualche parte) sono **progetto_default** (che gestirà l'autenticazione utente) e **progetto_dati** (che gestirà la parte dati dell'applicazione) e a cui avrà accesso l'utente PostgreSQL _progetto_ (password: _progetto_). I dati da importare in _progetto_dati_ si trovano in `/static/db_dump_dati.sql`, mentre per quanto riguarda _progetto_default_ è necessario dare `$ python3 manage.py migrate` per creare le tabelle relative e procedere poi con la creazione degli utenti dall'interfaccia di admin di Django (può essere necessario dare prima il comando `$ python3 manage.py makemigrations`).
+
+> **ATTENZIONE:** modificare le impostazioni dei PostgreSQL riguardanti il **formato della data**: di defaul è m/d/Y, ma a noi server **d/m/Y**! Inoltre, ricordarsi di rimuovere gli spazi bianchi a fine stringa presenti in tutte le tabelle di progetto_dati perchè possono creare problemi.
+
+La **gestione della lettura/scrittura** sulle basi di dati avviene attraverso il **routing dei database**: lo si può verificare nel file **dbRoute.py** e relativa configurazione in _progetto/settings.py_.
+
+
+
+### Utenti
+
+Gli utenti, come detto, sono creati dall'interfaccia di admin di Django (non dalla webapp in sè) che ne gestisce anche tutti i vari aspetti (gestione password, sessioni, ...). 
+
+Gli utenti sono divisi in tre gruppi: **customers**, **agents** e **managers**. Per ogni gruppo, questi sono i relativi utenti (se non è presente il dump, crearli manualmente):
+
+- **customers**: username da **C00001** a **C00025** (tutti con password _clientecliente_)
+- **agents**: username da **A001** a **A012** (tutti con password _agenteagente_)
+- **managers**: username da **M001** a **M003** (tutti con password _managermanager_)
 
 
 
@@ -359,16 +389,25 @@ Per riguarda il progetto in questione, **tutti i test** relativi alle linee guid
 
 
 
-## Recap comandi:
+## Recap opzioni _manage.py_
 
-- python3 manage.py inspectdb [--database nome_database > myapp/models.py]
+- **python3 manage.py inspectdb [--database nome_database > myapp/models.py]**
 
-Se ho già una base di dati, il comando la ispeziona e ne ricava un model (che potrebbe essere anche da sistemare, nel caso qualcosa non combaciasse). Il risultato lo salvo nel models.py dell'app voluta
+Se ho già una base di dati, il comando la ispeziona e ne ricava un model (che potrebbe essere anche da sistemare, nel caso qualcosa non combaciasse). Il risultato lo salvo nel *models.py* dell'app voluta
 
-- python3 manager.py shell
+- **python3 manager.py shell**
 
 Questo torna comodo: apre una shell Python, per dare i comandi "on the fly"
 
-- python3 manage.py runserver
+- **python3 manage.py runserver [ip_address[:port]]**
 
-Lancia il webserver interno
+Lancia il webserver interno. Di default resta in ascolto su _localhost_ alla porta 8000
+
+- **python3 manage.py makemigrations [--database nome_database]**
+
+  Se sono state fatte delle modifiche ai model, prepara il necessario per l'esportazione delle modifiche alla base di dati reale
+
+- **python3 manage.py migrate [--database nome_database]**
+
+  Riporta le modifiche ai model sulla base di dati reale
+
