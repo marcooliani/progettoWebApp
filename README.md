@@ -35,7 +35,7 @@ Per questo progetto ho scelto di utilizzare:
 
     
 
-- **Django REST Framework 3.12.4** ([https://www.django-rest-framework.org/][https://www.django-rest-framework.org/]) per lo **sviluppo delle API RESTful**, come già accennato al punto precedente, con i seguenti **pro**:
+- **Django REST Framework 3.12.4** ([https://www.django-rest-framework.org/](https://www.django-rest-framework.org/])) per lo **sviluppo delle API RESTful**, come già accennato al punto precedente, con i seguenti **pro**:
 
   + **creazione rapida** delle API e supporto per autenticazione e _permissions_
   + **integrazione con l'ORM** di Django tramite i _serializers_
@@ -315,7 +315,7 @@ _Questa operazione non è disponibile._
 
 
 ### API Testing
-Per il **testing delle AP**I ho utilizzato **Postman**: [https://www.postman.com/downloads/][https://www.postman.com/downloads/] . 
+Per il **testing delle AP**I ho utilizzato **Postman**: [https://www.postman.com/downloads/](https://www.postman.com/downloads/) . 
 
 Questo tool si è dimostrato molto potente ed efficiente, nonché facile da utilizzare. Di contro, necessita di un account (gratuito) e non zippato pesa oltre 400 MB 
 
@@ -323,7 +323,7 @@ Questo tool si è dimostrato molto potente ed efficiente, nonché facile da util
 
 ## WCAG 2.1 AA Testing
 
-Per i **test di accessibilità WCAG 2.1** ho utilizzato **a11y-sitechecker** ([https://github.com/forsti0506/a11y-sitechecker][https://github.com/forsti0506/a11y-sitechecker]). 
+Per i **test di accessibilità WCAG 2.1** ho utilizzato **a11y-sitechecker** ([https://github.com/forsti0506/a11y-sitechecker](https://github.com/forsti0506/a11y-sitechecker)). 
 
 Dopo l'installazione, configurare il tool editando `~/node_modules/a11y-sitechecker/lib/utils/setup-config.js`. La configurazione non è esattamente delle più intuitive, ad ogni modo quella usata per testare il progetto è la seguente, all'interno della funzione `setupConfig()` :
 
