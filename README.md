@@ -1,4 +1,6 @@
 # Progetto WebApplication (sessione estiva 2021)
+
+
 ## Overview
 
 Le specifiche del progetto si trovano in `/static/doc/Progetto Esame WebApplication - Giugno 2021.pdf`. 
@@ -83,7 +85,7 @@ Gli utenti sono divisi in tre gruppi: **customers**, **agents** e **managers**. 
 - **agents**: username da **A001** a **A012** (tutti con password _agenteagente_)
 - **managers**: username da **M001** a **M003** (tutti con password _managermanager_)
 
-
+<div style="page-break-before: always"></div>
 
 ## API
 
@@ -319,7 +321,7 @@ Per il **testing delle AP**I ho utilizzato **Postman**: [https://www.postman.com
 
 Questo tool si è dimostrato molto potente ed efficiente, nonché facile da utilizzare. Di contro, necessita di un account (gratuito) e non zippato pesa oltre 400 MB 
 
-
+<div style="page-break-before: always"></div>
 
 ## WCAG 2.1 AA Testing
 
@@ -387,7 +389,7 @@ I risultati verranno salvati in **formato JSON** all'interno della directory _WC
 
 Per riguarda il progetto in questione, **tutti i test** relativi alle linee guida _WCAG 2.1_ inerenti al livello _AA_ **sono stati superati**. L'unica _violation_ riguarda una _best practice_, precisamente relativa all'_heading_: tale violazione, però, non inficia sull'accessibilità della webapp sviluppata.
 
-
+<div style="page-break-before: always"></div>
 
 ## Recap opzioni _manage.py_
 
