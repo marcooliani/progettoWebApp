@@ -34,6 +34,11 @@
   cursor: pointer;
 }
 
+.toggle_pwd {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
 a.delete_order:hover,
 a.delete_customer:hover,
 a.delete_agent:hover {

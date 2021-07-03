@@ -15,6 +15,8 @@
 {% endif %}
 </div>
 
+<p> Tutti i campi sono obbligatori </p>
+
 <form name="modify_order" id="modify_order" class="needs-validation" aria-label="Modifica ordine {{ ordine.ord_num }}">
 
   {% csrf_token %} <!-- !!! -->
@@ -65,7 +67,7 @@
           <input type="text" class="form-control" id="ord_amount" name="ord_amount" 
             placeholder="4000.11" aria-label="Order amount" aria-required="true" value="{{ ordine.ord_amount }}"  required>
         </div>
-        <div id="ord_amount_help" class="form-text">Use "." for decimals separator</div>
+        <div id="ord_amount_help" class="form-text">Usare "." come separatore decimale</div>
       </div>
     </div>
 
@@ -77,7 +79,7 @@
           <input type="text" class="form-control" id="advance_amount" name="advance_amount" 
             placeholder="1000.23" aria-label="Advance amount" aria-required="true" value="{{ ordine.advance_amount }}" required>
         </div>
-        <div id="advance_amount_help" class="form-text">Use "." for decimals separator</div>
+        <div id="advance_amount_help" class="form-text">Usare "." come separatore decimale</div>
       </div>
     </div>
   </div>
@@ -91,7 +93,7 @@
           <input type="date" class="form-control" id="ord_date" name="ord_date" placeholder="YYYY-MM-DD" 
             aria-label="Order date" aria-required="true" value="{{ ordine.ord_date|date:'Y-m-d' }}" required>
         </div>
-        <div id="ord_date_help" class="form-text">Date format depends on your browser locales!</div>
+        <div id="ord_date_help" class="form-text">Il formato della data dipende dai locales del browser!</div>
       </div>
     </div>
 
@@ -101,7 +103,7 @@
         <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" 
           placeholder="Insert short description" aria-label="Breve descrizione dell'ordine" value="{{ ordine.ord_description }}"
           aria-required="true" required>
-        <div id="ord_desc_help" class="form-text">Max 60 chars</div>
+        <div id="ord_desc_help" class="form-text">Max 60 caratteri</div>
       </div>
     </div>
   </div>
