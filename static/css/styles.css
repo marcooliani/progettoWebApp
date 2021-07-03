@@ -1,9 +1,3 @@
-/* Sidebar */
-@media (min-width: 576px) {
-  .h-sm-100 {
-    height: 100%;
-  }
-}
 
 /* Ridefinisco la classe Bootstrap vh-100
  * visto che altrimenti ho problema con lo 
@@ -19,6 +13,7 @@
 .content {
   padding-top: 1rem;
   padding-bottom: 1rem;
+
 }
 
 .heading {
@@ -69,4 +64,25 @@ a:hover {
 
 .hidden {
   display:none;
+}
+
+/*
+ * Questa è per sistemare la sidebar quando la si 
+ * visualizza su mobile e in verticale (o comunque
+ * su schermi molto piccoli).
+ * Va messa in fondo perchè altrimenti non mi riesce
+ * di ridefinire l'altezza della .vh-100, prende la
+ * ridefinizione precedente!
+ */
+@media (max-width: 576px) {
+  .vh-100 {
+     height: 3.5rem !important
+  }
+
+  /*
+   * Questa non servirebbe, ma la lascio lo stesso
+   */
+  .sidebar {
+    height: 3.5rem !important
+  }
 }
