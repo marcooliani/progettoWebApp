@@ -67,11 +67,19 @@ marcuzzo@LoHacker:~$ psql --version
 psql (PostgreSQL) 13.2 (Debian 13.2-1)`
 ```
 
-Le basi di dati utilizzate (e da creare se il progetto viene clonato da qualche parte) sono **progetto_default** (che gestirà l'autenticazione utente) e **progetto_dati** (che gestirà la parte dati dell'applicazione) e a cui avrà accesso l'utente PostgreSQL _progetto_ (password: _progetto_). I dati da importare in _progetto_dati_ si trovano in `/static/db_dump_dati.sql`, mentre per quanto riguarda _progetto_default_ è necessario dare `$ python3 manage.py migrate` per creare le tabelle relative e procedere poi con la creazione degli utenti dall'interfaccia di admin di Django (può essere necessario dare prima il comando `$ python3 manage.py makemigrations`).
+Le basi di dati utilizzate (e da creare se il progetto viene clonato da qualche parte) sono **progetto_default** (che gestirà l'autenticazione utente) e **progetto_dati** (che gestirà la parte dati dell'applicazione) e a cui avrà accesso l'utente PostgreSQL _progetto_ (password: _progetto_).
 
-> **ATTENZIONE:** modificare le impostazioni dei PostgreSQL riguardanti il **formato della data**: di defaul è m/d/Y, ma a noi server **d/m/Y**! Inoltre, ricordarsi di rimuovere gli spazi bianchi a fine stringa presenti in tutte le tabelle di progetto_dati perchè possono creare problemi.
+In `/db_dump/` sono presenti i **dump** dei due database. Per importare le relative tabelle e i dati è sufficiente dare, dalla console di PostgreSQL, 
 
-La **gestione della lettura/scrittura** sulle basi di dati avviene attraverso il **routing dei database**: lo si può verificare nel file **dbRoute.py** e relativa configurazione in _progetto/settings.py_.
+`$ pgsql progetto_default -U progetto -h localhost < /tmp/progetto_default.sql` (per _progetto_default_)
+
+e
+
+`$ pgsql progetto_dati -U progetto -h localhost < /tmp/progetto_dati.sql` (per _progetto_dati_)
+
+> **ATTENZIONE:** modificare le impostazioni dei PostgreSQL riguardanti il **formato della data**: di defaul è m/d/Y, ma a noi server **d/m/Y**! Inoltre, ricordarsi di rimuovere gli spazi bianchi a fine stringa, se ancora presenti, in tutte le tabelle di progetto_dati perchè possono creare problemi.
+
+La **gestione della lettura/scrittura** sulle basi di dati avviene attraverso il **routing dei database**: lo si può verificare nel file **dbRoute.py** e relativa configurazione in `progetto/settings.py`.
 
 
 
