@@ -15,11 +15,29 @@ $(document).ready(function() {
     // Blocco l'invio del form
     event.preventDefault();
 
+    // Controllo da quale form arrivano i dati e preparo i vari
+    // parametri per la chiamata AJAX
+    var form_id = '#'+ $('form').attr('id');
+
+    if(form_id == "#new_order") {
+      var url = '/api/orders/new/';
+      var type = 'POST';
+      var redir_page = '/ordini/nuovo/?p=success';
+      var fail_msg = 'Ordine non inserito ';
+    }
+    else if(form_id == "#modify_order") {
+      var ord_num = $('#ord_num').val();
+      var url = '/api/orders/update/' + ord_num +  '/';
+      var type = 'PUT';
+      var redir_page = '/ordini/modifica/' + ord_num  + '/?p=success';
+      var fail_msg = 'Update non riuscito ';
+    }
+
     // Valido il form. Se è valido, manda la richiesta POST via AJAX
-    if($("#new_order")[0].checkValidity()) {
+    if($(form_id)[0].checkValidity()) {
 
       // Prendo i campi del form e li salvo in un array associativo
-      var form_data = $("#new_order").serializeArray();
+      var form_data = $(form_id).serializeArray();
       var _data = {};
       for (var i = 0; i < form_data.length; i++){
         _data[form_data[i]["name"]] = form_data[i]["value"];
@@ -32,8 +50,8 @@ $(document).ready(function() {
 
       // Richiesta AJAX
       $.ajax({
-        url: '/api/orders/new/',
-        type: 'POST',
+        url: url,
+        type: type,
         /* Passo il token csrf attaverso gli
         * header http, pena il 403 Forbidden */
         headers: {
@@ -45,7 +63,7 @@ $(document).ready(function() {
         success: function() {
           // Redirect alla stessa pagina, ma con parametro p=success
           // per mostrare l'alert di avvenuto inserimento dell'ordine
-          window.location = '/ordini/nuovo/?p=success';
+          window.location = redir_page;
         },
         error: function(message) {
         /* Potevo fare allo stesso modo del success, ma faccio
@@ -57,7 +75,7 @@ $(document).ready(function() {
          */
           $("#submit_result").html(
             '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-              '<strong><i class="fas fa-times-circle"></i> Errore!</strong> Ordine non inserito ' +
+              '<strong><i class="fas fa-times-circle"></i> Errore!</strong> ' + fail_msg +
                 '<button type="button" class="btn-close" data-bs-dismiss="alert" ' +
                     'aria-label="Chiudi alert">' +
                 '</button>' +
@@ -68,7 +86,7 @@ $(document).ready(function() {
     }
 
     else {
-        $("#new_order")[0].reportValidity()
+        $(form_id)[0].reportValidity()
     } 
 
   });

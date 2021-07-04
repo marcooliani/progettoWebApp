@@ -107,7 +107,7 @@
       <div class="mb-3">
         <label for="ord_description" class="form-label">Order Description</label>
         <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Breve descrizione dell'ordine" 
-            pattern="[A-Za-z 0-9\.\,\:\;\-òàèéìù]?" aria-label="Order description" aria-required="true" required>
+            pattern="[A-Za-z0-9 \.\,\(\)-òàùèì]{1,60}+" aria-label="Order description" aria-required="true" required>
         <div id="ord_desc_help" class="form-text">Max 60 caratteri</div>
       </div>
     </div>
@@ -118,7 +118,7 @@
 </form>
 
 {% load static %}
-<script src="{% static 'js/newOrder.js' %}"></script>
+<script src="{% static 'js/newAndUpdateOrder.js' %}"></script>
 <script src="{% static 'js/populateCustomerSelect.js' %}"></script>
 
 {% endblock %}
