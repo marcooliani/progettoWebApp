@@ -34,7 +34,7 @@ def index(request):
   elif(request.user.groups.all()[0].name == "agents"):
     order_list = order_list.filter(agent_code=request.user.username)
 
-  order_list = order_list.all().select_related('cust_code', 'agent_code').order_by('-ord_date')
+  order_list = order_list.all().select_related('cust_code', 'agent_code').order_by('-ord_date', '-ord_num')
 
   #logger.info(str(order_list.query))
 

@@ -2,8 +2,8 @@ $(document).ready(function() {
   /*
    * Ordinamento colonne
    */
-  $(".ordina").click(function(e) {
-    e.preventDefault();
+  $(".ordina").click(function(event) {
+    event.preventDefault();
 
     /*
      * Setto il tipo di ordinamento per la colonna

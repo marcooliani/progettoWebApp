@@ -16,9 +16,9 @@
 {% endif %}
 </div>
 
-<p> Tutti i campi sono obbligatori </p>
+<p class="all_mandatory badge bg-warning text-dark"><i class="fas fa-exclamation"></i> Tutti i campi sono obbligatori </p>
 
-<form name="new_order" id="new_order" class="needs-validation" aria-label="Aggiungi nuovo ordine">
+<form name="new_order" id="new_order" class="needs-validation" aria-label="Aggiungi nuovo ordine" novalidate>
 
   {% csrf_token %} <!-- !!! -->
 
@@ -71,7 +71,8 @@
         <label for="ord_amount" class="form-label">Order Amount</label>
         <div class="input-group">
           <div class="input-group-text">$</div>
-          <input type="text" class="form-control" id="ord_amount" name="ord_amount" placeholder="4000.11" aria-label="Order amount" aria-required="true" required>
+          <input type="text" class="form-control" id="ord_amount" name="ord_amount" placeholder="4000.11"
+            pattern="[0-9]+(\.[0-9]{1,2})?" aria-label="Order amount" aria-required="true" required>
         </div>
         <div id="ord_amount_help" class="form-text">Usare "." come separatore decimale</div>
       </div>
@@ -82,7 +83,8 @@
         <label for="advance_amount" class="form-label">Advance Amount</label>
         <div class="input-group">
           <div class="input-group-text">$</div>
-          <input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" aria-label="Advance amount" aria-required="true" required>
+          <input type="text" class="form-control" id="advance_amount" name="advance_amount" placeholder="1000.23" 
+            pattern="[0-9]+(\.[0-9]{1,2})?" aria-label="Advance amount" aria-required="true" required>
         </div>
         <div id="advance_amount_help" class="form-text">Usare "." come separatore decimale</div>
       </div>
@@ -104,8 +106,8 @@
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
       <div class="mb-3">
         <label for="ord_description" class="form-label">Order Description</label>
-        <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Insert order description" 
-            aria-label="Order description" aria-required="true" required>
+        <input type="text" class="form-control" id="ord_description" name="ord_description" maxlength="60" placeholder="Breve descrizione dell'ordine" 
+            pattern="[A-Za-z 0-9\.\,\:\;\-òàèéìù]?" aria-label="Order description" aria-required="true" required>
         <div id="ord_desc_help" class="form-text">Max 60 caratteri</div>
       </div>
     </div>

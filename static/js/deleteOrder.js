@@ -19,8 +19,8 @@ $(document).ready(function() {
    * assieme alla "replica" delle funzioni popover...)
    */
   //$(".delete_order").click(function(e) {
-  $('body').on('click', '.delete_order', function(e) {
-    e.preventDefault();
+  $('body').on('click', '.delete_order', function(event) {
+    event.preventDefault();
 
     // recupero l'id dell'ordine da cancellare e
     // lo passo al modal
@@ -32,8 +32,8 @@ $(document).ready(function() {
 
   });
 
-  $('#delete_confirm').click(function(e) {
-    e.preventDefault();
+  $('#delete_confirm').click(function(event) {
+    event.preventDefault();
 
     ord = $(this).attr('ordine');
 
