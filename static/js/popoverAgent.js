@@ -32,7 +32,7 @@ $(document).ready(function() {
   }
 
   $('.popover_age').popover({
-      title: '<i class="fas fa-user-tie"></i> About',
+      title: '<i class="fas fa-user-tie"></i> Agente',
       html: true,
       placement: 'right',
       animation: true,

@@ -37,7 +37,7 @@ $(document).ready(function() {
   }
 
   $('.popover_cli').popover({
-      title: '<i class="fas fa-user"></i> About',
+      title: '<i class="fas fa-user"></i> Cliente',
       html: true,
       placement: 'right',
       animation: true,
