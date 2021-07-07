@@ -1,0 +1,136 @@
+[
+    {
+        "help": "Elements must only use allowed ARIA attributes",
+        "description": "Ensures ARIA attributes are allowed for an element's role",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/aria-allowed-attr?application=axe-puppeteer",
+        "id": "aria-allowed-attr",
+        "impact": "serious",
+        "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412"
+        ],
+        "nodes": [
+            {
+                "html": "<span class=\"ordina\" sort=\"ord_num\" aria-label=\"Ordina per ID\">",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "aria-prohibited-attr",
+                        "data": [
+                            "aria-label"
+                        ],
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "ARIA attribute is not well supported on the element and the text content will be used instead: aria-label"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "span[sort=\"ord_num\"]"
+                    ]
+                }
+            },
+            {
+                "html": "<span class=\"ordina\" sort=\"ord_date\" aria-label=\"Ordina per data\">",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "aria-prohibited-attr",
+                        "data": [
+                            "aria-label"
+                        ],
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "ARIA attribute is not well supported on the element and the text content will be used instead: aria-label"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "span[sort=\"ord_date\"]"
+                    ]
+                }
+            },
+            {
+                "html": "<span class=\"ordina\" sort=\"ord_amount\" aria-label=\"Ordina per amount\">",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "aria-prohibited-attr",
+                        "data": [
+                            "aria-label"
+                        ],
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "ARIA attribute is not well supported on the element and the text content will be used instead: aria-label"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "span[sort=\"ord_amount\"]"
+                    ]
+                }
+            },
+            {
+                "html": "<span class=\"ordina\" sort=\"advance_amount\" aria-label=\"Ordina per advance amount\">",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "aria-prohibited-attr",
+                        "data": [
+                            "aria-label"
+                        ],
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "ARIA attribute is not well supported on the element and the text content will be used instead: aria-label"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "span[sort=\"advance_amount\"]"
+                    ]
+                }
+            },
+            {
+                "html": "<span class=\"ordina\" sort=\"agent_code\" aria-label=\"Ordina per agent ID\">",
+                "all": [],
+                "any": [],
+                "none": [
+                    {
+                        "id": "aria-prohibited-attr",
+                        "data": [
+                            "aria-label"
+                        ],
+                        "relatedNodes": [],
+                        "impact": "serious",
+                        "message": "ARIA attribute is not well supported on the element and the text content will be used instead: aria-label"
+                    }
+                ],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "span[sort=\"agent_code\"]"
+                    ]
+                }
+            }
+        ]
+    }
+]

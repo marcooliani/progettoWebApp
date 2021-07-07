@@ -675,6 +675,18 @@
         "nodes": []
     },
     {
+        "help": "scope attribute should be used correctly",
+        "description": "Ensures the scope attribute is used correctly on tables",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/scope-attr-valid?application=axe-puppeteer",
+        "id": "scope-attr-valid",
+        "impact": null,
+        "tags": [
+            "cat.tables",
+            "best-practice"
+        ],
+        "nodes": []
+    },
+    {
         "help": "Ensure that scrollable region has keyboard access",
         "description": "Elements that have scrollable content must be accessible by keyboard",
         "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/scrollable-region-focusable?application=axe-puppeteer",
@@ -760,46 +772,6 @@
         "nodes": []
     },
     {
-        "help": "lang attribute must have a valid value",
-        "description": "Ensures lang attributes have valid values",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/valid-lang?application=axe-puppeteer",
-        "id": "valid-lang",
-        "impact": null,
-        "tags": [
-            "cat.language",
-            "wcag2aa",
-            "wcag312"
-        ],
-        "nodes": []
-    },
-    {
-        "help": "<video> elements must have captions",
-        "description": "Ensures <video> elements have captions",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/video-caption?application=axe-puppeteer",
-        "id": "video-caption",
-        "impact": null,
-        "tags": [
-            "cat.text-alternatives",
-            "wcag2a",
-            "wcag122",
-            "section508",
-            "section508.22.a"
-        ],
-        "nodes": []
-    },
-    {
-        "help": "scope attribute should be used correctly",
-        "description": "Ensures the scope attribute is used correctly on tables",
-        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/scope-attr-valid?application=axe-puppeteer",
-        "id": "scope-attr-valid",
-        "impact": null,
-        "tags": [
-            "cat.tables",
-            "best-practice"
-        ],
-        "nodes": []
-    },
-    {
         "help": "The <caption> element should not contain the same text as the summary attribute",
         "description": "Ensure that tables do not have the same summary and caption",
         "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/table-duplicate-name?application=axe-puppeteer",
@@ -838,6 +810,34 @@
             "wcag131",
             "section508",
             "section508.22.g"
+        ],
+        "nodes": []
+    },
+    {
+        "help": "lang attribute must have a valid value",
+        "description": "Ensures lang attributes have valid values",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/valid-lang?application=axe-puppeteer",
+        "id": "valid-lang",
+        "impact": null,
+        "tags": [
+            "cat.language",
+            "wcag2aa",
+            "wcag312"
+        ],
+        "nodes": []
+    },
+    {
+        "help": "<video> elements must have captions",
+        "description": "Ensures <video> elements have captions",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/video-caption?application=axe-puppeteer",
+        "id": "video-caption",
+        "impact": null,
+        "tags": [
+            "cat.text-alternatives",
+            "wcag2a",
+            "wcag122",
+            "section508",
+            "section508.22.a"
         ],
         "nodes": []
     }

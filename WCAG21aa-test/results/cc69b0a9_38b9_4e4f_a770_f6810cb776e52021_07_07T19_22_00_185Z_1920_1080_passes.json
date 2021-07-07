@@ -25,9 +25,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         ".fa-rebel"
@@ -63,9 +63,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "body"
@@ -116,9 +116,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         ".fa-rebel"
@@ -142,7 +142,7 @@
         ],
         "nodes": [
             {
-                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "html": "<html lang=\"it\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
                 "all": [],
                 "any": [
                     {
@@ -150,7 +150,7 @@
                         "data": null,
                         "relatedNodes": [
                             {
-                                "html": "<main class=\"row vh-100\">",
+                                "html": "<main class=\"row \">",
                                 "target": [
                                     "main"
                                 ]
@@ -163,9 +163,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "html"
@@ -208,9 +208,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         ".navbar-brand"
@@ -233,7 +233,7 @@
         ],
         "nodes": [
             {
-                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "html": "<html lang=\"it\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
                 "all": [],
                 "any": [
                     {
@@ -247,9 +247,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "html"
@@ -285,9 +285,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "#navbarNav"
@@ -323,9 +323,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "#menu"
@@ -348,7 +348,7 @@
         ],
         "nodes": [
             {
-                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "html": "<html lang=\"it\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
                 "all": [],
                 "any": [
                     {
@@ -362,9 +362,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "html"
@@ -387,7 +387,7 @@
         ],
         "nodes": [
             {
-                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "html": "<html lang=\"it\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
                 "all": [],
                 "any": [],
                 "none": [
@@ -401,9 +401,9 @@
                 ],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "html"
@@ -451,9 +451,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         ".navbar-brand"
@@ -490,9 +490,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "header"
@@ -513,7 +513,7 @@
         ],
         "nodes": [
             {
-                "html": "<main class=\"row vh-100\">",
+                "html": "<main class=\"row \">",
                 "all": [],
                 "any": [
                     {
@@ -529,9 +529,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "main"
@@ -566,9 +566,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "header"
@@ -589,7 +589,7 @@
         ],
         "nodes": [
             {
-                "html": "<main class=\"row vh-100\">",
+                "html": "<main class=\"row \">",
                 "all": [],
                 "any": [
                     {
@@ -603,9 +603,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "main"
@@ -626,14 +626,14 @@
         ],
         "nodes": [
             {
-                "html": "<html lang=\"en\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
+                "html": "<html lang=\"it\" class=\"fontawesome-i2svg-active fontawesome-i2svg-complete\">",
                 "all": [
                     {
                         "id": "page-has-main",
                         "data": null,
                         "relatedNodes": [
                             {
-                                "html": "<main class=\"row vh-100\">",
+                                "html": "<main class=\"row \">",
                                 "target": [
                                     "main"
                                 ]
@@ -647,9 +647,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "html"
@@ -687,9 +687,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "header"
@@ -737,9 +737,9 @@
                 ],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         ".navbar-brand"
@@ -775,9 +775,9 @@
                 ],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         ".me-auto"
@@ -813,9 +813,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         ".ms-auto > li:nth-child(1)"
@@ -850,9 +850,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "meta[name=\"viewport\"]"
@@ -888,9 +888,9 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "meta[name=\"viewport\"]"
@@ -925,12 +925,91 @@
                 "none": [],
                 "targetResult": {
                     "urls": [
-                        "http://3.143.240.119:8000/ordini/",
                         "http://3.143.240.119:8000/ordini/200123/",
-                        "http://3.143.240.119:8000/clienti/C00022/"
+                        "http://3.143.240.119:8000/clienti/C00022/",
+                        "http://3.143.240.119:8000/ordini/"
                     ],
                     "target": [
                         "body > .container-fluid"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "ARIA attributes must conform to valid values",
+        "description": "Ensures all ARIA attributes have valid values",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/aria-valid-attr-value?application=axe-puppeteer",
+        "id": "aria-valid-attr-value",
+        "impact": null,
+        "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412"
+        ],
+        "nodes": [
+            {
+                "html": "<span class=\"ordina\" sort=\"ord_num\" aria-label=\"Ordina per ID\">",
+                "all": [
+                    {
+                        "id": "aria-valid-attr-value",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "critical",
+                        "message": "ARIA attribute values are valid"
+                    },
+                    {
+                        "id": "aria-errormessage",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "critical",
+                        "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+                    }
+                ],
+                "any": [],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "span[sort=\"ord_num\"]"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "help": "ARIA attributes must conform to valid names",
+        "description": "Ensures attributes that begin with aria- are valid ARIA attributes",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.2/aria-valid-attr?application=axe-puppeteer",
+        "id": "aria-valid-attr",
+        "impact": null,
+        "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412"
+        ],
+        "nodes": [
+            {
+                "html": "<span class=\"ordina\" sort=\"ord_num\" aria-label=\"Ordina per ID\">",
+                "all": [],
+                "any": [
+                    {
+                        "id": "aria-valid-attr",
+                        "data": null,
+                        "relatedNodes": [],
+                        "impact": "critical",
+                        "message": "ARIA attribute name is valid"
+                    }
+                ],
+                "none": [],
+                "targetResult": {
+                    "urls": [
+                        "http://3.143.240.119:8000/ordini/"
+                    ],
+                    "target": [
+                        "span[sort=\"ord_num\"]"
                     ]
                 }
             }

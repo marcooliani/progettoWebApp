@@ -1,12 +1,12 @@
 [
     {
-        "_id": "66db6a99-42c0-4f21-ac3b-d4d1e18f4ecb",
+        "_id": "cc69b0a9-38b9-4e4f-a770-f6810cb776e5",
         "url": "",
         "filesByDate": [
             {
-                "date": "2021-06-26T22:52:25.569Z",
+                "date": "2021-07-07T19:22:09.603Z",
                 "files": [
-                    "/home/marcuzzo/UniVr/WebApp/progetto/WCAG21aa-test/results/27_06_2021_00_52_1920_1080.json"
+                    "/home/marcuzzo/UniVr/WebApp/progetto/WCAG21aa-test/results/07_07_2021_21_22_1920_1080.json"
                 ]
             }
         ]
