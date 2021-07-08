@@ -25,12 +25,12 @@
         <div class="form-group">
           <label for="id_username">Username</label>
           <!-- <input type="text" class="form-control" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username"> -->
-          <input type="text" class="form-control" name="username" autofocus autocapitalize="none" maxlength="150" required id="id_username">
+          <input type="text" class="form-control" name="username" aria-label="Inserire username" aria-describedby="errormsg" autofocus autocapitalize="none" maxlength="150" required id="id_username">
         </div>
 
         <div class="form-group">
           <label for="id_password">Password</label>
-          <input type="password" class="form-control" name="password" autocomplete="current-password" required id="id_password">
+          <input type="password" class="form-control" name="password" aria-label="Inserire password" aria-describedby="errormsg" autocomplete="current-password" required id="id_password">
         </div>
 
         <div class="text-end py-1">
@@ -38,7 +38,7 @@
         </div>
 
         {% if form.errors %}
-          <p style="color: #f00">Username o password non validi!</p>
+          <p id="errormsg" style="color: #f00" aria-label="Login errato">Username o password non validi!</p>
         {% endif %}
 
         <button type="submit" id="sendlogin" class="btn btn-primary">Login</button>

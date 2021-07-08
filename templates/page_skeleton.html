@@ -63,25 +63,25 @@
     </header>
     
     <main class="row ">
-      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top vh-100 sidebar">
+      <nav class="col-xs-6 col-sm-3 col-md-3 col-lg-2 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top vh-100 sidebar">
         <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
           <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto 
-              mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
+              mb-0 justify-content-center align-items-center align-items-sm-start" id="menu" role="menu">
 
-            <li class="nav-item">
+            <li class="nav-item" role="menuitem">
               <a href="/ordini/" class="nav-link px-sm-0 px-2" title="Lista ordini">
                 <i class="fas fa-list"></i><span class="ms-1 d-none d-sm-inline">Ordini</span>
               </a>
             </li>
             
           {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-            <li class="nav-item">
+            <li class="nav-item" role="menuitem">
               <a href="/ordini/nuovo/" class="nav-link px-sm-0 px-2" title="Inserisci nuovo ordine">
                 <i class="fas fa-plus"></i><span class="ms-1 d-none d-sm-inline">Nuovo Ordine</span>
               </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" role="menuitem">
               <a href="/clienti/" class="nav-link px-sm-0 px-2" title="Elenco clienti">
                 <i class="fas fa-users"></i><span class="ms-1 d-none d-sm-inline">Clienti</span>
               </a>
@@ -89,7 +89,7 @@
           {% endif %}
 
           {% if request.session.gruppo == "managers" %}
-            <li class="nav-item">
+            <li class="nav-item" role="menuitem">
               <a href="/agenti/" class="nav-link px-sm-0 px-2" title="Elenco agenti">
                 <i class="fas fa-user-tie"></i><span class="ms-1 d-none d-sm-inline">Agenti</span>
               </a>
@@ -98,7 +98,7 @@
 
           </ul>
         </div>
-      </div>
+      </nav>
       <div class="col-xs-6 col-sm-9 col-md-9 col-lg-10 col-xl-10 content">{% block content %}{% endblock %}</div>
     </main>
   </div>
