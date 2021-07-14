@@ -39,13 +39,13 @@ $(document).ready(function() {
           var agent_name = response[i].agent_name;
 
           var tr_str = '<tr id="row_'+ cust_code + '">' +
-              '<td>' + cust_code + '</td>' +
-              '<td>' + cust_name + '</td>' +
-              '<td>' + cust_city + '</td>' +
-              '<td>' + cust_country + '</td>' +
-              '<td>' + grade + '</td>';
+              '<td tabindex="0">' + cust_code + '</td>' +
+              '<td tabindex="0">' + cust_name + '</td>' +
+              '<td tabindex="0">' + cust_city + '</td>' +
+              '<td tabindex="0">' + cust_country + '</td>' +
+              '<td tabindex="0">' + grade + '</td>';
           if(gruppo == "managers")
-            tr_str = tr_str + '<td id="' + agent_code + '"><a href="javascript:void(0);" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
+            tr_str = tr_str + '<td id="' + agent_code + '" tabindex="0"><a href="javascript:void(0);" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
 
           tr_str = tr_str + '<td class="nowrap"><a href="/clienti/' + cust_code + '/" title="Dettaglio '+ cust_name +'"><i class="fas fa-search"></i></a>' +
               '&nbsp;&nbsp;&nbsp;';

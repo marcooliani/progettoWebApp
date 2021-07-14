@@ -57,12 +57,12 @@ $(document).ready(function() {
             var phone_no = response[i].phone_no;
 
             var tr_str = '<tr id="row_'+ agent_code + '">' +
-                '<td>' + agent_code + '</td>' +
-                '<td>' + agent_name + '</td>' +
-                '<td>' + working_area + '</td>' +
-                '<td>' + country + '</td>' +
-                '<td>' + commission + '</td>' +
-                '<td>' + phone_no + '</td>' +
+                '<td tabindex="0">' + agent_code + '</td>' +
+                '<td tabindex="0">' + agent_name + '</td>' +
+                '<td tabindex="0">' + working_area + '</td>' +
+                '<td tabindex="0">' + country + '</td>' +
+                '<td tabindex="0">' + commission + '</td>' +
+                '<td tabindex="0">' + phone_no + '</td>' +
                 '<td class="nowrap">' +
                 '<a href="/agenti/' + agent_code.trim() + '/" title="Dettagli '+ agent_name +'"><i class="fas fa-search"></i></a>' +
                 '&nbsp;&nbsp;&nbsp;' +

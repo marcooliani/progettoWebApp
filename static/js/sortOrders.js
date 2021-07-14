@@ -96,17 +96,17 @@ $(document).ready(function() {
                 var ord_description = response[i].ord_description;
 
                 var tr_str = '<tr id="row_'+ ord_num + '">' +
-                    '<td>' + ord_num + '</td>' +
-                    '<td>' + formatta_data(ord_date) + '</td>' +
-                    '<td>' + ord_amount + '</td>' +
-                    '<td>' + advance_amount + '</td>';
+                    '<td tabindex="0">' + ord_num + '</td>' +
+                    '<td tabindex="0">' + formatta_data(ord_date) + '</td>' +
+                    '<td tabindex="0">' + ord_amount + '</td>' +
+                    '<td tabindex="0">' + advance_amount + '</td>';
                 if(gruppo == "agents" || gruppo == "managers")
-                    tr_str = tr_str + '<td id="' + cust_code + '"><a href="javascript:void(0);" class="popover_cli" code="' + cust_code + '">' + cust_name + '</td>';
+                    tr_str = tr_str + '<td id="' + cust_code + '" tabindex="0"><a href="javascript:void(0);" class="popover_cli" code="' + cust_code + '">' + cust_name + '</td>';
                 
                 if(gruppo == "customers" || gruppo == "managers")
-                    tr_str = tr_str + '<td id="' + agent_code + '"><a href="javascript:void(0);" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
+                    tr_str = tr_str + '<td id="' + agent_code + '" tabindex="0"><a href="javascript:void(0);" class="popover_age" code="' + agent_code  + '">' + agent_name + '</td>';
               
-                tr_str = tr_str + '<td>' + ord_description + '</td>' +
+                tr_str = tr_str + '<td tabindex="0">' + ord_description + '</td>' +
                     '<td class="nowrap">'+
                     '<a href="/ordini/'+ ord_num + '" title="Dettaglio ordine '+ ord_num + '"><i class="fas fa-search"></i></a>' +
                     '&nbsp;&nbsp;&nbsp;';

@@ -21,12 +21,12 @@
 
     {% for i in agent_list %} 
         <tr id="row_{{ i.agent_code }}">
-          <td>{{ i.agent_code }}</td>
-          <td>{{ i.agent_name }}</td>
-          <td>{{ i.working_area }}</td>
-          <td>{{ i.country }}</td>
-          <td>{{ i.commission }}</td>
-          <td>{{ i.phone_no }}</td>
+          <td tabindex="0">{{ i.agent_code }}</td>
+          <td tabindex="0">{{ i.agent_name }}</td>
+          <td tabindex="0">{{ i.working_area }}</td>
+          <td tabindex="0">{{ i.country }}</td>
+          <td tabindex="0">{{ i.commission }}</td>
+          <td tabindex="0">{{ i.phone_no }}</td>
           <td class="nowrap">
             <a href="/agenti/{{ i.agent_code }}/" title="Dettagli {{ i.agent_name }}"><i class='fas fa-search'></i></a>
               &nbsp;&nbsp;&nbsp;

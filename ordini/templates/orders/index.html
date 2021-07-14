@@ -27,19 +27,19 @@
       <tbody id="orderTable">
     {% for i in order_list %} 
         <tr id="row_{{ i.ord_num }}">
-          <td>{{ i.ord_num }}</td>
-          <td>{{ i.ord_date|date:'d/m/Y' }}</td>
-          <td>{{ i.ord_amount }}</td>
-          <td>{{ i.advance_amount }}</td>
+          <td tabindex="0">{{ i.ord_num }}</td>
+          <td tabindex="0">{{ i.ord_date|date:'d/m/Y' }}</td>
+          <td tabindex="0">{{ i.ord_amount }}</td>
+          <td tabindex="0">{{ i.advance_amount }}</td>
       {% if request.session.gruppo == "agents" or request.session.gruppo == "managers" %}
-          <td><a href="javascript:void(0);" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
+          <td tabindex="0"><a href="javascript:void(0);" class="popover_cli" code="{{ i.cust_code }}"> {{ i.cust_code.cust_name }}</a>
           </td>
       {% endif %}
       {% if request.session.gruppo == "customers" or request.session.gruppo == "managers"  %}
-          <td><a href="javascript:void(0);" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
+          <td tabindex="0"><a href="javascript:void(0);" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
           </td>
       {% endif %}
-          <td>{{ i.ord_description }}</td>
+          <td tabindex="0">{{ i.ord_description }}</td>
           <td class="nowrap">
             <a href="/ordini/{{ i.ord_num  }}/" title="Dettaglio ordine {{ i.ord_num  }}"><i class='fas fa-search'></i></a>
               &nbsp;&nbsp;&nbsp;

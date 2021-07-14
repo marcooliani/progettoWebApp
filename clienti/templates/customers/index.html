@@ -23,13 +23,13 @@
       <tbody id="customerTable">
     {% for i in customer_list %} 
         <tr id="row_{{ i.cust_code }}">
-          <td>{{ i.cust_code }}</td>
-          <td>{{ i.cust_name }}</td>
-          <td>{{ i.cust_city }}</td>
-          <td>{{ i.cust_country }}</td>
+          <td tabindex="0">{{ i.cust_code }}</td>
+          <td tabindex="0">{{ i.cust_name }}</td>
+          <td tabindex="0">{{ i.cust_city }}</td>
+          <td tabindex="0">{{ i.cust_country }}</td>
           <td>{{ i.grade }}</td>
       {% if request.session.gruppo == "managers"  %}
-          <td><a href="javascript:void(0);" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
+          <td tabindex="0"><a href="javascript:void(0);" class="popover_age" code="{{ i.agent_code }}"> {{ i.agent_code.agent_name }}</a>
           </td>
       {% endif %}
           <td class="nowrap">
